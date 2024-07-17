@@ -9,12 +9,6 @@ Criação o meu portfolio seguindo os apredizandos no curso de UX Designer da DI
 - Desenvolver o Wireframe e Design System  
 - Criar o Mockup Navegável e Finalizar o Protótipo por completo no Figma
 
-
-
-
-
-## FAQ
-
 ### Briefing do Projeto
 
 #### Home:
