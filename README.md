@@ -1,70 +1,54 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Portfolio
 
-## Available Scripts
+Criação o meu portfolio seguindo os apredizandos no curso de UX Designer da DIO.
 
-In the project directory, you can run:
+## TO DO LIST
 
-### `npm start`
+- Criar o Briefing do Projeto
+- Desenvolver o Wireframe e Design System  
+- Criar o Mockup Navegável e Finalizar o Protótipo por completo no Figma
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## FAQ
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Briefing do Projeto
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Home:
+- **Descrição Breve:** Apresentação como front-end developer com ênfase em criação de websites - modernos e funcionais.
+- **Skills:** HTML, CSS, JavaScript, jQuery, PHP, WordPress.
+- **Portfolio Selecionado:** Exemplos destacados de projetos recentes.
+- **Avaliações:** Feedbacks positivos de clientes.
+- **Aprendizado Atual:** Novas habilidades e tecnologias exploradas.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Sobre:
+- **Repetição da Apresentação:** Resumo inicial com detalhes adicionais sobre a experiência e expertise.
+- **Descrição Pessoal:** Texto descritivo sobre minha abordagem e paixão pelo desenvolvimento web.
+- **Skills Repetidas:** Lista detalhada das habilidades e tecnologias dominadas.
 
-### `npm run eject`
+#### Portfolio:
+- **Título da Página:** "Portfolio"
+- **Descrição Breve:** Visão geral dos projetos destacados.
+- **Filtros por Tecnologias:** Seleção por HTML, CSS, JavaScript, WordPress, entre outros.
+- **Listagem de Projetos:** Exibição dos projetos organizados por categorias e tecnologias.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#### Interna de Portfolio:
+- **Imagem Destacada:** Visual principal do projeto.
+- **Título e Resumo:** Informações essenciais sobre o projeto.
+- **Descrição Detalhada:** Explicação mais aprofundada do processo e soluções implementadas.
+- **Tecnologias Utilizadas:** Listagem detalhada das tecnologias aplicadas.
+- **Imagem da Tela:** Captura completa do layout do site.
+- **Links para Outros Posts:** Navegação para projetos relacionados ou posts adicionais.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Desenvolver o Wireframe e Design System
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+[![Wireframe](https://img.shields.io/badge/wireframe-2c2c2c?style=for-the-badge&logo=figma)](https://www.figma.com/design/JL8vMPinWMmX9ZHOSZBUCW/Meu-Portfolio?node-id=1-4&t=twaSYYbuAkBgLfa4-0)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+[![Design](https://img.shields.io/badge/design_System-2c2c2c?style=for-the-badge&logo=figma)](https://www.figma.com/design/JL8vMPinWMmX9ZHOSZBUCW/Meu-Portfolio?node-id=50-139&t=cH28kBtU0gpTn1CY-1)
 
-## Learn More
+### Criar o Mockup Navegável e Finalizar o Protótipo por completo no Figma
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[![prototipo](https://img.shields.io/badge/protótipo-2c2c2c?style=for-the-badge&logo=figma)](https://www.figma.com/proto/JL8vMPinWMmX9ZHOSZBUCW/Meu-Portfolio?page-id=66%3A458&node-id=137-1570&viewport=743%2C365%2C0.5&t=T50gvpyPL03TMWqk-1&scaling=scale-down&content-scaling=fixed)
