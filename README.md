@@ -8,12 +8,9 @@ Criação o meu portfolio seguindo os apredizandos no curso de UX Designer da DI
 - Criar o Briefing do Projeto
 - Desenvolver o Wireframe e Design System  
 - Criar o Mockup Navegável e Finalizar o Protótipo por completo no Figma
-
-
-
-
-
-## FAQ
+- Desenvolver o Layout - em progresso
+- Fazer o Deploy
+- Desenvolver API(Futuramente)
 
 ### Briefing do Projeto
 
@@ -52,3 +49,7 @@ Criação o meu portfolio seguindo os apredizandos no curso de UX Designer da DI
 ### Criar o Mockup Navegável e Finalizar o Protótipo por completo no Figma
 
 [![prototipo](https://img.shields.io/badge/protótipo-2c2c2c?style=for-the-badge&logo=figma)](https://www.figma.com/proto/JL8vMPinWMmX9ZHOSZBUCW/Meu-Portfolio?page-id=66%3A458&node-id=137-1570&viewport=743%2C365%2C0.5&t=T50gvpyPL03TMWqk-1&scaling=scale-down&content-scaling=fixed)
+
+### Desenvolver o Layout
+
+Para o desenvolvimento do Layout escolhi usar o react juntamente com axios para facilitar as requisições para o meu "api"
