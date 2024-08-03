@@ -1,0 +1,1 @@
+export { CardPortfolio } from './cardPortfolio';

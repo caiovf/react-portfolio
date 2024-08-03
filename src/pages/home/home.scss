@@ -1,0 +1,17 @@
+.section-home {
+    margin-top: 80px;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    &.portfolio {
+
+        .section-header{
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}

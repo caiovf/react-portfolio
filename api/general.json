@@ -1,0 +1,27 @@
+{
+    "logo" : "link_logo",
+    "menu" : [
+        {
+            "title" : "About",
+            "link" : "",
+            "target" : ""            
+        },
+        {
+            "title" : "Portfolio",
+            "link" : "",
+            "target" : ""            
+        }        
+    ],
+    "social" : [
+        {
+            "name" : "Github",
+            "slug" : "github",
+            "link" : "https://github.com/caiovf"
+        },
+        {
+            "name" : "Linkedin",
+            "slug" : "linkedin",
+            "link" : "https://www.linkedin.com/in/caio-ferreiradev/"
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+.layout-footer {
+    margin-top: 80px;
+    padding: 24px 0;
+    background: var(--color-primary);
+    
+    .section-content {
+        display: flex;
+        justify-content: space-between;
+
+        .layout-logo {
+            filter: brightness(0) invert(1);
+        }
+    }
+}

@@ -1,0 +1,74 @@
+[
+    {
+        "id" : 1,
+        "name" : "HTML",
+        "slug" : "html",
+        "color" : "#FF4B00"
+    },
+    {
+        "id" : 2,
+        "name" : "CSS",
+        "slug" : "css",
+        "color" : "#2196F3"
+    },
+    {
+        "id" : 3,
+        "name" : "Sass/Scss",
+        "slug" : "sass-scss",
+        "color" : "#FFDF00"
+    },
+    {
+        "id" : 4,
+        "name" : "Javascript",
+        "slug" : "javascript",
+        "color" : "#FFDF00"
+    },
+    {
+        "id" : 5,
+        "name" : "TypeScript",
+        "slug" : "typescript",
+        "color" : "#1C96EB"
+    },
+    {
+        "id" : 6,
+        "name" : "jQuery",
+        "slug" : "jquery",
+        "color" : "#0769AD"
+    },
+    {
+        "id" : 7,
+        "name" : "Angular",
+        "slug" : "angular",
+        "color" : "#EF3F4B"
+    },
+    {
+        "id" : 8,
+        "name" : "PHP",
+        "slug" : "php",
+        "color" : "#8F9ED1"
+    },
+    {
+        "id" : 9,
+        "name" : "MySql",
+        "slug" : "mysql",
+        "color" : "#057396"
+    },
+    {
+        "id" : 10,
+        "name" : "Wordpress",
+        "slug" : "wordpress",
+        "color" : "#3057DC"
+    },
+    {
+        "id" : 11,
+        "name" : "Woocommerce",
+        "slug" : "woocommerce",
+        "color" : "#A64A7B"
+    },
+    {
+        "id" : 12,
+        "name" : "Elementor",
+        "slug" : "elementor",
+        "color" : "#D63362"
+    }
+]

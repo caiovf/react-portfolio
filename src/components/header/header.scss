@@ -1,0 +1,25 @@
+.layout-header {
+    padding: 24px 0;
+    
+    .section-content{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .layout-logo,
+    .social-media {
+        width: 25%;
+    }
+    
+    .layout-nav{
+        display: flex;
+        justify-content: center;
+        width: 50%;
+    }
+    
+    .social-media {
+        justify-content: flex-end;
+    }
+}

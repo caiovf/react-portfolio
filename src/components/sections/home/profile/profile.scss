@@ -1,0 +1,40 @@
+.profile {
+    
+    .container {
+        display: flex;        
+        align-items: center;
+        gap: 24px;
+
+        .left-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            
+            h1 {
+                margin: 0 0 16px;
+            }
+            
+            p {
+                margin: 0;
+                max-width: 85%;
+                font-size: 1.5rem;
+                line-height: 1.5em;
+                color: var(--color-primary);
+            }
+
+            .button {
+                margin-top: 42px;
+            }
+        }
+        
+        .right-content {
+            max-width: 682px;
+            flex-shrink: 0;
+
+            img {
+                aspect-ratio: 1/1;
+                border-radius: 100%;
+            }
+        }
+    }
+}
