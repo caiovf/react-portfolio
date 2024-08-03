@@ -10,7 +10,6 @@ Criação o meu portfolio seguindo os apredizandos no curso de UX Designer da DI
 - Criar o Mockup Navegável e Finalizar o Protótipo por completo no Figma
 - Desenvolver o Layout - em progresso
 - Fazer o Deploy
-- Desenvolver API(Futuramente)
 
 ### Briefing do Projeto
 
@@ -52,4 +51,4 @@ Criação o meu portfolio seguindo os apredizandos no curso de UX Designer da DI
 
 ### Desenvolver o Layout
 
-Para o desenvolvimento do Layout escolhi usar o react juntamente com axios para facilitar as requisições para o meu "api"
+Para o desenvolvimento do Layout escolhi usar o react juntamente com axios para facilitar as requisições para o minha "api"
