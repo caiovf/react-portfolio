@@ -13,8 +13,8 @@
     },
     {
         "id" : 3,
-        "name" : "Sass/Scss",
-        "slug" : "sass-scss",
+        "name" : "Sass",
+        "slug" : "sass",
         "color" : "#FFDF00"
     },
     {

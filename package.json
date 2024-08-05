@@ -36,6 +36,8 @@
     ]
   },
   "devDependencies": {
+    "axios": "^1.7.3",
+    "react-loading-skeleton": "^3.4.0",
     "react-router-dom": "^6.25.1",
     "sass": "^1.77.8",
     "sass-loader": "^16.0.0",
