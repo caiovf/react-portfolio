@@ -13,9 +13,9 @@
     },
     {
         "id" : 3,
-        "name" : "Sass",
+        "name" : "Sass/Scss",
         "slug" : "sass",
-        "color" : "#FFDF00"
+        "color" : "#CF6D9E"
     },
     {
         "id" : 4,
