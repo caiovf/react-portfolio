@@ -1,25 +1,34 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, memo, useRef} from 'react';
 import { fetchData } from '../../../../api/api';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import './skills.scss';
 import { Button } from '../../../button';
 
-export const Skills = (props) => {       
+export const Skills = memo((props) => {       
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(null);    
+    const useEffectExecuted = useRef(false);
 
     useEffect(() => {
+        if(useEffectExecuted.current){
+            return;
+        }
+        setLoading(true);
+        setError(null);
+    
         fetchData('categories')
-        .then(response => {
+        .then((response) => {
             setData(response.data);
-            setLoading(false);
         })
-        .catch(error => {
-            setError(error);
+        .catch((err) => {
+            setError(err.message);
+        })
+        .finally(() => {
             setLoading(false);
         });
+        useEffectExecuted.current = true
     }, []);
 
     if (loading) {
@@ -46,8 +55,9 @@ export const Skills = (props) => {
                     <h2 data-custom-title="section">My Skills</h2>
                 </div>
                 <div className='section-content'>
-                    {data.map(item => (
+                    {data.map((item,index) => (
                         <Button
+                            key={index}
                             iconSrc={`${item.slug}.png`}
                             iconWidth="24"
                             iconHeight="24"
@@ -62,4 +72,4 @@ export const Skills = (props) => {
             </div>
         </section>    
     );
-};
+});

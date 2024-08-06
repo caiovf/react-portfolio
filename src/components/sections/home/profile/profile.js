@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo, useRef } from 'react';
 import { fetchData } from '../../../../api/api';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -6,22 +6,31 @@ import DOMPurify from 'dompurify';
 import { Button } from '../../../button';
 import './profile.scss';
 
-export const Profile = (props) => {
+export const Profile = memo((props) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const useEffectExecuted = useRef(false);
 
     useEffect(() => {
+        if(useEffectExecuted.current){
+            return;
+        }
+        setLoading(true);
+        setError(null);
+    
         fetchData('about')
-        .then(response => {
+        .then((response) => {            
             setData(response.data);
-            setLoading(false);
         })
-        .catch(error => {
-            setError(error);
-            setLoading(false);
-        });
-    }, []);
+        .catch((err) => {            
+            setError('Error fetching data')
+        })
+        .finally(() => {
+            setLoading(false)
+        });        
+        useEffectExecuted.current = true
+    }, [])
 
     if (loading) {
         return (
@@ -40,7 +49,9 @@ export const Profile = (props) => {
         );
     }
 
-    if (error) return console.error('erro no componente profile');
+    if (error) {
+        console.error(`Erro no componente profile: ${error}`)
+    }
 
     return (
         <section className='profile'>
@@ -64,4 +75,4 @@ export const Profile = (props) => {
             </div>
         </section>
     );
-};
+});

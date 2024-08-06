@@ -4,11 +4,12 @@ import { Profile } from '../../components/sections/home/profile';
 import { Skills } from '../../components/sections/home/skills';
 import { SectionPortfolio } from '../../components/sections/home/portfolio';
 import { Reviews } from '../../components/sections/home/reviews/reviews';
-export const Home = (props) => {
 
+export const Home = (props) => {
   useEffect(() => {
-    document.title = 'Home | Caio Ferreira Front End Developer';
+    document.title = 'Home | Caio Ferreira Front End Developer';      
   }, []);
+  console.log('Home component');
 
   return (
     <>

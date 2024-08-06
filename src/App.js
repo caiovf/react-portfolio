@@ -10,7 +10,7 @@ import { Portfolio } from './pages/portfolio';
 function App() {
   return (
     <Router>
-		<Header />
+		<Header />		
 			<main className='layout-main'>
 				<Routes>
 					<Route path="/" element={<Home />} />
