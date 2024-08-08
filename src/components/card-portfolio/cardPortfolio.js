@@ -21,6 +21,7 @@ export const CardPortfolio = (props) => {
             <div className='categories'>
                 {filteredCategories.map((item,index) => (
                     <Button
+                        key={index}
                         className="sm-border"
                         iconSrc={`${item.slug}.png`}
                         iconWidth="24"

@@ -15,7 +15,16 @@ export const Skills = memo((data) => {
                         <Skeleton height={62} width={200} count={1} />
                     </div>
                     <div className='section-content'>                
-                        <Skeleton height={56} width={123} count={7} />
+                        <Skeleton height={56} width={123} count={1} borderRadius="45px" />
+                        <Skeleton height={56} width={123} count={1} borderRadius="45px" />
+                        <Skeleton height={56} width={123} count={1} borderRadius="45px" />
+                        <Skeleton height={56} width={123} count={1} borderRadius="45px" />
+                        <Skeleton height={56} width={123} count={1} borderRadius="45px" />
+                        <Skeleton height={56} width={123} count={1} borderRadius="45px" />
+                        <Skeleton height={56} width={123} count={1} borderRadius="45px" />
+                        <Skeleton height={56} width={123} count={1} borderRadius="45px" />
+                        <Skeleton height={56} width={123} count={1} borderRadius="45px" />
+                        <Skeleton height={56} width={123} count={1} borderRadius="45px" />                        
                     </div>
                 </div>
             </section>
