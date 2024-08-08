@@ -65,10 +65,15 @@
     }
     
     .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         position: relative;
         z-index: 2;
         border-radius: 100%;
         padding: 8px;
+        min-height: 40px;
+        min-width: 40px;
         background: var(--color-white);
 
         +span {

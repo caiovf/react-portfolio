@@ -17,7 +17,7 @@ html {
     overflow-y: scroll;
     overflow-x: hidden;
     background: var(--color-white);
-    font: 16px/1.5 Roboto,sans-serif;
+    font: 16px/1.5 'Inter',sans-serif;
     -webkit-tap-highlight-color: var(--color-white);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -27,6 +27,7 @@ html {
 
 body {
     margin: 0;
+    font: 16px/1.5 'Inter',sans-serif;
     // background: #E7ECEF;
     // color: #000;
 }

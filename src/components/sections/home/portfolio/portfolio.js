@@ -27,7 +27,7 @@ export const SectionPortfolio = (props) => {
 
     const getPortraitValue = (index) => {
         const sequence = [0, 1, 1];
-        return sequence[(index % sequence.length)] === 0 ? 'portrait' : '';
+        return sequence[(index % sequence.length)] === 0 ? '' : 'portrait';
     };
 
     return (
@@ -58,7 +58,7 @@ export const SectionPortfolio = (props) => {
                             description={item.description}
                             categories={item.categories}
                             slug={item.slug}
-                            className={getPortraitValue(index) ? '' : 'portrait'}
+                            className={getPortraitValue(index)}
                         />
                     ))}
                 </div>                

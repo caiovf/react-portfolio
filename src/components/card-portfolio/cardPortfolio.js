@@ -1,35 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './cardPortfolio.scss';
 import { Button } from '../button';
 import { useNavigate } from 'react-router-dom';
+import { DataContext } from '../../contexts/dataContext';
 
 export const CardPortfolio = (props) => {       
     const navigate = useNavigate();
     const classNames = `card-portfolio ${props.className || ''}`.trim();
+    const { state } = useContext(DataContext);
+    const categories = state.skillsData;
+    const cardCategories = props.categories;
+    let filteredCategories = categories.filter(category => cardCategories.includes(category.id));
 
     const handleClick = () => {
         navigate(`/portfolio/${props.slug}`);
-      };
+    };
     
     return (
         <article className={classNames} title={props.title} onClick={handleClick}>
             <div className='categories'>
-                <Button
-                    className="sm-border"
-                    iconSrc="html.png"
-                    iconWidth="24"
-                    iconHeight="24"
-                    iconAlt="Html"
-                    customColor="#FF4B00"
-                />
-                <Button
-                    className="sm-border"
-                    iconSrc="css.png"
-                    iconWidth="24"
-                    iconHeight="24"
-                    iconAlt="Css"
-                    customColor="#2196F3"
-                />
+                {filteredCategories.map((item,index) => (
+                    <Button
+                        className="sm-border"
+                        iconSrc={`${item.slug}.png`}
+                        iconWidth="24"
+                        iconHeight="24"
+                        iconAlt={`Icone ${item.slug}`}
+                        customColor={item.color}
+                    />
+                ))}
             </div>
             <div className='box-img'>
                 <img className='img-cover' src={props.imgSrc} width={props.imgWidth} height={props.imgHeight} alt={props.imgAlt} />
