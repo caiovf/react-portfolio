@@ -1,38 +1,14 @@
-import React, { useEffect, useState, memo, useRef } from 'react';
-import { fetchData } from '../../../../api/api';
+import React, { memo } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import DOMPurify from 'dompurify';
 import { Button } from '../../../button';
 import './profile.scss';
 
-export const Profile = memo((props) => {
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const useEffectExecuted = useRef(false);
+export const Profile = memo((data) => {
+    data = data.data    
 
-    useEffect(() => {
-        if(useEffectExecuted.current){
-            return;
-        }
-        setLoading(true);
-        setError(null);
-    
-        fetchData('about')
-        .then((response) => {            
-            setData(response.data);
-        })
-        .catch((err) => {            
-            setError('Error fetching data')
-        })
-        .finally(() => {
-            setLoading(false)
-        });        
-        useEffectExecuted.current = true
-    }, [])
-
-    if (loading) {
+    if (!data) {
         return (
             <section className='profile'>
                 <div className='container'>
@@ -42,16 +18,12 @@ export const Profile = memo((props) => {
                         <Skeleton height={60} width={230} count={1} />
                     </div>
                     <div className='right-content'>
-                        <Skeleton height={682} width={682} count={1} borderRadius="250px" />
+                        <Skeleton height={682} width={682} count={1} borderRadius="500px" />
                     </div>
                 </div>
             </section>
         );
-    }
-
-    if (error) {
-        console.error(`Erro no componente profile: ${error}`)
-    }
+    }    
 
     return (
         <section className='profile'>

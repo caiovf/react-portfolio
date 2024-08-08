@@ -1,37 +1,13 @@
-import React, {useEffect, useState, memo, useRef} from 'react';
-import { fetchData } from '../../../../api/api';
+import React, { memo } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import './skills.scss';
 import { Button } from '../../../button';
 
-export const Skills = memo((props) => {       
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);    
-    const useEffectExecuted = useRef(false);
+export const Skills = memo((data) => {       
+    data = data.data
 
-    useEffect(() => {
-        if(useEffectExecuted.current){
-            return;
-        }
-        setLoading(true);
-        setError(null);
-    
-        fetchData('categories')
-        .then((response) => {
-            setData(response.data);
-        })
-        .catch((err) => {
-            setError(err.message);
-        })
-        .finally(() => {
-            setLoading(false);
-        });
-        useEffectExecuted.current = true
-    }, []);
-
-    if (loading) {
+    if (!data) {
         return (
             <section className='section-home skills'>
                 <div className='container'>
@@ -44,9 +20,7 @@ export const Skills = memo((props) => {
                 </div>
             </section>
         );
-    }
-
-    if (error) return console.error('erro no componente skills');
+    }    
 
     return (
         <section className='section-home skills'>
