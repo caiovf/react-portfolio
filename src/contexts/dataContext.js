@@ -7,14 +7,19 @@ const DataProvider = ({ children }) => {
   const [state, setState] = useState({
     aboutData: null,
     skillsData: null,
+    projectsData: {
+        portfolio: null,
+        study: null
+    },
     loading: {
       about: true,
       skills: true,
+      projects: true,
     },
     error: null,
   });
 
-  const fetchExecuted = useRef({ about: false, skills: false });
+  const fetchExecuted = useRef({ about: false, skills: false, projects: false });
 
   useEffect(() => {
     const fetchAboutData = async () => {
@@ -51,6 +56,28 @@ const DataProvider = ({ children }) => {
       }
     };
 
+    const fetchProjectsData = async () => {
+        try {
+          const response = await fetchData('projects');
+          const portfolioData = response.data.filter(item => item.project_type === 'portfolio').slice(0, 4);
+          const studiesData = response.data.filter(item => item.project_type === 'estudo').slice(0, 4);
+          setState(prevState => ({
+            ...prevState,
+            projectsData: {
+              portfolio: portfolioData,
+              study: studiesData
+            },
+            loading: { ...prevState.loading, projects: false },
+          }));
+        } catch (err) {
+          setState(prevState => ({
+            ...prevState,
+            error: prevState.error ? prevState.error : 'Error fetching Projects data',
+            loading: { ...prevState.loading, projects: false },
+          }));
+        }
+      };
+
     if (!fetchExecuted.current.about) {
       fetchAboutData();
       fetchExecuted.current.about = true;
@@ -60,6 +87,12 @@ const DataProvider = ({ children }) => {
       fetchSkillsData();
       fetchExecuted.current.skills = true;
     }
+
+    if (!fetchExecuted.current.projects) {
+        fetchProjectsData();
+        fetchExecuted.current.projects = true;
+    }
+
   }, []);
 
   return (

@@ -11,18 +11,21 @@ export const Home = (props) => {
   
   const profileData = state.aboutData;
   const skillsData = state.skillsData;
-
+  const portfolioData = state.projectsData.portfolio;
+  const studyData = state.projectsData.study;  
   return (
     <>
       <Profile data={profileData} />
       <Skills data={skillsData} />
       <SectionPortfolio 
         titulo="Portfolio"
+        data={portfolioData}
       />
       <Reviews />
       <SectionPortfolio 
         titulo="Advancing my skills"
         type="estudo"
+        data={studyData}        
       />
     </>    
   );

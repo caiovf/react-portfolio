@@ -26,21 +26,7 @@
         "link_github" : "",
         "full_project_img" : "",
         "status" : 1
-    },
-    {
-        "id" : 3,
-        "title" : "Pokemon Vanilla Javascript",
-        "slug" : "pokemon-vanilla-javascript",
-        "thumbnail" : "https://raw.githubusercontent.com/caiovf/react-portfolio/main/src/assets/img/projeto-3.webp",
-        "project_type": "estudo",
-        "description" : "",
-        "text" : "",
-        "categories" : [1,2,4],
-        "link_projet" : "",
-        "link_github" : "",
-        "full_project_img" : "",
-        "status" : 1
-    },
+    },    
     {
         "id" : 4,
         "title" : "Pokemon Angular",
@@ -56,7 +42,7 @@
         "status" : 1
     },
     {
-        "id" : 4,
+        "id" : 5,
         "title" : "Blog Pessoal",
         "slug" : "blog-pessoal",
         "thumbnail" : "https://raw.githubusercontent.com/caiovf/react-portfolio/main/src/assets/img/projeto-6.jpg",
@@ -64,6 +50,20 @@
         "description" : "",
         "text" : "",
         "categories" : [1,2,3,5,7],
+        "link_projet" : "",
+        "link_github" : "",
+        "full_project_img" : "",
+        "status" : 1
+    },
+    {
+        "id" : 3,
+        "title" : "Pokemon Vanilla Javascript",
+        "slug" : "pokemon-vanilla-javascript",
+        "thumbnail" : "https://raw.githubusercontent.com/caiovf/react-portfolio/main/src/assets/img/projeto-3.webp",
+        "project_type": "estudo",
+        "description" : "",
+        "text" : "",
+        "categories" : [1,2,4],
         "link_projet" : "",
         "link_github" : "",
         "full_project_img" : "",

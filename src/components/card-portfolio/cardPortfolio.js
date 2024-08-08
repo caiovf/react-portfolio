@@ -7,7 +7,6 @@ export const CardPortfolio = (props) => {
     const navigate = useNavigate();
     const classNames = `card-portfolio ${props.className || ''}`.trim();
 
-
     const handleClick = () => {
         navigate(`/portfolio/${props.slug}`);
       };

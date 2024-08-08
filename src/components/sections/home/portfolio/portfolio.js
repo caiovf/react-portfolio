@@ -1,11 +1,34 @@
 import React from 'react';
 import './portfolio.scss';
 import { Button } from '../../../button';
+import Skeleton from 'react-loading-skeleton';
 import { CardPortfolio } from '../../../card-portfolio';
-import imgPortfolio from '../../../../assets/img/projetos-2.png';
-import imgPortfolio2 from '../../../../assets/img/projetos-4.jpg';
 
 export const SectionPortfolio = (props) => {       
+    const data = props.data
+    const type = props.type ? props.type : 'portfolio'
+
+    if (!data) {
+        return (
+            <section className='section-home portfolio'>
+            <div className='container'>
+                <div className='section-header'>
+                    <Skeleton height={62} width={200} count={1} />
+                    <Skeleton height={62} width={236} count={1} borderRadius="45px" />                    
+                </div>
+                <div className='section-content'>   
+                    <Skeleton height={529} width={922} count={1} borderRadius="16px" />
+                    <Skeleton height={529} width={494} count={1} borderRadius="16px" />
+                </div>                
+            </div>
+        </section>  
+        );
+    }      
+
+    const getPortraitValue = (index) => {
+        const sequence = [0, 1, 1];
+        return sequence[(index % sequence.length)] === 0 ? 'portrait' : '';
+    };
 
     return (
         <section className='section-home portfolio'>
@@ -20,30 +43,24 @@ export const SectionPortfolio = (props) => {
                         iconAlt="Arrow"
                         label="View More Projects"
                         navigate="/portfolio"
+                        value={type}
                     />
                 </div>
-                <div className='section-content'>                
-                    <CardPortfolio 
-                        imgSrc={imgPortfolio}
-                        imgWidth="922"
-                        imgHeight="529"
-                        imgAlt="alt mazalti investimentos"
-                        title="Mazalti Investimentos"
-                        description="Desenvolvi um site moderno e funcional para a Mazalti Investimento, uma consultoria de investimentos, utilizando WordPress e Elementor. O projeto incluiu design responsivo, otimização para SEO e integração de ferramentas de contato e blog, proporcionando uma experiência de usuário intuitiva e profissional para atrair e engajar clientes potenciais.    "
-                        categories={[11,12]}
-                        slug="mazalti-investimentos"
-                    />
-                    <CardPortfolio 
-                        imgSrc={imgPortfolio2}
-                        imgWidth="494"
-                        imgHeight="529"
-                        imgAlt="alt miogx"
-                        title="Miogx"
-                        description="Realizei a montagem do site para, utilizando HTML, CSS, JavaScript e WordPress com ACF, destacando portfólios animados e proporcionando uma navegação intuitiva."
-                        categories={[1,2,4,11]}
-                        slug="miogx"
-                        className="portrait"
-                    />
+                <div className='section-content'>
+                    {data.map((item,index) => (
+                        <CardPortfolio 
+                            key={index}
+                            imgSrc={item.thumbnail}
+                            imgWidth={getPortraitValue(index) ? 922 : 494}
+                            imgHeight="529"
+                            imgAlt={`Imagem do projeto ${item.title}`}
+                            title={item.title}
+                            description={item.description}
+                            categories={item.categories}
+                            slug={item.slug}
+                            className={getPortraitValue(index) ? '' : 'portrait'}
+                        />
+                    ))}
                 </div>                
             </div>
         </section>    

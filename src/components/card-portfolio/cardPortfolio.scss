@@ -2,6 +2,13 @@
     cursor: pointer;
     position: relative;
 
+    &.portrait{
+
+        .box-img img {
+            aspect-ratio: 9/9.65;
+        }
+    }
+
     &:hover{
 
         .box-img{
@@ -45,6 +52,11 @@
             transition: opacity 300ms ease-in-out;
         }
 
+        img{
+            border-radius: 16px;
+            aspect-ratio: 10/5.75;
+        }
+
         .button{
             position: absolute;
             z-index: 2;
@@ -53,11 +65,7 @@
             transform: translate(-50%,-50%) scaleX(0);
             transition: transform 200ms ease-in-out;
             pointer-events: none;
-        }
-        
-        img{
-            border-radius: 16px;
-        }
+        }            
     }
 
     .box-text {
