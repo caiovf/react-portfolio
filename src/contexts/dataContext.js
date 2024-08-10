@@ -11,15 +11,17 @@ const DataProvider = ({ children }) => {
         portfolio: null,
         study: null
     },
+    reviewsData: null,
     loading: {
       about: true,
       skills: true,
       projects: true,
+      reviews: true
     },
     error: null,
   });
 
-  const fetchExecuted = useRef({ about: false, skills: false, projects: false });
+  const fetchExecuted = useRef({ about: false, skills: false, projects: false, reviews: false });
 
   useEffect(() => {
     const fetchAboutData = async () => {
@@ -58,22 +60,39 @@ const DataProvider = ({ children }) => {
 
     const fetchProjectsData = async () => {
         try {
-          const response = await fetchData('projects');
-          const portfolioData = response.data.filter(item => item.project_type === 'portfolio').slice(0, 4);
-          const studiesData = response.data.filter(item => item.project_type === 'estudo').slice(0, 4);
-          setState(prevState => ({
+            const response = await fetchData('projects');
+            const portfolioData = response.data.filter(item => item.project_type === 'portfolio').slice(0, 4);
+            const studiesData = response.data.filter(item => item.project_type === 'estudo').slice(0, 4);
+            setState(prevState => ({
             ...prevState,
             projectsData: {
-              portfolio: portfolioData,
-              study: studiesData
+                portfolio: portfolioData,
+                study: studiesData
             },
             loading: { ...prevState.loading, projects: false },
+            }));
+        } catch (err) {
+            setState(prevState => ({
+                ...prevState,
+                error: prevState.error ? prevState.error : 'Error fetching Projects data',
+                loading: { ...prevState.loading, projects: false },
+            }));
+        }
+    };
+
+    const fetchReviewsData = async () => {
+        try {
+          const response = await fetchData('reviews');
+          setState(prevState => ({
+            ...prevState,
+            reviewsData: response.data,
+            loading: { ...prevState.loading, reviews: false },
           }));
         } catch (err) {
           setState(prevState => ({
             ...prevState,
-            error: prevState.error ? prevState.error : 'Error fetching Projects data',
-            loading: { ...prevState.loading, projects: false },
+            error: prevState.error ? prevState.error : 'Error fetching Reviews data',
+            loading: { ...prevState.loading, reviews: false },
           }));
         }
       };
@@ -91,6 +110,11 @@ const DataProvider = ({ children }) => {
     if (!fetchExecuted.current.projects) {
         fetchProjectsData();
         fetchExecuted.current.projects = true;
+    }
+
+    if (!fetchExecuted.current.reviews) {
+        fetchReviewsData();
+        fetchExecuted.current.reviews = true;
     }
 
   }, []);

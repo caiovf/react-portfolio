@@ -5,8 +5,8 @@ import DOMPurify from 'dompurify';
 import { Button } from '../../../button';
 import './profile.scss';
 
-export const Profile = memo((data) => {
-    data = data.data    
+export const Profile = memo((props) => {
+    const data = props.data    
 
     if (!data) {
         return (

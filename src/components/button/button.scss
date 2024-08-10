@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: var(--color-secondary);
+    background: $color-secondary;
     padding: 8px;
     border-radius: 45px;
     transition: background 300ms ease-in-out, transform 300ms ease-in-out;
@@ -74,7 +74,7 @@
         padding: 8px;
         min-height: 40px;
         min-width: 40px;
-        background: var(--color-white);
+        background: $color-white;
 
         +span {
             padding: 0 8px 0 0;
@@ -84,6 +84,6 @@
     span {
         font-weight: 700;
         font-size: 1.125rem;
-        color: var(--color-white);        
+        color: $color-white;        
     }
 }

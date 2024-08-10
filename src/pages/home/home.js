@@ -4,7 +4,7 @@ import './home.scss';
 import { Profile } from '../../components/sections/home/profile';
 import { Skills } from '../../components/sections/home/skills';
 import { SectionPortfolio } from '../../components/sections/home/portfolio';
-import { Reviews } from '../../components/sections/home/reviews/reviews';
+import { Reviews } from '../../components/sections/home/reviews';
 
 export const Home = (props) => {  
   const { state } = useContext(DataContext);
@@ -12,16 +12,23 @@ export const Home = (props) => {
   const profileData = state.aboutData;
   const skillsData = state.skillsData;
   const portfolioData = state.projectsData.portfolio;
-  const studyData = state.projectsData.study;  
+  const studyData = state.projectsData.study;
+  const reviewsData = state.reviewsData;  
   return (
     <>
-      <Profile data={profileData} />
-      <Skills data={skillsData} />
+      <Profile 
+        data={profileData}
+      />
+      <Skills 
+        data={skillsData}
+      />
       <SectionPortfolio 
         titulo="Portfolio"
         data={portfolioData}
       />
-      <Reviews />
+      <Reviews 
+        data={reviewsData}
+      />
       <SectionPortfolio 
         titulo="Advancing my skills"
         type="estudo"

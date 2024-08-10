@@ -1,24 +1,19 @@
-:root{
-    --color-primary: #01161E;
-    --color-secondary: #124559;
-    --color-white: #fefefe;
-}
-
 * {
     &,
     &:before,
     &:after {
         box-sizing: border-box;
-    }    
+    }        
 } 
+
 
 html {
     height: 100vh;
     overflow-y: scroll;
     overflow-x: hidden;
-    background: var(--color-white);
+    background: $color-white;
     font: 16px/1.5 'Inter',sans-serif;
-    -webkit-tap-highlight-color: var(--color-white);
+    -webkit-tap-highlight-color: $color-white;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     // scroll-behavior: smooth;
@@ -130,7 +125,7 @@ textarea{
 
 [data-custom-title]{
     margin: 0;
-    color: var(--color-primary);
+    color: $color-primary;
 }
 
 [data-custom-title~="banner"]{

@@ -29,7 +29,7 @@ export const SectionPortfolio = (props) => {
         const sequence = [0, 1, 1];
         return sequence[(index % sequence.length)] === 0 ? '' : 'portrait';
     };
-
+    
     return (
         <section className='section-home portfolio'>
             <div className='container'>

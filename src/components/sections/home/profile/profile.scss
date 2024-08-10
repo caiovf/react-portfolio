@@ -19,7 +19,7 @@
                 max-width: 85%;
                 font-size: 1.5rem;
                 line-height: 1.5em;
-                color: var(--color-primary);
+                color: $color-primary;
             }
 
             .button {
@@ -28,7 +28,7 @@
         }
         
         .right-content {
-            max-width: 682px;
+            width: 49%;
             flex-shrink: 0;
 
             img {

@@ -1,1 +1,1 @@
-export { Reviews } from './card';
+export { Reviews } from './reviews';

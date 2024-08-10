@@ -1,11 +1,11 @@
 .card-review{
     padding: 24px;
     border-radius: 16px;
-    background: var(--color-secondary);
+    background: $color-secondary;
 
     h3,p{
         margin: 0;
-        color: var(--color-white);
+        color: $color-white;
     }
 
     .box-text {
