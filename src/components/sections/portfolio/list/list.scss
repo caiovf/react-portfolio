@@ -1,0 +1,23 @@
+.list-portfolio{
+
+    .section-content{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+
+        .card-portfolio{
+            width: calc(65% - 14px);
+            flex-shrink: 0;
+
+            &.portrait{
+                width: calc(35% - 10px);
+            }
+        }
+    }
+}
+
+.list-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}

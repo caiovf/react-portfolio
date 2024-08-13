@@ -6,13 +6,12 @@
     }        
 } 
 
-
 html {
     height: 100vh;
     overflow-y: scroll;
     overflow-x: hidden;
     background: $color-white;
-    font: 16px/1.5 'Inter',sans-serif;
+    font: 16px/1.5 $font-primary;
     -webkit-tap-highlight-color: $color-white;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -21,10 +20,17 @@ html {
 }
 
 body {
-    margin: 0;
-    font: 16px/1.5 'Inter',sans-serif;
-    // background: #E7ECEF;
-    // color: #000;
+    margin: 0;    
+}
+
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.layout-main {
+    margin-bottom: auto;
 }
 
 img,iframe,svg {
