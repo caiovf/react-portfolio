@@ -14,6 +14,7 @@ export const Home = (props) => {
   const portfolioData = state.projectsData.portfolio;
   const studyData = state.projectsData.study;
   const reviewsData = state.reviewsData;  
+  
   return (
     <>
       <Profile 
@@ -31,7 +32,7 @@ export const Home = (props) => {
       />
       <SectionPortfolio 
         titulo="Advancing my skills"
-        type="estudo"
+        type="advancing-skills"
         data={studyData}        
       />
     </>    

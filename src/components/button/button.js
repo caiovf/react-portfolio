@@ -14,6 +14,7 @@ export const Button = (props) => {
             e.preventDefault();
             navigate(props.navigate, { state: { filter: props.value } });
         }
+        
         if (props.onClick) {
             props.onClick(e);
         }
@@ -30,7 +31,6 @@ export const Button = (props) => {
         className: `button ${props.className || ''}`,
         ...(props.customColor && { style: {background: props.customColor} }),
         'aria-label': props.label,
-
         onClick: handleClick
     };
 

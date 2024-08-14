@@ -1,23 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import './list.scss';
 import { Button } from '../../../button';
 import { CardPortfolio } from '../../../card-portfolio';
-import { DataContext } from '../../../../contexts/dataContext';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-export const List = (props) => {
-    const { state } = useContext(DataContext);
-  
-    let portfolioData = state.projectsData.portfolio;
-    
-    let AllSkills = state.skillsData.filter(skill => 
-        portfolioData.some(project => project.categories.includes(skill.id))
-    );
+export const List = (props) => {    
+    const AllSkills = props.skills;
+    const [selectedSkill, setSelectedSkill] = useState(null);
+    const [filteredPortfolio, setFilteredPortfolio] = useState(props.projects);    
 
     const getPortraitValue = (index) => {
         const sequence = [0, 1, 1];
         return sequence[(index % sequence.length)] === 0 ? '' : 'portrait';
+    };
+
+    const setFilter = (skillId) => {        
+        if (skillId) {
+            const filtered = props.projects.filter(project => 
+                project.categories.includes(skillId)
+            );
+            setFilteredPortfolio(filtered);
+        } else {
+            setFilteredPortfolio(props.projects);
+        }
+        setSelectedSkill(skillId);
     };
 
     return (
@@ -26,12 +33,15 @@ export const List = (props) => {
                 <div className='section-header'>
                     <h2>Filter By</h2>
                     <div className='list-buttons'>
-                        <Button
-                            iconSrc="filter.svg"
-                            iconWidth="24"
-                            iconHeight="24"
-                            iconAlt={`Icone para remover a filtragem}`}
-                        />
+                        {selectedSkill && (
+                            <Button
+                                iconSrc="filter.svg"
+                                iconWidth="24"
+                                iconHeight="24"
+                                iconAlt={`Icone para remover a filtragem}`}
+                                onClick={() => setFilter(null)}
+                            />
+                        )}
                         {!AllSkills ? (
                             <>
                                 <Skeleton height={56} width={123} count={1} borderRadius="45px" />
@@ -53,16 +63,16 @@ export const List = (props) => {
                                     iconHeight="24"
                                     iconAlt={`Icone ${item.slug}`}
                                     label={item.name}
-                                    navigate="/portfolio"
-                                    value={item.slug}
                                     customColor={item.color}
+                                    onClick={() => setFilter(item.id)}
+                                    className={selectedSkill === item.id ? 'active' : ''}
                                 />
                             ))
                         )}                        
                     </div>
                 </div>
                 <div className='section-content'>
-                    {portfolioData.map((item,index) => (
+                    {filteredPortfolio.map((item,index) => (
                         <CardPortfolio 
                             key={index}
                             imgSrc={item.thumbnail}
