@@ -11,7 +11,7 @@ export const Portfolio = (props) => {
   const { state } = useContext(DataContext);
   const portfolioData = (type === 'advancing-skills') ? state.projectsData.study : state.projectsData.portfolio ;  
   const pageTitle = (type === 'advancing-skills') ? 'Advancing my Skills' : "Portfolio" ;  
-  const pageResumn = (type === 'advancing-skills') ? '' : "Explore my work to see a range of projects utilizing HTML, CSS, JavaScript, jQuery, PHP, and WordPress. <a href='https://www.linkedin.com/in/caio-ferreiradev/' target='_blank' rel='nofollow noopener noreferrer'>Let's build something amazing together!</a>";
+  const pageResumn = (type === 'advancing-skills') ? 'Explore my portfolio to discover projects that highlight my continuous learning and skills development, featuring React, WordPress, and more.' : "Explore my work to see a range of projects utilizing HTML, CSS, JavaScript, jQuery, PHP, and WordPress. <a href='https://www.linkedin.com/in/caio-ferreiradev/' target='_blank' rel='nofollow noopener noreferrer'>Let's build something amazing together!</a>";
 
   const AllSkills = state.skillsData.filter(skill => 
       portfolioData.some(project => project.categories.includes(skill.id))

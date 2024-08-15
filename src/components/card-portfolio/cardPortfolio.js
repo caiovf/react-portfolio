@@ -13,7 +13,7 @@ export const CardPortfolio = (props) => {
     let filteredCategories = categories.filter(category => cardCategories.includes(category.id));
 
     const handleClick = () => {
-        navigate(`/portfolio/${props.slug}`);
+        navigate(`/portfolio/${props.slug}`, { state: { slug: props.slug } });
     };
     
     return (

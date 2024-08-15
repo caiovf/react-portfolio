@@ -5,6 +5,7 @@ import { Footer } from './components/footer';
 import { Home } from './pages/home';
 import { About } from './pages/about';
 import { Portfolio } from './pages/portfolio';
+import { PortfolioSingle } from './pages/portfolio-single';
 
 function App() {
 	function ScrollToTop({ children }) {
@@ -25,7 +26,7 @@ function App() {
 							<Route path="/" element={<Home />} />
 							<Route path="/about" element={<About />} />
 							<Route path="/portfolio" element={<Portfolio />} />
-							<Route path="/portfolio/:slug" element={<Portfolio />} />
+							<Route path="/portfolio/:slug" element={<PortfolioSingle />} />
 							<Route path="/advancing-skills" element={<Portfolio />} />
 						</Routes>
 					</main>
