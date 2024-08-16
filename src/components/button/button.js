@@ -37,7 +37,7 @@ export const Button = (props) => {
     return (
         <ButtonTag className={classNames} {...linkProps} {...buttonProps}>
             {props.iconSrc && <div className='icon'>
-                <img className='img-responsive' src={imageSrc} width={props.iconWidth} height={props.iconHeight} alt={props.iconAlt} />
+                <img className='img-responsive' loading='lazy' src={imageSrc} width={props.iconWidth} height={props.iconHeight} alt={props.iconAlt} />
             </div>}
             {props.label && <span>{props.label}</span>}            
         </ButtonTag>

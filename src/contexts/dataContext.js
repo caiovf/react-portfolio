@@ -124,10 +124,16 @@ const DataProvider = ({ children }) => {
             state.projectsData.portfolio.find(project => project.slug === slug) ||
             state.projectsData.study.find(project => project.slug === slug)
         );
-    }   
+    }
+
+    const getCategoriesById = (categories) => {
+        return (
+            state.skillsData.filter(category => categories.includes(category.id))
+        )
+    }
 
     return (
-        <DataContext.Provider value={{ state, setState, getProjectBySlug }}>
+        <DataContext.Provider value={{ state, setState, getProjectBySlug, getCategoriesById }}>
         {children}
         </DataContext.Provider>
     );

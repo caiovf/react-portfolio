@@ -32,7 +32,7 @@ export const CardPortfolio = (props) => {
                 ))}
             </div>
             <div className='box-img'>
-                <img className='img-cover' src={props.imgSrc} width={props.imgWidth} height={props.imgHeight} alt={props.imgAlt} />
+                <img className='img-cover' loading='lazy' src={props.imgSrc} width={props.imgWidth} height={props.imgHeight} alt={props.imgAlt} />
                 <Button
                     className="invert-position"
                     iconSrc="arrow.svg"

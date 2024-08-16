@@ -53,6 +53,6 @@ export const Skills = memo((data) => {
                     ))}                
                 </div>
             </div>
-        </section>    
+        </section>
     );
 });

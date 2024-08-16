@@ -8,10 +8,10 @@
         "description" : "Desenvolvi um site moderno e funcional para a Mazalti Investimento, uma consultoria de investimentos, utilizando WordPress e Elementor. O projeto incluiu design responsivo, otimização para SEO e integração de ferramentas de contato e blog, proporcionando uma experiência de usuário intuitiva e profissional para atrair e engajar clientes potenciais.",
         "text" : "O site foi projetado para se adaptar perfeitamente a diferentes dispositivos, garantindo uma navegação fluida em desktops, tablets e smartphones. A otimização para SEO melhorou a visibilidade nos motores de busca, atraindo mais tráfego orgânico e aumentando a exposição da consultoria online. Integrei formulários de contato personalizados, facilitando a comunicação entre a Mazalti Investimento e seus clientes. A seção de blog foi adicionada para a publicação de conteúdos atualizados e relevantes sobre o mercado financeiro, mantendo os visitantes informados e engajados. O resultado é um site que reflete a expertise e a credibilidade da Mazalti Investimento, ajudando a fortalecer sua presença online e a captar novos negócios.",
         "categories" : [10,12],
-        "link_projet" : "",
+        "link_project" : "",
         "link_github" : "",
         "full_project_img" : "",
-        "status" : 0
+        "current_online" : 0
     },
     {
         "id" : 2,
@@ -22,10 +22,10 @@
         "description" : "Realizei a montagem do site para, utilizando HTML, CSS, JavaScript e WordPress com ACF, destacando portfólios animados e proporcionando uma navegação intuitiva.",
         "text" : "",
         "categories" : [1,2,6,10],
-        "link_projet" : "https://miogx.com/",
+        "link_project" : "https://miogx.com/",
         "link_github" : "",
         "full_project_img" : "",
-        "status" : 1
+        "current_online" : 1
     },    
     {
         "id" : 4,
@@ -36,10 +36,10 @@
         "description" : "",
         "text" : "",
         "categories" : [1,2,3,5,7],
-        "link_projet" : "",
-        "link_github" : "",
+        "link_project" : "caiovf.github.io/angular-pokedex/",
+        "link_github" : "https://github.com/caiovf/angular-pokedex",
         "full_project_img" : "",
-        "status" : 1
+        "current_online" : 1
     },
     {
         "id" : 5,
@@ -50,10 +50,10 @@
         "description" : "",
         "text" : "",
         "categories" : [1,2,3,5,7],
-        "link_projet" : "",
-        "link_github" : "",
+        "link_project" : "https://caiovf.github.io/angular-blog/",
+        "link_github" : "https://github.com/caiovf/angular-blog",
         "full_project_img" : "",
-        "status" : 1
+        "current_online" : 1
     },
     {
         "id" : 3,
@@ -64,9 +64,9 @@
         "description" : "",
         "text" : "",
         "categories" : [1,2,4],
-        "link_projet" : "",
-        "link_github" : "",
+        "link_project" : "caiovf.github.io/pokedex/",
+        "link_github" : "https://github.com/caiovf/pokedex",
         "full_project_img" : "",
-        "status" : 1
+        "current_online" : 1
     }
 ]
