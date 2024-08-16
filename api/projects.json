@@ -36,7 +36,7 @@
         "description" : "",
         "text" : "",
         "categories" : [1,2,3,5,7],
-        "link_project" : "caiovf.github.io/angular-pokedex/",
+        "link_project" : "https://caiovf.github.io/angular-pokedex/",
         "link_github" : "https://github.com/caiovf/angular-pokedex",
         "full_project_img" : "",
         "current_online" : 1
@@ -64,7 +64,7 @@
         "description" : "",
         "text" : "",
         "categories" : [1,2,4],
-        "link_project" : "caiovf.github.io/pokedex/",
+        "link_project" : "https://caiovf.github.io/pokedex/",
         "link_github" : "https://github.com/caiovf/pokedex",
         "full_project_img" : "",
         "current_online" : 1

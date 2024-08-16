@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const Button = (props) => {
     const navigate = useNavigate(); 
-    const imageSrc = require(`../../assets/img/icons/${props.iconSrc}`);
+    const imageSrc = props.iconSrc ? require(`../../assets/img/icons/${props.iconSrc}`) : null ;
     const ButtonTag = props.link ? 'a' : 'button';
     const classNames = `button ${props.className || ''}`.trim();      
     

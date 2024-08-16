@@ -12,12 +12,14 @@ export const PortfolioSingle = (props) => {
     const project = getProjectBySlug(type);        
     const projectCategories = getCategoriesById(project.categories);
 
+    console.log(project.link_project);
+    console.log(project.current_online);
+
     const cleanHtml = (text) => {
         return DOMPurify.sanitize(text, {
           ALLOWED_ATTR: ['href', 'target', 'rel'],           
         })
     };
-
 
     useEffect(() => {
         document.title = `${project.title} | Caio Ferreira Front End Developer`;
@@ -56,12 +58,13 @@ export const PortfolioSingle = (props) => {
                                 {project.link_project && (
                                     <Button
                                         className="invert-position"
-                                        iconSrc="arrow-dg.svg"
+                                        iconSrc={project.current_online ? "arrow-dg.svg" : "offline.svg"}
                                         iconWidth="24"
                                         iconHeight="24"
                                         iconAlt="Arrow"
-                                        label={project.current_online ? "View Project" : "Project Offline"}                            
+                                        label={project.current_online ? "View Project" : "Project Offline"}
                                         link={project.current_online ? project.link_project : '' }
+                                        newTab
                                     />
                                 )}
                                 {project.link_github && (                            
@@ -73,6 +76,7 @@ export const PortfolioSingle = (props) => {
                                         iconAlt="Arrow"
                                         label="GitHub Code"                            
                                         link={project.link_github}
+                                        newTab
                                     />
                                 )}
                             </div>
