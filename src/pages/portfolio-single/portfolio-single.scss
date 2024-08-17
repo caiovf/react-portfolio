@@ -1,0 +1,87 @@
+.single-banner {    
+
+    .box-text {
+        margin-top: 24px;
+
+        h1 {
+            margin: 0;
+            font-size: 4rem;
+            line-height: 1em;
+            color: $color-primary;
+        }
+
+        .resume,
+        .text {
+
+            p {
+                font-size: 1.25rem;
+                line-height: 1.5em;
+                color: $color-primary;
+            }
+        }
+
+        .resume {
+            margin-top: 16px;
+
+            p {
+                font-weight: 600;                
+            }
+        }
+
+        .text {
+            margin-top: 24px;
+        }
+    }
+}
+
+.tools-used {
+    margin-top: 48px;
+
+    .section-header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+
+        // h2 {
+        //     margin: 0;
+        //     font-size: 3rem;
+        //     line-height: 1.1em;
+        //     color: $color-primary;
+        // }
+
+        .list-buttons{
+            display: flex;
+            gap: 16px;
+        }
+    }
+
+    .section-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 24px;
+    }
+}
+
+.reviews.single {
+    margin-top: 48px;
+
+    .section-content {
+        margin-top: 24px;
+
+        .swiper {
+            padding: 0 0 48px;
+
+            .card-review {
+
+                .box-text {
+
+                    p {
+                        font-size: 1.25rem;
+                    }
+                }
+            }
+        }
+    }
+}

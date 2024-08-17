@@ -1,49 +1,67 @@
 import React, { useContext,useEffect } from 'react';
 import './portfolio-single.scss';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { DataContext } from '../../contexts/dataContext';
 import { Button } from '../../components/button';
+import { CardReview } from '../../components/card-review';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 import DOMPurify from 'dompurify';
 
 export const PortfolioSingle = (props) => {   
-    const { getProjectBySlug, getCategoriesById } = useContext(DataContext);
-    const location = useLocation();
-    const type = location.state?.slug;
-    const project = getProjectBySlug(type);        
-    const projectCategories = getCategoriesById(project.categories);
+    const { getProjectBySlug, getCategoriesById, getReviewsByProjectId } = useContext(DataContext);
+    const { slug } = useParams();    
+    const project = getProjectBySlug(slug);    
+        
+    const {
+        id: projectId = '',
+        title: projectTitle = '',
+        thumbnail: projectThumbnail = '',
+        description: projectDescription = '',
+        text: projectText = '',
+        link_project: projectLink = '',
+        link_github: projectGithub = '',
+        categories: projectCategoriesIds = []
+    } = project || {};
+    
+    const projectCategories = getCategoriesById(projectCategoriesIds);
+    const projectReviews = project ? getReviewsByProjectId(projectId) : [];
 
-    console.log(project.link_project);
-    console.log(project.current_online);
-
+    console.log(projectReviews);
     const cleanHtml = (text) => {
         return DOMPurify.sanitize(text, {
           ALLOWED_ATTR: ['href', 'target', 'rel'],           
         })
     };
-
+    
     useEffect(() => {
-        document.title = `${project.title} | Caio Ferreira Front End Developer`;
-    }, [project.title]);
+        if (projectTitle) {
+            document.title = `${projectTitle} | Caio Ferreira Front End Developer`;
+        }
+        
+    }, [projectTitle]);
 
     return (
         <>
             <section className='single-banner'>
                 <div className='container'>
-                    {project.thumbnail && (
+                    {projectThumbnail && (
                         <div className='box-img'>
-                            <img className='img-responsive' src={project.thumbnail} width="1440" height="826" alt={`Imagem do projeto ${project.title}`}></img>
+                            <img className='img-responsive' src={projectThumbnail} width="1440" height="826" alt={`Imagem do projeto ${projectTitle}`}></img>
                         </div>
                     )}
                     <div className='box-text'>
-                        <h1>{project.title}</h1>
-                        {project.description && (
+                        <h1>{projectTitle}</h1>
+                        {projectDescription && (
                             <div className='resume'>
-                                <p>{project.description}</p>
+                                <p>{projectDescription}</p>
                             </div>
                         )}
-                        {project.text && (
+                        {projectText && (
                             <div className='text'>
-                                <p dangerouslySetInnerHTML={{ __html: cleanHtml(project.text) }}></p>
+                                <p dangerouslySetInnerHTML={{ __html: cleanHtml(projectText) }}></p>
                             </div>
                         )}
                     </div>
@@ -52,10 +70,10 @@ export const PortfolioSingle = (props) => {
             <section className='tools-used'>
                 <div className='container'>
                     <div className='section-header'>
-                        <h2>Tools Used</h2>
-                        {( project.link_project || project.link_github) && (
+                        <h2 data-custom-title="section">Tools Used</h2>
+                        {( projectLink || projectGithub) && (
                             <div className='list-buttons'>
-                                {project.link_project && (
+                                {projectLink && (
                                     <Button
                                         className="invert-position"
                                         iconSrc={project.current_online ? "arrow-dg.svg" : "offline.svg"}
@@ -67,7 +85,7 @@ export const PortfolioSingle = (props) => {
                                         newTab
                                     />
                                 )}
-                                {project.link_github && (                            
+                                {projectGithub && (                            
                                     <Button
                                         className="invert-position"
                                         iconSrc="arrow-dg.svg"
@@ -97,6 +115,32 @@ export const PortfolioSingle = (props) => {
                     </div>
                 </div>
             </section>
+            {projectReviews && projectReviews.length > 0 && (
+                <section className='reviews single'>
+                    <div className='container'>
+                        <div className='section-header'>
+                            <h2 data-custom-title="section">{ projectReviews.length <= 1 ? "Review" : "Reviews"}</h2>                    
+                        </div>
+                        <div className='section-content'>
+                            <Swiper
+                                modules={[Pagination]}
+                                spaceBetween={8}
+                                slidesPerView={1}
+                                pagination={{ clickable: true, dynamicBullets: true }}
+                                >
+                                {projectReviews.map((item,index) => (                        
+                                    <SwiperSlide key={index}>
+                                        <CardReview                                 
+                                            data={item}
+                                        />
+                                    </SwiperSlide>                                    
+                                ))}
+                            </Swiper>
+                            
+                        </div>                
+                    </div>
+                </section>
+            )}
         </>
     );
 };

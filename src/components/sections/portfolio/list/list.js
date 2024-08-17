@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './list.scss';
 import { Button } from '../../../button';
 import { CardPortfolio } from '../../../card-portfolio';
@@ -26,6 +26,17 @@ export const List = (props) => {
         }
         setSelectedSkill(skillId);
     };
+
+    useEffect(() => {
+        if (selectedSkill) {
+            const filtered = props.projects.filter(project => 
+                project.categories.includes(selectedSkill)
+            );
+            setFilteredPortfolio(filtered);
+        } else {
+            setFilteredPortfolio(props.projects);
+        }
+    }, [props.projects, selectedSkill]);
 
     return (
         <section className='list-portfolio'>

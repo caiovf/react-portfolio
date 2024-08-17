@@ -1,5 +1,5 @@
 {
-  "name": "portfolio",
+  "name": "portfolio",  
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "dompurify": "^3.1.6",
+    "gh-pages": "^6.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
@@ -15,8 +16,12 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "build:gh-pages": "PUBLIC_URL=https://caiovf.github.io/react-portfolio craco build",
+    "testbuild": "serve -s build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

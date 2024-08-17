@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { DataContext } from '../../contexts/dataContext';
 import './home.scss';
 import { Profile } from '../../components/sections/home/profile';
@@ -14,6 +14,10 @@ export const Home = (props) => {
   const portfolioData = state.projectsData.portfolio;
   const studyData = state.projectsData.study;
   const reviewsData = state.reviewsData;  
+
+  useEffect(() => {
+    document.title = `Home | Caio Ferreira Front End Developer`;
+  }, []);
   
   return (
     <>

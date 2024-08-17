@@ -9,15 +9,15 @@
     }
 
     p {
-        max-width: 660px;
+        max-width: 730px;
         margin: 16px 0 0;
         font-weight: 600;
-        font-size: 1.125rem;
+        font-size: 1.25rem;
         line-height: 1.5em;
         color: #2b2b2b;
 
         a {
-            display: inline-block;
+            display: inline;
             color: $color-tertiary;
 
             &[href]{

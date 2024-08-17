@@ -6,12 +6,12 @@ const DataContext = createContext();
 const DataProvider = ({ children }) => {
     const [state, setState] = useState({
         aboutData: null,
-        skillsData: null,
+        skillsData: [],
         projectsData: {
-            portfolio: null,
-            study: null
+            portfolio: [],
+            study: []
         },
-        reviewsData: null,
+        reviewsData: [],
         loading: {
             about: true,
             skills: true,
@@ -43,18 +43,18 @@ const DataProvider = ({ children }) => {
 
         const fetchSkillsData = async () => {
             try {
-            const response = await fetchData('categories');
-            setState(prevState => ({
-                ...prevState,
-                skillsData: response.data,
-                loading: { ...prevState.loading, skills: false },
-            }));
+                const response = await fetchData('categories');
+                setState(prevState => ({
+                    ...prevState,
+                    skillsData: response.data,
+                    loading: { ...prevState.loading, skills: false },
+                }));
             } catch (err) {
-            setState(prevState => ({
-                ...prevState,
-                error: prevState.error ? prevState.error : 'Error fetching skills data',
-                loading: { ...prevState.loading, skills: false },
-            }));
+                setState(prevState => ({
+                    ...prevState,
+                    error: prevState.error ? prevState.error : 'Error fetching skills data',
+                    loading: { ...prevState.loading, skills: false },
+                }));
             }
         };
 
@@ -132,8 +132,14 @@ const DataProvider = ({ children }) => {
         )
     }
 
+    const getReviewsByProjectId = (projectId) => {
+        return (
+            state.reviewsData.filter(review => review.project_id === projectId)
+        )
+    }
+
     return (
-        <DataContext.Provider value={{ state, setState, getProjectBySlug, getCategoriesById }}>
+        <DataContext.Provider value={{ state, setState, getProjectBySlug, getCategoriesById, getReviewsByProjectId }}>
         {children}
         </DataContext.Provider>
     );
