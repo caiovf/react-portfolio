@@ -29,7 +29,6 @@ export const PortfolioSingle = (props) => {
     const projectCategories = getCategoriesById(projectCategoriesIds);
     const projectReviews = project ? getReviewsByProjectId(projectId) : [];
 
-    console.log(projectReviews);
     const cleanHtml = (text) => {
         return DOMPurify.sanitize(text, {
           ALLOWED_ATTR: ['href', 'target', 'rel'],           
