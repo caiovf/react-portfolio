@@ -2,7 +2,7 @@
     margin-top: 48px;
 
     .section-header{
-        margin-bottom: 24px;
+        margin-bottom: 48px;
 
         h2 {
             margin: 0 0 24px;
@@ -15,7 +15,7 @@
     .section-content{
         display: flex;
         flex-wrap: wrap;
-        gap: 24px;
+        gap: 48px 24px;
 
         .card-portfolio{
             width: calc(65% - 14px);

@@ -46,8 +46,7 @@ export const Skills = memo((data) => {
                             iconHeight="24"
                             iconAlt={`Icone ${item.slug}`}
                             label={item.name}
-                            navigate="/portfolio"
-                            value={item.slug}
+                            navigate={`projects/category/${item.slug}`}
                             customColor={item.color}
                         />
                     ))}                

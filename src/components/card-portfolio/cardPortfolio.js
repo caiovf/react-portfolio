@@ -13,7 +13,7 @@ export const CardPortfolio = (props) => {
     let filteredCategories = categories.filter(category => cardCategories.includes(category.id));
 
     const handleClick = () => {
-        navigate(`/portfolio/${props.slug}`, { state: { slug: props.slug } });
+        navigate(`/projects/${props.slug}`, { state: { slug: props.slug } });
     };
     
     return (
@@ -40,7 +40,7 @@ export const CardPortfolio = (props) => {
                     iconHeight="20"
                     iconAlt="Arrow"
                     label="View Project"
-                    navigate="/portfolio"
+                    navigate="/projects"
                 />
             </div>
             <div className='box-text'>

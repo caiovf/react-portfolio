@@ -8,6 +8,7 @@ const DataProvider = ({ children }) => {
         aboutData: null,
         skillsData: [],
         projectsData: {
+            projects: [],
             portfolio: [],
             study: []
         },
@@ -61,11 +62,13 @@ const DataProvider = ({ children }) => {
         const fetchProjectsData = async () => {
             try {
                 const response = await fetchData('projects');
+                const projects = response.data.slice(0, 4);
                 const portfolioData = response.data.filter(item => item.project_type === 'portfolio').slice(0, 4);
                 const studiesData = response.data.filter(item => item.project_type === 'estudo').slice(0, 4);
                 setState(prevState => ({
                 ...prevState,
                 projectsData: {
+                    projects: projects,
                     portfolio: portfolioData,
                     study: studiesData
                 },
@@ -132,6 +135,12 @@ const DataProvider = ({ children }) => {
         )
     }
 
+    const getCategoryBySlug = (categories) => {
+        return (
+            state.skillsData.filter(category => categories.includes(category.slug))[0]
+        )
+    }
+
     const getReviewsByProjectId = (projectId) => {
         return (
             state.reviewsData.filter(review => review.project_id === projectId)
@@ -139,7 +148,7 @@ const DataProvider = ({ children }) => {
     }
 
     return (
-        <DataContext.Provider value={{ state, setState, getProjectBySlug, getCategoriesById, getReviewsByProjectId }}>
+        <DataContext.Provider value={{ state, setState, getProjectBySlug, getCategoriesById, getCategoryBySlug, getReviewsByProjectId }}>
         {children}
         </DataContext.Provider>
     );

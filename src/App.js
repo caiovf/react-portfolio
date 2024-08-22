@@ -25,9 +25,10 @@ function App() {
 						<Routes>
 							<Route path="/" element={<Home />} />
 							<Route path="/about" element={<About />} />
-							<Route path="/portfolio" element={<Portfolio />} />
-							<Route path="/portfolio/:slug" element={<PortfolioSingle />} />
-							<Route path="/advancing-skills" element={<Portfolio />} />
+							<Route path="/projects" element={<Portfolio />} />
+							<Route path="/projects/:slug" element={<PortfolioSingle />} />
+							<Route path="/projects/category/:category" element={<Portfolio />} />
+							<Route path="/projects/type/:category" element={<Portfolio />} />
 						</Routes>
 					</main>
 				<Footer />

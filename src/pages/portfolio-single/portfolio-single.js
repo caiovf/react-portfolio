@@ -12,8 +12,8 @@ import DOMPurify from 'dompurify';
 
 export const PortfolioSingle = (props) => {   
     const { getProjectBySlug, getCategoriesById, getReviewsByProjectId } = useContext(DataContext);
-    const { slug } = useParams();    
-    const project = getProjectBySlug(slug);    
+    const { slug } = useParams();
+    const project = getProjectBySlug(slug);
         
     const {
         id: projectId = '',
