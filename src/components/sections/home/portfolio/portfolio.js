@@ -42,7 +42,7 @@ export const SectionPortfolio = (props) => {
                         iconHeight="24"
                         iconAlt="Arrow"
                         label="View More Projects"
-                        navigate={`projects/type/${type}`}
+                        navigate={`/${type}`}
                         value={type}
                     />
                 </div>

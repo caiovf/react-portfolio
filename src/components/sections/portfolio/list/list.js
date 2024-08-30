@@ -8,8 +8,8 @@ import 'react-loading-skeleton/dist/skeleton.css';
 export const List = (props) => {    
     const AllSkills = props.skills;
     const categoryFilter = props.categoryFilter;
-    const [selectedSkill, setSelectedSkill] = useState(categoryFilter);
-    const [filteredPortfolio, setFilteredPortfolio] = useState(props.projects);
+    const [selectedSkill, setSelectedSkill] = useState();
+    const [filteredPortfolio, setFilteredPortfolio] = useState();
 
     const getPortraitValue = (index) => {
         const sequence = [0, 1, 1];
@@ -29,16 +29,18 @@ export const List = (props) => {
     };
 
     useEffect(() => {
-        if (selectedSkill) {
+
+        setSelectedSkill(null);
+        setFilteredPortfolio(props.projects);        
+
+        if (categoryFilter) {
             const filtered = props.projects.filter(project => 
-                project.categories.includes(selectedSkill)
+                project.categories.includes(categoryFilter)
             );
             setFilteredPortfolio(filtered);
-        } else {
-            setFilteredPortfolio(props.projects);
-        }
+        }  
         
-    }, [props.projects, selectedSkill]);
+    }, [props.projects,categoryFilter]);
     
     return (
         <section className='list-portfolio'>

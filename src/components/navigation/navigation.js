@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './navigation.scss';
 import { Link } from 'react-router-dom';
 
 export const Navigation = (props) => {
-    const [state,setState,selectedSkill,setSelectedSkill] = useState();    
-    console.log(state);
-    console.log(selectedSkill);
-    console.log(setSelectedSkill);
+    const navigate = useNavigate(); 
     
-    const handleLinkClick = () => {
-        console.log('action');
-        setState(null);
-    
+    const handleClick = (e) => {
+        e.preventDefault();
+        navigate('/portfolio', { state: { filter: 'portfolio' } });        
     };
 
     return (
@@ -25,7 +22,7 @@ export const Navigation = (props) => {
                     <Link to="/about">About</Link>
                 </li>
                 <li>                
-                    <Link to="/projects/type/portfolio" onClick={handleLinkClick}>Portfolio</Link>
+                    <Link to="/portfolio" onClick={handleClick}>Portfolio</Link>
                 </li>
                 <li>                
                     <a href="https://www.linkedin.com/in/caio-ferreiradev/" title="Contact" target="_blank" rel="nofollow noopener noreferrer">Contact</a>
