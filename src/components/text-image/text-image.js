@@ -7,8 +7,12 @@ import './text-image.scss';
 export const TextImage = memo((props) => {
     const title = props.title;
     const description = props.description;
-    const image = props.img;
     const alternate = props.alternate ? props.alternate : false;
+    const image = props.img;
+    const imageWidth = props.imgWidth ? props.imgWidth : 690;
+    const imageHeight = props.imgHeight ? props.imgHeight : 500;
+    const imgAlt = props.imgAlt ? props.imgAlt : '';
+    const sectionClasses = `section-home text-image${alternate ? ' alternate' : ''}`;
 
     if (!props) {
         return (
@@ -20,7 +24,7 @@ export const TextImage = memo((props) => {
                         <Skeleton height={60} width={230} count={1} />
                     </div>
                     <div className='right-content'>
-                        <Skeleton height={682} width={682} count={1} borderRadius="500px" />
+                        <Skeleton height={imageWidth} width={imageHeight} count={1} borderRadius="500px" />
                     </div>
                 </div>
             </section>
@@ -28,14 +32,14 @@ export const TextImage = memo((props) => {
     }    
 
     return (
-        <section className='section-home text-image'>
+        <section className={sectionClasses}>
             <div className='container'>
                 <div className='left-content'>
                     <h2 data-custom-title="section" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(title) }}></h2>
                     <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(description) }}></p>
                 </div>
                 <div className='right-content'>
-                    <img className="img-responsive" src={image} width="690" height="500" alt="Foto de Caio Ferreira" />
+                    <img className="img-responsive" src={image} width={imageWidth} height={imageHeight} alt={imgAlt} />
                 </div>
             </div>
         </section>

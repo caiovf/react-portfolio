@@ -48,6 +48,9 @@ export const About = (props) => {
                 title={whenNotCodingTitle}
                 description={whenNotCodingDescription}
                 img={whenNotCodingImage}
+                imgWidth="690"
+                imgHeight="600"
+                imgAlt=""
                 alternate={true}
             />
             <Reviews 

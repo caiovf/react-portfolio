@@ -1,0 +1,39 @@
+.text-image {
+
+    &.alternate {
+
+        .right-content {
+            order: -1;
+        }
+    }
+
+    .container{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap: 48px;
+
+        .left-content {
+
+            p {
+                margin: 32px 0 0;
+                font-weight: 600;
+                font-size: 1.5rem;
+                line-height: 1.5em;
+                color: $color-black;
+
+                a {
+                    display: inline;
+                    color: $color-tertiary;
+        
+                    &[href]{
+                        transition: color 300ms ease-in-out;
+        
+                        &:hover {
+                            color: $color-secondary;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
