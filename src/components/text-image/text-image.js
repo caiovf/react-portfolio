@@ -2,13 +2,13 @@ import React, { memo } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import DOMPurify from 'dompurify';
-// import { Button } from '../../../button';
-import './profile.scss';
+import './text-image.scss';
 
-export const Profile = memo((props) => {
+export const TextImage = memo((props) => {
     const title = props.title;
     const description = props.description;
     const image = props.img;
+    const alternate = props.alternate ? props.alternate : false;
 
     if (!props) {
         return (
@@ -28,23 +28,14 @@ export const Profile = memo((props) => {
     }    
 
     return (
-        <section className='profile'>
+        <section className='section-home text-image'>
             <div className='container'>
                 <div className='left-content'>
-                    <h1 data-custom-title="banner" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(title) }}></h1>
+                    <h2 data-custom-title="section" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(title) }}></h2>
                     <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(description) }}></p>
-                    {/* <Button                        
-                        iconSrc="download.svg"
-                        iconWidth="24"
-                        iconHeight="24"
-                        iconAlt="Icone Download"
-                        label="Download Resume"
-                        link={data.resume}
-                        download="true"
-                    /> */}
                 </div>
                 <div className='right-content'>
-                    <img className="img-responsive" src={image} width="682" height="682" alt="Foto de Caio Ferreira" />
+                    <img className="img-responsive" src={image} width="690" height="500" alt="Foto de Caio Ferreira" />
                 </div>
             </div>
         </section>

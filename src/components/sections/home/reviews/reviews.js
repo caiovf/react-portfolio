@@ -52,22 +52,24 @@ export const Reviews = memo((props) => {
                     <h2 data-custom-title="section">{title}</h2>                    
                 </div>
             </div>
-            <div className='section-content'>
-                <Swiper
-                    modules={[Pagination]}
-                    spaceBetween={16}
-                    slidesPerView={2.5}
-                    pagination={{ clickable: true, dynamicBullets: true }}
-                    >
-                    {listReviews.map((item,index) => (                        
-                        <SwiperSlide key={index}>
-                            <CardReview                                 
-                                data={item}
-                            />
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
-            </div>                
+            {listReviews ? (
+                <div className='section-content'>
+                    <Swiper
+                        modules={[Pagination]}
+                        spaceBetween={16}
+                        slidesPerView={2.5}
+                        pagination={{ clickable: true, dynamicBullets: true }}
+                        >
+                        {listReviews.map((item,index) => (                        
+                            <SwiperSlide key={index}>
+                                <CardReview                                 
+                                    data={item}
+                                />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                </div>                
+            ) : ('')}
         </section>    
     );
 })
