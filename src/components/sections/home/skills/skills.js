@@ -4,10 +4,11 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import './skills.scss';
 import { Button } from '../../../button';
 
-export const Skills = memo((data) => {       
-    data = data.data
+export const Skills = memo((props) => {       
+    const listSkill = props.data;
+    const title = props.titulo ? props.titulo : '';
 
-    if (!data) {
+    if (!listSkill) {
         return (
             <section className='section-home skills'>
                 <div className='container'>
@@ -35,10 +36,10 @@ export const Skills = memo((data) => {
         <section className='section-home skills'>
             <div className='container'>
                 <div className='section-header'>
-                    <h2 data-custom-title="section">My Skills</h2>
+                    <h2 data-custom-title="section">{title}</h2>
                 </div>
                 <div className='section-content'>
-                    {data.map((item,index) => (
+                    {listSkill.map((item,index) => (
                         <Button
                             key={index}
                             iconSrc={`${item.slug}.png`}

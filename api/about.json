@@ -1,7 +1,22 @@
 {
     "title": "Caio Ferreira</br>Front End Developer",
     "description" : "I am a front-end developer with over 6 years of experience in the field. My main focus is on developing modern and functional websites using technologies such as <strong>HTML, CSS, JavaScript, jQuery, PHP, and WordPress.</strong>",
-    "resume" : "link_resume",
     "image" : "https://raw.githubusercontent.com/caiovf/react-portfolio/main/src/assets/img/profile.jpeg",
-    "text": "Throughout my career, I have worked on a variety of projects, ranging from simple landing pages to complex web applications. My expertise in HTML and CSS allows me to create pixel-perfect designs that are both visually appealing and user-friendly. I utilize JavaScript and jQuery to add interactive elements, enhancing the user experience and making websites more dynamic. In addition to front-end technologies, I have a solid understanding of PHP and WordPress, which enables me to develop custom themes and plugins tailored to specific client needs. This combination of skills allows me to build websites that are not only aesthetically pleasing but also highly functional and easy to manage. I am committed to staying updated with the latest industry trends and best practices, ensuring that the websites I develop are up-to-date with the latest technologies and standards. My goal is to deliver high-quality, responsive, and SEO-friendly websites that help businesses achieve their online objectives and provide an exceptional user experience. Learn a bit about me:"
+    "page_title": "Hello, I’m Caio Ferreira",
+    "page_description" : "I’m a front-end developer with 6+ years of experience, building modern, responsive websites that look great and work flawlessly. From small business sites to large platforms, I’m here to create seamless user experiences.<a title='Let’s bring your vision to life!' href='https://www.linkedin.com/in/caio-ferreiradev/' target='_blank' rel='nofollow noopener noreferrer'>Let’s bring your vision to life!</a>",
+    "how_work" : {
+        "title": "How I Work",
+        "description":"I believe that each project is unique and deserves a personalized approach. My focus is always on creating solutions that prioritize user experience, efficiency, and scalability.</br></br>I work collaboratively, always seeking a balance between design and functionality, with attention to detail and deadlines.</br></br>For me, the success of a project is delivering more than the client expects, quickly and without compromising quality.",
+        "image":""
+    },
+    "when_not_coding":{
+        "title": "When i’m not coding...",
+        "description": "Beyond coding, I have a deep passion for volleyball, enjoying the sport in all its forms. Whether it’s indoor, outdoor, or beach volleyball, the game always brings out my competitive side and fuels my drive for teamwork.</br></br>Recently, I’ve developed a strong love for beach volleyball, with its quick tempo and dynamic nature, much like the way I approach challenges in development—always adapting and striving for the best results.</br></br>Just as in coding, where precision and timing are key, volleyball helps me maintain focus, discipline, and a sense of balance, keeping my mind sharp and energized for the creative demands of web development.",
+        "image": ""
+    },
+    "lets_work":{
+        "title": "Let’s Work Together",
+        "description": "I’m always looking for exciting new projects and collaborations. If you’re looking to create or increase your online presence, let’s talk! <a title='Check out my portfolio' href='https://www.linkedin.com/in/caio-ferreiradev/' target='_blank' rel='nofollow noopener noreferrer'>Check out my portfolio</a> to see how I’ve helped businesses grow through innovative web solutions.",
+        "image": ""
+    }
 }

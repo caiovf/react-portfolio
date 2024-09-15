@@ -22,16 +22,20 @@ export const Home = (props) => {
   return (
     <>
       <Profile 
-        data={profileData}
+        title={profileData.title}
+        description={profileData.description}
+        img={profileData.image}
       />
       <Skills 
+        titulo="Skills"
         data={skillsData}
       />
       <SectionPortfolio 
         titulo="Portfolio"
         data={portfolioData}
       />
-      <Reviews 
+      <Reviews
+        titulo="Reviews" 
         data={reviewsData}
       />
       <SectionPortfolio 

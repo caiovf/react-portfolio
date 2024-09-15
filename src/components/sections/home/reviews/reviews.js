@@ -8,10 +8,11 @@ import './reviews.scss';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-export const Reviews = memo((props) => {      
-    const data = props.data
+export const Reviews = memo((props) => {          
+    const listReviews = props.data;
+    const title = props.titulo ? props.titulo : '';
 
-    if (!data) {
+    if (!props) {
         return (
             <section className='section-home reviews'>
                 <div className='container'>
@@ -48,7 +49,7 @@ export const Reviews = memo((props) => {
         <section className='section-home reviews'>
             <div className='container'>
                 <div className='section-header'>
-                    <h2 data-custom-title="section">Reviews</h2>                    
+                    <h2 data-custom-title="section">{title}</h2>                    
                 </div>
             </div>
             <div className='section-content'>
@@ -58,7 +59,7 @@ export const Reviews = memo((props) => {
                     slidesPerView={2.5}
                     pagination={{ clickable: true, dynamicBullets: true }}
                     >
-                    {data.map((item,index) => (                        
+                    {listReviews.map((item,index) => (                        
                         <SwiperSlide key={index}>
                             <CardReview                                 
                                 data={item}

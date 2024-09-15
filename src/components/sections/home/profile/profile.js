@@ -6,9 +6,11 @@ import { Button } from '../../../button';
 import './profile.scss';
 
 export const Profile = memo((props) => {
-    const data = props.data    
+    const title = props.title;
+    const description = props.description;
+    const image = props.image;
 
-    if (!data) {
+    if (!props) {
         return (
             <section className='profile'>
                 <div className='container'>
@@ -29,9 +31,9 @@ export const Profile = memo((props) => {
         <section className='profile'>
             <div className='container'>
                 <div className='left-content'>
-                    <h1 data-custom-title="banner" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data.title) }}></h1>
-                    <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data.description) }}></p>
-                    <Button                        
+                    <h1 data-custom-title="banner" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(title) }}></h1>
+                    <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(description) }}></p>
+                    {/* <Button                        
                         iconSrc="download.svg"
                         iconWidth="24"
                         iconHeight="24"
@@ -39,10 +41,10 @@ export const Profile = memo((props) => {
                         label="Download Resume"
                         link={data.resume}
                         download="true"
-                    />
+                    /> */}
                 </div>
                 <div className='right-content'>
-                    <img className="img-responsive" src={data.image} width="682" height="682" alt="Foto de Caio Ferreira" />
+                    <img className="img-responsive" src={image} width="682" height="682" alt="Foto de Caio Ferreira" />
                 </div>
             </div>
         </section>

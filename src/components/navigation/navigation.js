@@ -25,7 +25,7 @@ export const Navigation = (props) => {
                     <Link to="/portfolio" onClick={handleClick}>Portfolio</Link>
                 </li>
                 <li>                
-                    <a href="https://www.linkedin.com/in/caio-ferreiradev/" title="Contact" target="_blank" rel="nofollow noopener noreferrer">Contact</a>
+                    <a title="Contact" href="https://www.linkedin.com/in/caio-ferreiradev/" target="_blank" rel="nofollow noopener noreferrer">Contact</a>
                 </li>
             </ul>
         </nav>    

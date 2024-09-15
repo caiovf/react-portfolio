@@ -5,7 +5,7 @@ const DataContext = createContext();
 
 const DataProvider = ({ children }) => {
     const [state, setState] = useState({
-        aboutData: null,
+        aboutData: {},
         skillsData: [],
         projectsData: {
             projects: [],
