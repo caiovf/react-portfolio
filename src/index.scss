@@ -127,6 +127,22 @@ textarea{
     padding: 0 15px;
     width: 100%;
     margin: 0 auto;
+
+    @media #{$screen-sm}{
+        max-width: 750px;
+    }
+
+    @media #{$screen-md}{
+        max-width: 970px;
+    }
+
+    @media #{$screen-lg}{
+        max-width: 1170px;
+    }
+    
+    @media #{$screen-xl}{    
+        max-width: 1470px;
+    }
 }
 
 [data-custom-title]{
@@ -135,11 +151,70 @@ textarea{
 }
 
 [data-custom-title~="banner"]{
-    font-size: 4rem;
+    font-size: 2rem;
     line-height: 1.1em;
+    
+    @media #{$screen-xs}{
+        font-size: 2.8rem;
+    }
+
+    @media #{$screen-sm}{
+        font-size: 2rem;
+    }
+    
+    @media #{$screen-lg}{
+        font-size: 3.5rem;
+    }
+    
+    @media #{$screen-xl}{
+        font-size: 4rem;
+    }
 }
 
-[data-custom-title~="section"]{
-    font-size: 3rem;
+[data-custom-title~="section"]{    
+    font-size: 2rem;
     line-height: 1.3em;
+
+    @media #{$screen-sm}{
+        font-size: 1.8rem;
+    }
+    
+    @media #{$screen-lg}{
+        font-size: 2.5rem;    
+    }
+    
+    @media #{$screen-xl}{
+        font-size: 3rem;
+    }
+}
+
+[data-custom-resumn]{
+
+    p {
+        
+        &:last-child {
+            margin: 0;
+        }
+    }    
+}
+
+[data-custom-resumn~="banner"]{
+
+    p {
+        font-size: 1rem;
+        line-height: 1.5em;
+        color: $color-primary;
+        
+        @media #{$screen-md}{
+            font-size: 1.15rem;
+        }
+        
+        @media #{$screen-lg}{
+            font-size: 1.25rem;
+        }
+        
+        @media #{$screen-xl}{
+            font-size: 1.5rem;
+        }
+    }
 }

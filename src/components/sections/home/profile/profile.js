@@ -32,16 +32,9 @@ export const Profile = memo((props) => {
             <div className='container'>
                 <div className='left-content'>
                     <h1 data-custom-title="banner" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(title) }}></h1>
-                    <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(description) }}></p>
-                    {/* <Button                        
-                        iconSrc="download.svg"
-                        iconWidth="24"
-                        iconHeight="24"
-                        iconAlt="Icone Download"
-                        label="Download Resume"
-                        link={data.resume}
-                        download="true"
-                    /> */}
+                    <div data-custom-resumn="banner">
+                        <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(description) }}></p>                    
+                    </div>
                 </div>
                 <div className='right-content'>
                     <img className="img-responsive" src={image} width="682" height="682" alt="Foto de Caio Ferreira" />

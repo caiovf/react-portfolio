@@ -16,7 +16,7 @@
     },
     "lets_work":{
         "title": "Let’s Work Together",
-        "description": "I’m always looking for exciting new projects and collaborations. If you’re looking to create or increase your online presence, let’s talk! <a title='Check out my portfolio' href='https://www.linkedin.com/in/caio-ferreiradev/' target='_blank' rel='nofollow noopener noreferrer'>Check out my portfolio</a> to see how I’ve helped businesses grow through innovative web solutions.",
+        "description": "I’m always looking for exciting new projects and collaborations. If you’re looking to create or increase your online presence, let’s talk! <a title='Check out my portfolio' href='/portfolio' target='_blank' rel='nofollow noopener noreferrer'>Check out my portfolio</a> to see how I’ve helped businesses grow through innovative web solutions.",
         "image": "https://raw.githubusercontent.com/caiovf/react-portfolio/main/src/assets/img/profile-2.jpg"
     }
 }

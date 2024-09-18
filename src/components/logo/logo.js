@@ -13,7 +13,8 @@ export const Logo = (props) => {
 
   return (    
     <div className='layout-logo'>
-		<img 
+		<img
+    className='img-responsive' 
 		src={logoImage}
 		alt="C Ferreira FrontEnd Developer"
     width="264"

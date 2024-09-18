@@ -3,6 +3,10 @@
     .section-content{
         display: flex;
         flex-wrap: wrap;
-        gap: 16px;
+        gap: 8px;
+        
+        @media #{$screen-lg}{            
+            gap: 16px;
+        }
     }
 }

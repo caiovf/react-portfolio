@@ -77,8 +77,12 @@
         }
 
         h3 {
-            font-size: 2rem;
+            font-size: 1.5rem;
             line-height: 1.25em;
+            
+            @media #{$screen-xs}{
+                font-size: 2rem;
+            }
         }
 
         p {
@@ -87,9 +91,17 @@
             text-overflow: ellipsis;
             -webkit-line-clamp: 3;
             overflow: hidden;
-            margin-top: 16px;
-            font-size: 1rem;
+            margin-top: 0;
+            font-size: .875rem;
             line-height: 1.5em;
+            
+            @media #{$screen-xs}{
+                font-size: 1rem;
+            }
+
+            @media #{$screen-sm}{                
+                margin-top: 16px;
+            }
         }
     }
 }

@@ -1,17 +1,50 @@
 .portfolio{
 
+    .section-header{
+
+        .button{
+            display: none;
+
+            @media #{$screen-sm}{
+                display: flex;
+            }
+        }            
+    }
+
     .section-content{
         display: flex;
         flex-wrap: wrap;
-        gap: 24px;
+        gap: 32px;
+        
+        @media #{$screen-xs}{
+            gap: 24px;
+        }
 
         .card-portfolio{
-            width: calc(65% - 14px);
             flex-shrink: 0;
+            width: 100%;
+            
+            @media #{$screen-sm}{
+                width: calc(65% - 14px);
+            }
 
             &.portrait{
-                width: calc(35% - 10px);
+
+                @media #{$screen-sm}{
+                    width: calc(35% - 10px);
+                }
             }
+        }
+    }
+
+    .section-footer{
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @media #{$screen-sm}{
+            display: none;
         }
     }
 }

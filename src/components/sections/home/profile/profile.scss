@@ -2,8 +2,13 @@
     
     .container {
         display: flex;        
-        align-items: center;
+        flex-direction: column;
         gap: 24px;
+        
+        @media #{$screen-sm}{
+            align-items: center;
+            flex-direction: row;
+        }
 
         .left-content {
             display: flex;
@@ -14,12 +19,11 @@
                 margin: 0 0 16px;
             }
             
-            p {
-                margin: 0;
-                max-width: 85%;
-                font-size: 1.5rem;
-                line-height: 1.5em;
-                color: $color-primary;
+            [data-custom-resumn] {
+                
+                @media #{$screen-md}{
+                    max-width: 85%;
+                }
             }
 
             .button {
@@ -28,8 +32,13 @@
         }
         
         .right-content {
-            width: 49%;
             flex-shrink: 0;
+            order: -1;
+            
+            @media #{$screen-sm}{                
+                width: 49%;
+                order: unset;
+            }
 
             img {
                 aspect-ratio: 1/1;

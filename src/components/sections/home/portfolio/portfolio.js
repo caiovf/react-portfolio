@@ -61,7 +61,19 @@ export const SectionPortfolio = (props) => {
                             className={getPortraitValue(index)}
                         />
                     ))}
-                </div>                
+                </div>
+                <div className='section-footer'>
+                    <Button
+                        className="invert-position"
+                        iconSrc="arrow.svg"
+                        iconWidth="24"
+                        iconHeight="24"
+                        iconAlt="Arrow"
+                        label="View More Projects"
+                        navigate={`/${type}`}
+                        value={type}
+                    />
+                </div>
             </div>
         </section>    
     );

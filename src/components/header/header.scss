@@ -10,16 +10,29 @@
     
     .layout-logo,
     .social-media {
-        width: 25%;
+        
+        @media #{$screen-lg}{
+            width: 25%;
+
+        }
     }
     
     .layout-nav{
-        display: flex;
-        justify-content: center;
-        width: 50%;
+        display: none;
+        
+        @media #{$screen-lg}{
+            display: flex;
+            justify-content: center;
+            width: 50%;
+        }
     }
     
     .social-media {
-        justify-content: flex-end;
+        display: none;
+
+        @media #{$screen-lg}{
+            display: flex;
+            justify-content: flex-end;
+        }
     }
 }

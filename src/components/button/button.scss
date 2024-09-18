@@ -4,9 +4,14 @@
     justify-content: center;
     gap: 8px;
     background: $color-secondary;
-    padding: 8px;
+    padding: 4px;
     border-radius: 45px;
+    min-height: 48px;
     transition: background 300ms ease-in-out, transform 300ms ease-in-out;
+    
+    @media #{$screen-lg}{
+        padding: 8px;
+    }
 
     &[href],
     &[aria-label]{
@@ -92,7 +97,11 @@
 
     span {
         font-weight: 700;
-        font-size: 1.125rem;
-        color: $color-white;        
+        font-size: 1rem;
+        color: $color-white;  
+        
+        @media #{$screen-lg}{
+            font-size: 1.125rem;
+        }
     }
 }

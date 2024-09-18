@@ -1,0 +1,7 @@
+.layout-logo {
+    max-width: 220px;
+
+    @media #{$screen-xs}{
+        max-width: unset;
+    }
+}
