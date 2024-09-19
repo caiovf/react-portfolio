@@ -2,11 +2,12 @@ import React,{useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './navigation.scss';
 import { Link } from 'react-router-dom';
+import { SocialMedia } from '../social-media';
 
 export const Navigation = (props) => {
     const navigate = useNavigate();         
     const iconMenu = require('../../assets/img/icons/menu.png');
-    const iconClose = require('../../assets/img/icons/menu.png');
+    const iconClose = require('../../assets/img/icons/close.png');
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const handleClick = (e) => {
@@ -49,12 +50,12 @@ export const Navigation = (props) => {
             <div className={`menu-mobile ${isMobileMenuOpen ? 'open' : ''}`}>
                 <div className='menu-mobile-content'>
                     <button
-                    className='toggle-menu-mobile' 
-                    aria-label="Close menu"
-                    onClick={toggleMobileMenu}
-                >
-                    <img src={iconClose} width={50} height={50} alt='icon to open mobile menu'></img>
-                </button>
+                        className='toggle-menu-mobile' 
+                        aria-label="Close menu"
+                        onClick={toggleMobileMenu}
+                    >
+                        <img src={iconClose} width={30} height={30} alt='icon to close mobile menu'></img>
+                    </button>
                     <ul>
                         <li>
                             <Link to="/about" onClick={toggleMobileMenu}>About</Link>
@@ -66,6 +67,7 @@ export const Navigation = (props) => {
                             <a title="Contact" href="https://www.linkedin.com/in/caio-ferreiradev/" target="_blank" rel="nofollow noopener noreferrer">Contact</a>
                         </li>
                     </ul>
+                    <SocialMedia />
                 </div>
             </div>
         </>

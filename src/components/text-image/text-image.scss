@@ -2,24 +2,37 @@
 
     &.alternate {
 
-        .right-content {
-            order: -1;
+        @media #{$screen-sm}{
+
+            .right-content {
+                order: -1;
+            }
         }
     }
 
     .container{
         display: grid;
-        grid-template-columns: repeat(2,1fr);
-        gap: 48px;
+        grid-template-columns: repeat(1,1fr);
+        gap: 24px;
+        
+        @media #{$screen-sm}{
+            gap: 48px;
+            grid-template-columns: repeat(2,1fr);
+        }
 
         .left-content {
 
             p {
-                margin: 32px 0 0;
+                margin: 16px 0 0;
                 font-weight: 600;
-                font-size: 1.3rem;
+                font-size: 1rem;
                 line-height: 1.5em;
                 color: $color-black;
+                
+                @media #{$screen-sm}{
+                    margin: 32px 0 0;
+                    font-size: 1.3rem;
+                }
 
                 a {
                     display: inline;
@@ -37,6 +50,11 @@
         }
 
         .right-content {
+            order: -1;
+
+            @media #{$screen-sm}{
+                order: unset;
+            }
 
             img{
                 border-radius: 16px;

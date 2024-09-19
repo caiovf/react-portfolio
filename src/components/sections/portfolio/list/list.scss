@@ -18,11 +18,18 @@
         gap: 48px 24px;
 
         .card-portfolio{
-            width: calc(65% - 14px);
             flex-shrink: 0;
+            width: 100%;
+            
+            @media #{$screen-sm}{
+                width: calc(65% - 14px);
+            }
 
             &.portrait{
-                width: calc(35% - 10px);
+                
+                @media #{$screen-sm}{
+                    width: calc(35% - 10px);
+                }
             }
         }
     }
@@ -30,6 +37,19 @@
 
 .list-buttons {
     display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    gap: 8px;
+    
+    @media #{$screen-sm}{
+        flex-wrap: wrap;
+    }
+    
+    @media #{$screen-lg}{
+        gap: 16px;
+    }
+
+    .button {
+        scroll-snap-align: start;
+    }
 }

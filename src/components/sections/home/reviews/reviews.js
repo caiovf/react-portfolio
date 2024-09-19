@@ -24,7 +24,21 @@ export const Reviews = memo((props) => {
                     <Swiper
                         modules={[Pagination]}
                         spaceBetween={16}
-                        slidesPerView={2.5}
+                        slidesPerView={1}
+                        breakpoints={{                            
+                            200: {
+                                slidesPerView: 1,
+                                spaceBetween: 16,
+                            },
+                            768: {
+                                slidesPerView: 1.5,
+                                spaceBetween: 16,
+                            },
+                            1300: {
+                                slidesPerView: 2.5,
+                                spaceBetween: 16,
+                            },
+                        }}
                         pagination={{ clickable: true, dynamicBullets: true }}
                         >                        
                             <SwiperSlide>
@@ -55,9 +69,19 @@ export const Reviews = memo((props) => {
             {listReviews ? (
                 <div className='section-content'>
                     <Swiper
-                        modules={[Pagination]}
                         spaceBetween={16}
-                        slidesPerView={2.5}
+                        slidesPerView={1}
+                        breakpoints={{
+                            768: {
+                                slidesPerView: 1.5,
+                                spaceBetween: 16,
+                            },
+                            1300: {
+                                slidesPerView: 2.5,
+                                spaceBetween: 16,
+                            }
+                        }}
+                        modules={[Pagination]}
                         pagination={{ clickable: true, dynamicBullets: true }}
                         >
                         {listReviews.map((item,index) => (                        

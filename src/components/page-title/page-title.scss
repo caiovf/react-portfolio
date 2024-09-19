@@ -1,20 +1,38 @@
 .page-title {
-    margin-top: 48px;
+    margin-top: 24px;
+    
+    @media #{$screen-lg}{
+        margin-top: 48px;
+    }
 
     h1 {
         margin: 0;
-        font-size: 4rem;
+        font-size: 3.3rem;
         line-height: 1.1em;
         color: $color-primary;
+        // max-width: 330px;
+
+        @media #{$screen-xs}{
+            font-size: 4rem;
+            max-width: 440px;
+        }
+
+        @media #{$screen-sm}{
+            max-width: unset;
+        }
     }
 
     p {
         max-width: 911px;
         margin: 16px 0 0;
         font-weight: 600;
-        font-size: 1.25rem;
+        font-size: 1rem;
         line-height: 1.5em;
         color: #2b2b2b;
+        
+        @media #{$screen-lg}{
+            font-size: 1.25rem;
+        }
 
         a {
             display: inline;
