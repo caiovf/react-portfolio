@@ -2,10 +2,13 @@
 
     &.alternate {
 
-        @media #{$screen-sm}{
+        .container {
 
-            .right-content {
-                order: -1;
+            @media #{$screen-sm}{
+    
+                .right-content {
+                    order: -1;
+                }
             }
         }
     }
