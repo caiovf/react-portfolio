@@ -45,7 +45,7 @@ export const Navigation = (props) => {
                 aria-expanded={isMobileMenuOpen}
                 onClick={toggleMobileMenu}
             >
-                <img src={iconMenu} width={50} height={50} alt='icon to open mobile menu'></img>
+                <img src={iconMenu} width={48} height={48} alt='icon to open mobile menu'></img>
             </button>
             <div className={`menu-mobile ${isMobileMenuOpen ? 'open' : ''}`}>
                 <div className='menu-mobile-content'>
