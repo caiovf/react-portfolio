@@ -6,7 +6,11 @@
     .section-content{
 
         .swiper {
-            padding: 0 24px;
+            padding: 0 15px;
+            
+            @media #{$screen-sm}{
+                padding: 0 24px;
+            }
         }
 
         .swiper-pagination{
