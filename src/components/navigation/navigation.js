@@ -12,8 +12,7 @@ export const Navigation = (props) => {
 
     const handleClick = (e) => {
         e.preventDefault();
-        navigate('/portfolio', { state: { filter: 'portfolio' } });
-        toggleMobileMenu()
+        navigate('/portfolio', { state: { filter: 'portfolio' } });        
     };
 
     const toggleMobileMenu = () => {
@@ -32,7 +31,7 @@ export const Navigation = (props) => {
                         <Link to="/about">About</Link>
                     </li>
                     <li>                
-                        <Link to="/portfolio" onClick={handleClick}>Portfolio</Link>
+                        <Link to="/portfolio">Portfolio</Link>
                     </li>
                     <li>                
                         <a title="Contact" href="https://www.linkedin.com/in/caio-ferreiradev/" target="_blank" rel="nofollow noopener noreferrer">Contact</a>
