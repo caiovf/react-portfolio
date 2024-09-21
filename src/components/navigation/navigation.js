@@ -1,3 +1,4 @@
+
 import React,{useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './navigation.scss';
@@ -60,7 +61,7 @@ export const Navigation = (props) => {
                             <Link to="/about" onClick={toggleMobileMenu}>About</Link>
                         </li>
                         <li>                
-                            <Link to="/portfolio" onClick={handleClick}>Portfolio</Link>
+                            <Link to="/portfolio" onClick={toggleMobileMenu}>Portfolio</Link>
                         </li>
                         <li>                
                             <a title="Contact" href="https://www.linkedin.com/in/caio-ferreiradev/" target="_blank" rel="nofollow noopener noreferrer">Contact</a>
