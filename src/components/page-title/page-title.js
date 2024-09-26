@@ -14,7 +14,7 @@ export const PageTitle = (props) => {
   return (
     <section className='page-title'>
         <div className='container'>
-            <h1>{props.title}</h1>
+            <h1 dangerouslySetInnerHTML={{ __html: cleanHtml(props.title) }}></h1>
             {props.resumn && (
               <p dangerouslySetInnerHTML={{ __html: cleanHtml(props.resumn) }}></p>
             )}
