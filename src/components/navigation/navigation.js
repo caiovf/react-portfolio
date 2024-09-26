@@ -1,19 +1,12 @@
 import React,{useState} from 'react';
-import { useNavigate } from 'react-router-dom';
 import './navigation.scss';
 import { Link } from 'react-router-dom';
 import { SocialMedia } from '../social-media';
 
-export const Navigation = (props) => {
-    const navigate = useNavigate();         
+export const Navigation = (props) => {    
     const iconMenu = require('../../assets/img/icons/menu.png');
     const iconClose = require('../../assets/img/icons/close.png');
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-    const handleClick = (e) => {
-        e.preventDefault();
-        navigate('/portfolio', { state: { filter: 'portfolio' } });        
-    };
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);    
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen((prev) =>  !prev);         
@@ -60,7 +53,7 @@ export const Navigation = (props) => {
                             <Link to="/about" onClick={toggleMobileMenu}>About</Link>
                         </li>
                         <li>                
-                            <Link to="/portfolio" onClick={handleClick}>Portfolio</Link>
+                            <Link to="/portfolio" onClick={toggleMobileMenu}>Portfolio</Link>
                         </li>
                         <li>                
                             <a title="Contact" href="https://www.linkedin.com/in/caio-ferreiradev/" target="_blank" rel="nofollow noopener noreferrer">Contact</a>

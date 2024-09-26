@@ -1,5 +1,9 @@
 .single-banner {
-    margin-top: 48px;
+    margin-top: 24px;
+    
+    @media #{$screen-sm}{
+        margin-top: 48px;
+    }
 
     .box-img {
 
@@ -13,18 +17,30 @@
 
         h1 {
             margin: 0;
-            font-size: 4rem;
+            font-size: 2.3rem;
             line-height: 1em;
             color: $color-primary;
+            
+            @media #{$screen-xs}{
+                font-size: 3rem;
+            }
+            
+            @media #{$screen-lg}{
+                font-size: 4rem;
+            }
         }
 
         .resume,
         .text {
 
             p {
-                font-size: 1.25rem;
+                font-size: 1rem;
                 line-height: 1.5em;
                 color: $color-primary;
+                
+                @media #{$screen-sm}{
+                    font-size: 1.25rem;
+                }
             }
         }
 
@@ -86,7 +102,11 @@
                 .box-text {
 
                     p {
-                        font-size: 1.25rem;
+                        font-size: 1rem;
+                        
+                        @media #{$screen-sm}{
+                            font-size: 1.25rem;
+                        }
                     }
                 }
             }

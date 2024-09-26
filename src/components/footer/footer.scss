@@ -1,7 +1,11 @@
 .layout-footer {
-    margin-top: 80px;
+    margin-top: 40px;
     padding: 24px 0;
     background: $color-primary;
+    
+    @media #{$screen-sm}{
+        margin-top: 80px;
+    }
     
     .section-content {
         display: flex;
