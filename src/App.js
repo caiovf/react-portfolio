@@ -6,6 +6,8 @@ import { Home } from './pages/home';
 import { About } from './pages/about';
 import { Portfolio } from './pages/portfolio';
 import { PortfolioSingle } from './pages/portfolio-single';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 function App() {
 	function ScrollToTop({ children }) {
@@ -20,7 +22,7 @@ function App() {
   	return (
 		<Router>
 			<ScrollToTop>
-				<Header />		
+				<Header />						
 					<main className='layout-main'>
 						<Routes>
 							<Route path="/" element={<Home />} />
@@ -31,6 +33,8 @@ function App() {
 							<Route path="/advancing-skills" element={<Portfolio />} />
 						</Routes>
 					</main>
+					<Analytics />
+					<SpeedInsights />
 				<Footer />
 			</ScrollToTop>
 		</Router>
