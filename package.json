@@ -1,5 +1,5 @@
 {
-  "name": "portfolio",  
+  "name": "portfolio",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "@craco/craco": "^7.1.0",
+    "@supabase/supabase-js": "^2.45.4",
     "axios": "^1.7.3",
     "react-loading-skeleton": "^3.4.0",
     "react-router-dom": "^6.25.1",

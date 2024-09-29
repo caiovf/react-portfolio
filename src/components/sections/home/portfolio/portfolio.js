@@ -50,6 +50,7 @@ export const SectionPortfolio = (props) => {
                     {data.map((item,index) => (
                         <CardPortfolio 
                             key={index}
+                            ID={item.id}
                             imgSrc={item.thumbnail}
                             imgWidth={getPortraitValue(index) ? 922 : 494}
                             imgHeight="529"
