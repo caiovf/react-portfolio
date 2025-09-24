@@ -1,6 +1,5 @@
 import React, { createContext, useState, useRef, useEffect } from 'react';
 import { fetchData } from '../api/api'; 
-import { supabase } from '../utils/supabase';
 
 const DataContext = createContext();
 
@@ -45,7 +44,7 @@ const DataProvider = ({ children }) => {
 
         const fetchSkillsData = async () => {
             try {
-                const response = await supabase.from('categories').select();
+                const response = await fetchData('categories');
                 setState(prevState => ({
                     ...prevState,
                     skillsData: response.data,
@@ -61,50 +60,20 @@ const DataProvider = ({ children }) => {
         };
 
         const fetchProjectsData = async () => {
-            try {                
-                let { data: response, error } = await supabase.from('projects').select().range(0, 12);
-                
-                if (error) {
-                    console.error('Erro ao buscar projetos:', error);
-                    return;
-                }
-                
-                response = await Promise.all(
-                    response.map(async (project) => {                        
-                        let { data: projectsCategories, error: categoryError } = await supabase
-                            .from('projects_categories')
-                            .select('category_id')
-                            .eq('project_id', project.id);
-                        
-                        if (categoryError) {
-                            console.error('Erro ao buscar categorias:', categoryError);
-                            return {
-                                ...project,
-                                categories: []
-                            };
-                        }
-                        
-                        return {
-                            ...project,
-                            categories: projectsCategories.map(rel => rel.category_id)  || []
-                        };
-                    })
-                );
-
-                let projects = response.slice(0, 4);
-                let portfolioData = response.filter(item => item.project_type === 'portfolio').slice(0, 4);
-                let studiesData = response.filter(item => item.project_type === 'estudo').slice(0, 4);
-                
+            try {
+                const response = await fetchData('projects');
+                const projects = response.data.slice(0, 4);
+                const portfolioData = response.data.filter(item => item.project_type === 'portfolio').slice(0, 4);
+                const studiesData = response.data.filter(item => item.project_type === 'estudo').slice(0, 4);
                 setState(prevState => ({
-                    ...prevState,
-                    projectsData: {
-                        projects: projects,
-                        portfolio: portfolioData,
-                        study: studiesData
-                    },
-                    loading: { ...prevState.loading, projects: false },
+                ...prevState,
+                projectsData: {
+                    projects: projects,
+                    portfolio: portfolioData,
+                    study: studiesData
+                },
+                loading: { ...prevState.loading, projects: false },
                 }));
-                
             } catch (err) {
                 setState(prevState => ({
                     ...prevState,
@@ -116,7 +85,7 @@ const DataProvider = ({ children }) => {
 
         const fetchReviewsData = async () => {
             try {
-                const response = await supabase.from('reviews').select();
+                const response = await fetchData('reviews');
                 setState(prevState => ({
                 ...prevState,
                 reviewsData: response.data,
