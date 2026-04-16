@@ -6,10 +6,9 @@ export default {
   // Configuração para SSG (Static Site Generation)
   ssr: true,
   presets: [vercelPreset()],
-/*
   async prerender() {
     const baseURL = 'https://raw.githubusercontent.com/caiovf/react-portfolio/main/api/';
-    const routes = ["/", "/about", "/portfolio", "/advancing-skills"];
+    const routes = ["/", "/about", "/portfolio", "/advancing-skills", "/plugins"];
     
     try {
       const response = await axios.get(`${baseURL}projects.json`);
@@ -25,5 +24,4 @@ export default {
       return routes;
     }
   },
-*/
 };
