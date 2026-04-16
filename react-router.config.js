@@ -2,8 +2,8 @@ import axios from 'axios';
 import { index, route } from "@react-router/dev/routes";
 
 export default {
-  // Configuração para SSG (Static Site Generation)
-  ssr: true,
+  // Configuração para SPA (ssr: false) com geração de HTML inicial (prerender)
+  ssr: false,
   async prerender() {
     const baseURL = 'https://raw.githubusercontent.com/caiovf/react-portfolio/main/api/';
     const routes = ["/", "/about", "/portfolio", "/advancing-skills", "/plugins"];

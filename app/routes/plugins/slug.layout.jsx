@@ -51,7 +51,7 @@ const subPages = [
 // ─────────────────────────────────────────────
 // Loader — carrega o projeto e repassa via Outlet context
 // ─────────────────────────────────────────────
-export async function loader({ params }) {
+export async function clientLoader({ params }) {
   const data = await getAllData();
   const project = data.projectsData.plugins?.find((p) => p.slug === params.slug);
   if (!project) throw new Response("Not Found", { status: 404 });

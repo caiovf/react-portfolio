@@ -12,7 +12,7 @@ export function meta() {
   ];
 }
 
-export async function loader() {
+export async function clientLoader() {
   return await getAllData();
 }
 

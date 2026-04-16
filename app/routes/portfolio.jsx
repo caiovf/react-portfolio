@@ -16,7 +16,7 @@ export function meta({ data, params, location }) {
   ];
 }
 
-export async function loader() {
+export async function clientLoader() {
   return await getAllData();
 }
 

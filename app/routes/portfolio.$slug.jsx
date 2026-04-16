@@ -14,7 +14,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 // Force HMR to recognize Skeleton import
 
-export async function loader({ params }) {
+export async function clientLoader({ params }) {
   const data = await getAllData();
   const project = data.projectsData.portfolio.find(p => p.slug === params.slug) ||
                   data.projectsData.study.find(p => p.slug === params.slug) ||
