@@ -1,1 +1,0 @@
-export { SectionPortfolio } from './portfolio';

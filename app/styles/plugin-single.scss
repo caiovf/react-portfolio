@@ -1,0 +1,1076 @@
+// ============================================================
+// VoxAI Plugin Page — "Luminescent Intelligence"
+// Tradução fiel das classes Tailwind do App.tsx original
+// ============================================================
+
+// ── Tokens exatos do design original
+$primary:    #ba9eff;
+$primary-dim: #8455ef;
+$secondary:  #699cff;
+$bg:         #0e0e0e;
+$dark-1:     #131313;   // surface-low
+$dark-2:     #1a1919;   // surface-mid (card FAQ)
+$dark-3:     #201f1f;   // surface-high (step badge bg)
+$dark-4:     #262626;   // surface-highest
+$muted:      #adaaaa;   // on-surface-variant
+$outline-5:  rgba(255,255,255,0.05);
+$outline-10: rgba(255,255,255,0.10);
+
+// ── Shared mixins
+@mixin glass-surface {
+  background: rgba(38, 38, 38, 0.4);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(49, 48, 47, 0.18);
+}
+@mixin nebula-glow($color: $primary) {
+  box-shadow: 0px 40px 60px rgba($color, 0.08);
+}
+
+// ── Keyframes
+@keyframes pulse-glow {
+  0%   { opacity: 0.6; transform: scale(1); }
+  50%  { opacity: 1;   transform: scale(1.05); }
+  100% { opacity: 0.6; transform: scale(1); }
+}
+
+// ── Lucide icon size helpers used inline in JSX
+// (actual sizing done via style prop in JSX)
+.vox-icon-primary svg,
+.vox-icon-primary  { color: $primary;   width: 32px; height: 32px; }
+.vox-icon-secondary svg,
+.vox-icon-secondary { color: $secondary; width: 32px; height: 32px; }
+
+// ============================================================
+// ROOT WRAPPER  (.vox-root)
+// Isolates everything from the portfolio's global styles
+// ============================================================
+.vox-root {
+  background-color: $bg;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  /* ── Hard reset within scope */
+  *, *::before, *::after { box-sizing: border-box; }
+  h1, h2, h3, h4, h5 { margin: 0; }
+  p  { margin: 0; }
+  a  { text-decoration: none; color: inherit; display: inline; }
+  ul { list-style: none; padding: 0; margin: 0; }
+  button { cursor: pointer; border: none; font: inherit; background: transparent; }
+  svg { display: block; flex-shrink: 0; }
+
+  // Shared utility classes (mirroring the SCSS from the original repo)
+  .glass-surface { @include glass-surface; }
+  .nebula-glow   { @include nebula-glow;  }
+
+  // ── Container (max-w-7xl mx-auto px-8)
+  .vox-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+
+    @media (max-width: 640px) { padding: 0 1.25rem; }
+  }
+
+  // ── Gradient text helper
+  .vox-gradient-text {
+    background: linear-gradient(to right, $primary, $secondary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  // ============================================================
+  // HEADER  — fixed top-0 w-full z-50
+  // bg-[#1a103d]/40 backdrop-blur-xl border-b border-white/5
+  // shadow-[0px_40px_60px_rgba(186,158,255,0.08)]
+  // ============================================================
+  .vox-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: rgba(26, 16, 61, 0.40);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid $outline-5;
+    box-shadow: 0px 40px 60px rgba(186, 158, 255, 0.08);
+
+    &__nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      max-width: 1280px;
+      margin: 0 auto;
+      gap: 1rem;
+    }
+
+    &__links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+
+      @media (max-width: 768px) { display: none; }
+    }
+
+    &__link {
+      font-size: .9rem;
+      font-weight: 500;
+      color: #94a3b8; // text-slate-400
+      transition: color .2s;
+      &:hover { color: #fff; }
+    }
+
+    &__right {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      flex-shrink: 0;
+    }
+  }
+
+  // Logo — text-2xl font-bold gradient
+  .vox-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'Manrope', sans-serif;
+    background: linear-gradient(to right, #a78bfa, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    flex-shrink: 0;
+  }
+
+  // "← Portfólio" — único acréscimo ao header original
+  .vox-back-btn {
+    font-size: .82rem;
+    font-weight: 600;
+    color: $muted;
+    padding: .3rem .75rem;
+    border-radius: .5rem;
+    border: 1px solid rgba(255,255,255,.08);
+    transition: color .2s, border-color .2s;
+    white-space: nowrap;
+
+    &:hover {
+      color: $primary;
+      border-color: rgba($primary, .3);
+    }
+  }
+
+  // Download button in header
+  // bg-gradient-to-br from-[#ba9eff] to-[#8455ef] text-black font-semibold px-6 py-2 rounded-xl
+  .vox-btn-download {
+    background: linear-gradient(135deg, $primary, $primary-dim);
+    color: #000;
+    font-weight: 600;
+    padding: .5rem 1.5rem;
+    border-radius: .75rem;
+    transition: transform .15s;
+    font-family: 'Inter', sans-serif;
+    white-space: nowrap;
+
+    &:hover  { transform: scale(1.05); }
+    &:active { transform: scale(.95); }
+  }
+
+  // ============================================================
+  // MAIN  — pt-24
+  // ============================================================
+  .vox-main { padding-top: 6rem; flex: 1; }
+
+  // ── Section dark bg helper
+  .vox-section--dark { background: $dark-1; }
+
+  // ── Shared section header (text-center mb-16)
+  .vox-section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .vox-section-title {
+    // text-4xl font-headline font-bold mb-4
+    font-size: 2.25rem;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  .vox-section-desc {
+    color: $muted;
+    max-width: 40rem;
+    margin: 0 auto;
+  }
+
+  // ============================================================
+  // HERO — pt-20 pb-32 px-8
+  // ============================================================
+  .vox-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 5rem 0 8rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+
+    &__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+
+      @media (max-width: 1024px) {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+    &__left { position: relative; z-index: 10; }
+    &__right { position: relative; }
+
+    // Badge — inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#201f1f] border border-white/10 mb-6
+    &__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .25rem .75rem;
+      border-radius: 9999px;
+      background: $dark-3;
+      border: 1px solid $outline-10;
+      margin-bottom: 1.5rem;
+    }
+    &__badge-text {
+      font-size: .75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: $muted;
+    }
+
+    // h1 — text-5xl lg:text-7xl font-headline font-extrabold tracking-tight leading-tight mb-6
+    &__title {
+      font-size: 3rem;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+
+      @media (min-width: 1024px) { font-size: 4.5rem; }
+    }
+
+    // p — text-xl text-[#adaaaa] leading-relaxed mb-10 max-w-xl
+    &__desc {
+      font-size: 1.25rem;
+      color: $muted;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+      max-width: 36rem;
+    }
+
+    // Actions
+    &__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  }
+
+  // Pulse dot
+  .vox-pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $primary;
+    display: block;
+    animation: pulse-glow 3s infinite ease-in-out;
+  }
+
+  // Hero buttons
+  // bg-gradient-to-br from-[#ba9eff] to-[#8455ef] text-black font-bold px-8 py-4 rounded-xl
+  .vox-btn-primary {
+    background: linear-gradient(135deg, $primary, $primary-dim);
+    color: #000;
+    font-weight: 700;
+    padding: 1rem 2rem;
+    border-radius: .75rem;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 8px 20px rgba($primary, .2);
+    transition: transform .15s;
+
+    &:hover  { transform: scale(1.05); }
+    &:active { transform: scale(.95); }
+  }
+
+  // bg-[#262626]/20 border border-white/10 backdrop-blur-md text-white font-bold px-8 py-4 rounded-xl
+  .vox-btn-ghost {
+    background: rgba(38, 38, 38, .2);
+    border: 1px solid $outline-10;
+    backdrop-filter: blur(12px);
+    color: #fff;
+    font-weight: 700;
+    padding: 1rem 2rem;
+    border-radius: .75rem;
+    font-family: 'Inter', sans-serif;
+    transition: background .2s;
+
+    &:hover { background: rgba(38, 38, 38, .4); }
+  }
+
+  // ── Player mockup
+  // glass-surface p-8 rounded-3xl border border-white/10 nebula-glow
+  .vox-player {
+    padding: 2rem;
+    border-radius: 1.5rem;
+    border: 1px solid $outline-10;
+    @include nebula-glow;
+
+    &__header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    // w-12 h-12 rounded-xl bg-gradient-to-br from-[#ba9eff] to-[#699cff]
+    &__icon {
+      width: 48px;
+      height: 48px;
+      border-radius: .75rem;
+      background: linear-gradient(135deg, $primary, $secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    &__title {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+      margin-bottom: .2rem;
+    }
+
+    &__subtitle { font-size: .875rem; color: $muted; }
+
+    &__body { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    &__controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &__center-controls {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+  }
+
+  // Progress bar — h-1.5 bg-[#262626] rounded-full overflow-hidden
+  .vox-progress {
+    height: 6px;
+    background: $dark-4;
+    border-radius: 9999px;
+    overflow: hidden;
+    position: relative;
+
+    &__fill {
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      width: 33.33%;
+      background: $primary;
+    }
+  }
+
+  // Control icons
+  // text-[#adaaaa] w-5 h-5 cursor-pointer hover:text-white transition-colors
+  .vox-ctrl-icon {
+    color: $muted;
+    cursor: pointer;
+    transition: color .2s;
+    width: 20px;
+    height: 20px;
+
+    &:hover { color: #fff; }
+
+    &--lg { width: 24px; height: 24px; }
+
+    // Volume — text-[#ba9eff]
+    &--active { color: $primary; }
+  }
+
+  // Play button — w-14 h-14 rounded-full bg-white text-black
+  .vox-play-btn {
+    width: 56px;
+    height: 56px;
+    background: #fff;
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .2s;
+
+    &:hover { transform: scale(1.10); }
+  }
+
+  // Decorative blurs
+  .vox-glow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+
+    &--top-right {
+      top: -2.5rem; right: -2.5rem;
+      width: 160px; height: 160px;
+      background: rgba($primary, .20);
+      filter: blur(80px);
+    }
+
+    &--bottom-left {
+      bottom: -2.5rem; left: -2.5rem;
+      width: 240px; height: 240px;
+      background: rgba($secondary, .10);
+      filter: blur(100px);
+    }
+  }
+
+  // ============================================================
+  // FEATURES BENTO GRID
+  // grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6
+  // auto-rows-auto md:auto-rows-[240px]
+  // ============================================================
+  .vox-features { padding: 6rem 0; }
+
+  .vox-bento {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    auto-rows: auto;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 240px;
+    }
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  // glass-surface p-8 rounded-3xl flex flex-col justify-between group overflow-hidden relative
+  .vox-bento-card {
+    @include glass-surface;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    position: relative;
+
+    // md:col-span-2 → col-2
+    &--col-2 {
+      @media (min-width: 768px) { grid-column: span 2; }
+    }
+    // md:row-span-2
+    &--row-2 {
+      @media (min-width: 768px) { grid-row: span 2; }
+    }
+
+    &__top  { position: relative; z-index: 10; }
+    &__bottom {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
+    }
+  }
+
+  // text-xs font-medium uppercase tracking-widest text-[#ba9eff] mb-4 block
+  .vox-bento-tag {
+    font-size: .75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: $primary;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  // text-2xl font-headline font-bold mb-2
+  .vox-bento-title {
+    font-size: 1.5rem;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    margin-bottom: .5rem;
+  }
+
+  // text-[#adaaaa] text-sm leading-relaxed
+  .vox-bento-desc {
+    font-size: .875rem;
+    color: $muted;
+    line-height: 1.75;
+  }
+
+  // mt-4 space-y-2 (voice list)
+  .vox-bento-list {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .875rem;
+      color: $muted;
+    }
+  }
+
+  .vox-bento-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $secondary;
+    flex-shrink: 0;
+    display: inline-block;
+  }
+
+  // bg-[#ba9eff]/10 text-[#ba9eff] px-3 py-1 rounded-full text-xs font-semibold
+  .vox-bento-badge {
+    background: rgba($primary, .10);
+    color: $primary;
+    padding: .25rem .75rem;
+    border-radius: 9999px;
+    font-size: .75rem;
+    font-weight: 600;
+  }
+
+  // Watermark — absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10
+  .vox-bento-watermark {
+    position: absolute;
+    right: -1rem;
+    bottom: -1rem;
+    opacity: .05;
+    transition: opacity .3s;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg { width: 100%; height: 100%; }
+  }
+  .vox-bento-card:hover .vox-bento-watermark { opacity: .1; }
+
+  // ============================================================
+  // HOW IT WORKS — py-24 px-8
+  // ============================================================
+  .vox-how { padding: 6rem 0; }
+
+  // grid grid-cols-1 md:grid-cols-3 gap-12 relative
+  .vox-steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    position: relative;
+
+    @media (min-width: 768px) { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  // hidden md:block absolute top-8 left-16 right-16 h-[2px]
+  // bg-gradient-to-r from-[#ba9eff]/10 via-[#ba9eff]/30 to-[#ba9eff]/10 -z-10
+  .vox-steps__line {
+    display: none;
+
+    @media (min-width: 768px) {
+      display: block;
+      position: absolute;
+      top: 2rem;
+      left: 4rem;
+      right: 4rem;
+      height: 2px;
+      background: linear-gradient(
+        to right,
+        rgba($primary, .10),
+        rgba($primary, .30),
+        rgba($primary, .10)
+      );
+      z-index: -1;
+    }
+  }
+
+  .vox-step {
+    position: relative;
+
+    // w-16 h-16 rounded-2xl bg-[#201f1f] border border-white/10
+    // mb-8 flex items-center justify-center text-2xl font-bold font-headline text-[#ba9eff]
+    // group-hover:scale-110 transition-transform
+    &__number {
+      width: 64px;
+      height: 64px;
+      border-radius: 1rem;
+      background: $dark-3;
+      border: 1px solid $outline-10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: 'Manrope', sans-serif;
+      color: $primary;
+      margin-bottom: 2rem;
+      transition: transform .2s;
+
+      &:hover { transform: scale(1.10); }
+    }
+
+    // text-xl font-bold mb-4
+    &__title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    // text-[#adaaaa]
+    &__desc { color: $muted; }
+  }
+
+  // ============================================================
+  // SHORTCODES — py-24 px-8 bg-[#131313] overflow-hidden
+  // ============================================================
+  .vox-shortcodes {
+    padding: 6rem 0;
+    overflow: hidden;
+
+    // max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16
+    &__grid {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+      align-items: center;
+
+      @media (min-width: 1024px) {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+
+    // lg:w-1/2
+    &__text {
+      width: 100%;
+      @media (min-width: 1024px) { width: 50%; }
+    }
+
+    // lg:w-1/2 w-full
+    &__code {
+      width: 100%;
+      @media (min-width: 1024px) { width: 50%; }
+    }
+
+    // text-4xl font-headline font-bold mb-6
+    &__title {
+      font-size: 2.25rem;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    // text-[#adaaaa] mb-8 text-lg
+    &__desc {
+      color: $muted;
+      margin-bottom: 2rem;
+      font-size: 1.125rem;
+    }
+  }
+
+  // space-y-4 (checklist wrapper)
+  .vox-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    &__item {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      font-size: 1rem;
+    }
+  }
+
+  // code-block (from original SCSS — kept same class name)
+  .code-block {
+    background: #000;
+    border: 1px solid rgba(49, 48, 47, .18);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    box-shadow: 0 25px 50px rgba(0,0,0,.25);
+
+    .comment  { color: rgba($secondary, .5); font-size: .875rem; }
+    .shortcode { color: $primary; }
+  }
+
+  // flex items-center gap-2 mb-6 border-b border-white/5 pb-4
+  .vox-code-dots {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid $outline-5;
+    padding-bottom: 1rem;
+  }
+
+  .vox-code-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+
+    &--red    { background: rgba(239,68,68,.5); }
+    &--yellow { background: rgba(234,179,8,.5); }
+    &--green  { background: rgba(34,197,94,.5); }
+  }
+
+  // ml-4 text-[#adaaaa]/50 text-xs font-sans
+  .vox-code-filename {
+    margin-left: 1rem;
+    color: rgba($muted, .5);
+    font-size: .75rem;
+    font-family: 'Inter', sans-serif;
+  }
+
+  // space-y-6
+  .vox-code-entries {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .comment { display: block; margin-bottom: .5rem; }
+  }
+
+  // p-3 bg-[#131313] rounded-lg border border-white/5
+  .vox-code-row {
+    padding: .75rem;
+    background: $dark-1;
+    border-radius: .5rem;
+    border: 1px solid $outline-5;
+    transition: border-color .2s;
+
+    &:hover { border-color: rgba($primary, .3); }
+  }
+
+  // ============================================================
+  // PRICING — py-24 px-8
+  // ============================================================
+  .vox-pricing { padding: 6rem 0; }
+
+  // max-w-5xl mx-auto
+  .vox-pricing__inner { max-width: 64rem; }
+
+  // grid grid-cols-1 md:grid-cols-2 gap-8
+  .vox-pricing__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+
+    @media (min-width: 768px) { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  // bg-[#131313] p-10 rounded-3xl border border-white/5 flex flex-col
+  .vox-plan {
+    background: $dark-1;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    border: 1px solid $outline-5;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    // pricing-card pro — from original SCSS
+    &.pricing-card.pro {
+      background: linear-gradient(135deg, $dark-3, $dark-4);
+      border: 1px solid rgba($primary, .3);
+      @include nebula-glow($primary);
+    }
+
+    &__header { margin-bottom: 2rem; }
+
+    // Mais Popular badge
+    // absolute top-0 right-10 -translate-y-1/2 bg-[#ba9eff] text-black text-xs font-bold
+    // px-4 py-1 rounded-full uppercase tracking-tighter
+    &__popular-badge {
+      position: absolute;
+      top: 0;
+      right: 2.5rem;
+      transform: translateY(-50%);
+      background: $primary;
+      color: #000;
+      font-size: .75rem;
+      font-weight: 700;
+      padding: .25rem 1rem;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: -.02em;
+    }
+
+    // text-2xl font-bold mb-2
+    &__name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+    }
+
+    // text-4xl font-black mb-4
+    &__price {
+      font-size: 2.25rem;
+      font-weight: 900;
+      font-family: 'Manrope', sans-serif;
+      margin-bottom: 1rem;
+
+      &--pro { color: $primary; }
+    }
+
+    // text-base font-normal text-[#adaaaa]
+    &__cycle {
+      font-size: 1rem;
+      font-weight: 400;
+      color: $muted;
+    }
+
+    // text-[#adaaaa] text-sm
+    &__tagline {
+      font-size: .875rem;
+      color: $muted;
+    }
+
+    // space-y-4 mb-10 flex-grow
+    &__features {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+      flex: 1;
+
+      li {
+        display: flex;
+        align-items: center;
+        gap: .75rem;
+        font-size: .95rem;
+      }
+
+      &--off { color: $muted; }
+    }
+
+    &__feature--off { color: $muted; }
+    &__bold { font-weight: 700; }
+
+    // w-full py-4 rounded-xl border border-white/10 font-bold
+    &__cta {
+      width: 100%;
+      padding: 1rem;
+      border-radius: .75rem;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      transition: background .2s, transform .15s;
+
+      &--outline {
+        border: 1px solid $outline-10;
+        color: #fff;
+        background: transparent;
+        &:hover { background: $dark-4; }
+      }
+
+      // w-full py-4 rounded-xl bg-[#ba9eff] text-black font-bold hover:scale-[1.02]
+      &--pro {
+        background: $primary;
+        color: #000;
+        &:hover { transform: scale(1.02); }
+      }
+    }
+  }
+
+  // ============================================================
+  // FAQ — py-24 px-8 bg-[#131313]
+  // ============================================================
+  .vox-faq { padding: 6rem 0; }
+
+  // max-w-3xl mx-auto
+  .vox-faq__inner { max-width: 48rem; }
+
+  // space-y-6
+  .vox-faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  // p-6 rounded-2xl bg-[#1a1919] border border-white/5
+  .vox-faq__item {
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background: $dark-2;
+    border: 1px solid $outline-5;
+  }
+
+  // text-lg font-bold mb-2
+  .vox-faq__question {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: .5rem;
+  }
+
+  // text-[#adaaaa] leading-relaxed
+  .vox-faq__answer {
+    color: $muted;
+    line-height: 1.75;
+  }
+
+  // ============================================================
+  // FOOTER — bg-[#000000] py-16 px-8 border-t border-white/5
+  // ============================================================
+  .vox-footer {
+    background: #000;
+    padding: 4rem 0;
+    border-top: 1px solid $outline-5;
+  }
+
+  // grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto
+  .vox-footer__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding-bottom: 4rem;
+
+    @media (min-width: 768px) { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .vox-footer__col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  // text-xl font-black text-white font-headline
+  .vox-footer__brand {
+    font-size: 1.25rem;
+    font-weight: 900;
+    font-family: 'Manrope', sans-serif;
+    color: #fff;
+  }
+
+  // text-[#adaaaa] text-sm
+  .vox-footer__text {
+    font-size: .875rem;
+    color: $muted;
+    line-height: 1.6;
+  }
+
+  // flex gap-4
+  .vox-footer__socials {
+    display: flex;
+    gap: 1rem;
+    margin-top: .25rem;
+  }
+
+  // text-[#adaaaa] hover:text-[#ba9eff] cursor-pointer transition-colors w-5 h-5
+  .vox-footer__social-icon {
+    width: 20px;
+    height: 20px;
+    color: $muted;
+    cursor: pointer;
+    transition: color .2s;
+
+    &:hover { color: $primary; }
+  }
+
+  // text-white font-bold
+  .vox-footer__col-title {
+    font-weight: 700;
+    color: #fff;
+  }
+
+  // space-y-2
+  .vox-footer__links {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
+    a {
+      font-size: .875rem;
+      color: $muted;
+      transition: color .2s;
+      &:hover { color: $primary; }
+    }
+  }
+
+  // flex gap-2
+  .vox-newsletter {
+    display: flex;
+    gap: .5rem;
+    margin-top: .25rem;
+
+    &__input {
+      flex: 1;
+      background: $dark-1;
+      border: 1px solid $outline-10;
+      border-radius: .5rem;
+      padding: .5rem 1rem;
+      font-size: .875rem;
+      color: #fff;
+      outline: none;
+      font-family: 'Inter', sans-serif;
+      min-width: 0;
+      transition: border-color .2s;
+
+      &::placeholder { color: $muted; }
+      &:focus { border-color: rgba($primary, .4); }
+    }
+
+    // bg-[#ba9eff] p-2 rounded-lg text-black hover:scale-105 transition-transform
+    &__btn {
+      background: $primary;
+      padding: .5rem;
+      border-radius: .5rem;
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform .2s;
+
+      &:hover { transform: scale(1.05); }
+    }
+  }
+
+  // max-w-7xl mx-auto mt-16 pt-8 border-t border-white/5
+  // flex flex-col md:flex-row justify-between items-center gap-4
+  .vox-footer__bottom {
+    border-top: 1px solid $outline-5;
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+    @media (min-width: 768px) { flex-direction: row; }
+
+    p { font-size: .875rem; color: $muted; }
+  }
+
+  .vox-footer__author {
+    color: #fff;
+    font-weight: 600;
+  }
+}

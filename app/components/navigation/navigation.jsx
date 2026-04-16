@@ -1,0 +1,81 @@
+import React,{useState} from 'react';
+import './navigation.scss';
+import { Link } from 'react-router';
+import { SocialMedia } from '../social-media';
+import { GTranslate } from '../gtranslate/gtranslate';
+
+const iconMenu = '/assets/img/icons/menu.png';
+const iconClose = '/assets/img/icons/close.png';
+
+export const Navigation = (props) => {    
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);    
+
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen((prev) =>  !prev);         
+    };
+
+    return (
+        <>
+            <nav 
+                className="layout-nav"
+                role="navigation"
+                aria-label="main navigation"
+            >
+                <ul>
+                    <li>
+                        <Link to="/about">About</Link>
+                    </li>
+                    <li>                
+                        <Link to="/portfolio">Portfolio</Link>
+                    </li>
+                    {/* <li>                
+                        <Link to="/plugins">Plugins</Link>
+                    </li> */}
+                    <li>                
+                        <a title="Contact" href="https://www.linkedin.com/in/caio-ferreiradev/" target="_blank" rel="nofollow noopener noreferrer">Contact</a>
+                    </li>
+                    <li>
+                        <GTranslate />
+                    </li>
+                </ul>
+            </nav>
+            <button
+                className='toggle-menu-mobile' 
+                aria-label="Open menu"
+                aria-expanded={isMobileMenuOpen}
+                onClick={toggleMobileMenu}
+            >
+                <img src={iconMenu} width={48} height={48} alt='icon to open mobile menu'></img>
+            </button>
+            <div className={`menu-mobile ${isMobileMenuOpen ? 'open' : ''}`}>
+                <div className='menu-mobile-content'>
+                    <button
+                        className='toggle-menu-mobile' 
+                        aria-label="Close menu"
+                        onClick={toggleMobileMenu}
+                    >
+                        <img src={iconClose} width={30} height={30} alt='icon to close mobile menu'></img>
+                    </button>
+                    <ul>
+                        <li>
+                            <Link to="/about" onClick={toggleMobileMenu}>About</Link>
+                        </li>
+                        <li>                
+                            <Link to="/portfolio" onClick={toggleMobileMenu}>Portfolio</Link>
+                        </li>
+                        <li>                
+                            <Link to="/plugins" onClick={toggleMobileMenu}>Plugins</Link>
+                        </li>
+                        <li>                
+                            <a title="Contact" href="https://www.linkedin.com/in/caio-ferreiradev/" target="_blank" rel="nofollow noopener noreferrer">Contact</a>
+                        </li>
+                        <li>
+                            <GTranslate />
+                        </li>
+                    </ul>
+                    <SocialMedia />
+                </div>
+            </div>
+        </>
+    );    
+};

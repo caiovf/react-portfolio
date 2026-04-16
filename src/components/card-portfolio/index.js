@@ -1,1 +1,0 @@
-export { CardPortfolio } from './cardPortfolio';

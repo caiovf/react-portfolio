@@ -1,0 +1,350 @@
+// ============================================================
+// Sub-pages styles — Documentation, API Reference, etc.
+// Imported inside plugin-single.scss scope via @use or appended
+// ============================================================
+
+// Este arquivo é importado pelo plugin-single.scss
+// Estilos ficam dentro do .vox-root scope lá
+
+.vox-root {
+  // ── Active link em sub-páginas
+  .vox-header__link--page {
+    color: #fff;
+  }
+
+  // ============================================================
+  // SUB-PAGES
+  // ============================================================
+  $primary:   #ba9eff;
+  $secondary: #699cff;
+  $dark-1:    #131313;
+  $muted:     #adaaaa;
+
+  .vox-subpage {
+    min-height: 80vh;
+
+    &__hero {
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+
+    &__icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 1rem;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    &__title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      margin-bottom: 1rem;
+    }
+
+    &__desc {
+      font-size: 1.1rem;
+      color: $muted;
+      line-height: 1.75;
+      max-width: 600px;
+
+      strong { color: #fff; }
+    }
+
+    &__body {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 4rem;
+      padding-top: 3rem;
+      padding-bottom: 5rem;
+      align-items: start;
+
+      @media (max-width: 860px) {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    &__sidebar {
+      position: sticky;
+      top: 6rem;
+      @media (max-width: 860px) { position: static; }
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+  }
+
+  .vox-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .82rem;
+    color: $muted;
+    margin-bottom: 1.5rem;
+
+    a { color: $muted; transition: color .2s; }
+    a:hover { color: $primary; }
+    span { color: #fff; font-weight: 500; }
+  }
+
+  .vox-doc-nav {
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 1rem;
+    padding: 1.25rem;
+
+    &__title {
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: $muted;
+      margin-bottom: 1rem;
+    }
+
+    &__link {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .45rem .6rem;
+      border-radius: .5rem;
+      font-size: .875rem;
+      color: $muted;
+      transition: color .2s, background .2s;
+      margin-bottom: .2rem;
+
+      &:hover { color: #fff; background: rgba(255,255,255,.05); }
+    }
+
+    &__badge {
+      font-size: .65rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      margin-right: .25rem;
+    }
+  }
+
+  .vox-doc-section {
+    background: rgba(255,255,255,.02);
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 1.25rem;
+    padding: 2rem;
+    scroll-margin-top: 6rem;
+    transition: border-color .2s;
+
+    &:hover { border-color: rgba($primary, .15); }
+
+    &__header {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: 1rem;
+    }
+
+    &__icon {
+      width: 36px;
+      height: 36px;
+      border-radius: .6rem;
+      background: rgba($primary, .1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $primary;
+      flex-shrink: 0;
+
+      svg { width: 18px; height: 18px; }
+    }
+
+    &__title {
+      font-size: 1.25rem;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+    }
+
+    &__desc {
+      font-size: .95rem;
+      color: $muted;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .vox-doc-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+
+    &__item {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      font-size: .9rem;
+      line-height: 1.6;
+    }
+
+    &__num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba($primary, .15);
+      color: $primary;
+      font-size: .75rem;
+      font-weight: 700;
+      font-family: 'Manrope', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+  }
+
+  .vox-doc-codes {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+  }
+
+  .vox-doc-code-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: .75rem 1rem;
+    background: #000;
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: .6rem;
+    font-family: 'JetBrains Mono', monospace;
+    transition: border-color .2s;
+
+    &:hover { border-color: rgba($primary, .3); }
+
+    .shortcode { color: $primary; font-size: .9rem; }
+
+    &__desc {
+      font-size: .82rem;
+      color: $muted;
+      font-family: 'Inter', sans-serif;
+    }
+  }
+
+  // API Reference extras
+  .vox-api-section {
+    .vox-doc-section__icon {
+      background: rgba($secondary, .1);
+      color: $secondary;
+    }
+  }
+
+  .vox-api-section__path {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .vox-api-badge {
+    font-size: .7rem;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    padding: .25rem .6rem;
+    border-radius: .4rem;
+    letter-spacing: .06em;
+  }
+
+  .vox-api-path-code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .9rem;
+    color: rgba(255,255,255,.7);
+  }
+
+  .vox-api-params { margin-bottom: 1.5rem; }
+
+  .vox-api-params__title {
+    font-size: .75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: $muted;
+    margin-bottom: .75rem;
+  }
+
+  .vox-api-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .875rem;
+
+    th {
+      text-align: left;
+      font-size: .72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: $muted;
+      padding: .5rem .75rem;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+
+    td {
+      padding: .65rem .75rem;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      vertical-align: top;
+      color: rgba(255,255,255,.85);
+      line-height: 1.5;
+    }
+
+    tr:last-child td { border-bottom: none; }
+  }
+
+  .vox-api-code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .82rem;
+    color: $primary;
+    background: rgba($primary, .08);
+    padding: .15rem .4rem;
+    border-radius: .3rem;
+  }
+
+  .vox-api-type {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .8rem;
+    color: $secondary;
+  }
+
+  .vox-api-req {
+    font-size: .78rem;
+    font-weight: 700;
+    color: $primary;
+    background: rgba($primary, .1);
+    padding: .15rem .5rem;
+    border-radius: .3rem;
+  }
+
+  .vox-api-opt {
+    font-size: .78rem;
+    color: $muted;
+  }
+
+  .vox-api-response { margin-top: 1rem; }
+
+  .vox-api-pre {
+    color: rgba(255,255,255,.75);
+    font-size: .82rem;
+    line-height: 1.8;
+    margin: 0;
+    font-family: 'JetBrains Mono', monospace;
+    white-space: pre-wrap;
+  }
+}

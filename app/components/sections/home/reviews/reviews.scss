@@ -1,0 +1,31 @@
+.reviews {
+    display: flex;
+    flex-direction: column;
+    // gap: 32px;
+
+    // .section-header {
+    //     margin-bottom: 0;
+    // }
+    
+    .section-content{
+        padding: 0 15px;
+        
+        @media #{$screen-sm}{
+            padding: 0 24px;
+        }        
+
+        .swiper-pagination{
+
+            .swiper-pagination-bullet {
+                width: 15px;
+                height: 15px;
+                background: $color-secondary;
+            }
+        }
+    }
+}
+
+swiper-slide {
+    height: auto !important;
+    display: flex !important;
+}
