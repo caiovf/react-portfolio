@@ -25,8 +25,5 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: ["swiper", "swiper/react"],
-  },
-  build: {
-    outDir: "build",
   }
 });
