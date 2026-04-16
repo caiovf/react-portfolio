@@ -1,22 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export const GTranslate = ({ className = 'button', style = {} }) => {
     const [isPt, setIsPt] = useState(false);
+    // State for visual feedback (disabled + opacity on the button)
+    const [isTranslating, setIsTranslating] = useState(false);
+    // Ref-based sync guard: blocks clicks immediately, before React's re-render
+    // commits the `disabled` prop — preventing double-dispatch in the same frame.
+    const isTranslatingRef = useRef(false);
+    // The language we are aiming for ('pt' | 'en' | null).
+    // Observer only releases the lock when lang matches this exactly.
+    const targetLangRef = useRef(null);
+    // Safety release ref: clears itself in releaseTranslating
+    const safetyTimerRef = useRef(null);
+
+    const releaseTranslating = () => {
+        isTranslatingRef.current = false;
+        targetLangRef.current = null;
+        setIsTranslating(false);
+        if (safetyTimerRef.current) {
+            clearTimeout(safetyTimerRef.current);
+            safetyTimerRef.current = null;
+        }
+    };
 
     const checkIsPt = () => {
         const combo = document.querySelector('.goog-te-combo');
         if (combo && combo.value) {
             return combo.value === 'pt';
         }
-        
-        // Fallback for when script is just loaded and combo isn't fully initialized
-        const html = document.documentElement;
-        return html.classList.contains('translated-ltr') && html.lang === 'pt';
+        // Fallback: read the lang attribute Google sets on <html>
+        return document.documentElement.lang === 'pt';
     };
 
     useEffect(() => {
         if (!document.querySelector('#google-translate-script')) {
-            // Inject a global invisible container for Google Translate to live in safely across SPA navigations
             const globalDiv = document.createElement('div');
             globalDiv.id = 'google_translate_element_global';
             globalDiv.style.display = 'none';
@@ -43,41 +60,82 @@ export const GTranslate = ({ className = 'button', style = {} }) => {
 
             window.googleTranslateElementInit = () => {
                 new window.google.translate.TranslateElement(
-                    {
-                        pageLanguage: 'en',
-                        includedLanguages: 'en,pt',
-                        autoDisplay: false
-                    },
+                    { pageLanguage: 'en', includedLanguages: 'en,pt', autoDisplay: false },
                     'google_translate_element_global'
                 );
             };
         }
 
-        // Check on mount
+        // One-time init sync: wait for the widget to inject its DOM
         setTimeout(() => setIsPt(checkIsPt()), 500);
 
+        // Watch only `lang` on <html>.
+        //
+        // Why not `translated-ltr` class?
+        // Google removes `translated-ltr` as the FIRST step of EN restoration
+        // (before restoring text nodes), which caused premature lock release and
+        // the partial-translation / comma-disappearing bug.
+        //
+        // `html.lang` is set only when the operation is complete:
+        //   EN→PT done: lang === 'pt'
+        //   PT→EN done: lang === 'en'
+        //
+        // We intentionally ignore lang === '' (intermediate state during restoration)
+        // and only react when lang matches our exact target.
+        // The 5 s safety timer is the last-resort release if Google never sets 'en'
+        // (rare: e.g. very old Google Translate behaviour that leaves lang empty).
         const observer = new MutationObserver(() => {
-             setIsPt(checkIsPt());
+            const target = targetLangRef.current;
+            if (!target) return; // no operation in flight
+
+            const lang = document.documentElement.lang;
+
+            if (target === 'pt' && lang === 'pt') {
+                setIsPt(true);
+                releaseTranslating();
+            } else if (target === 'en' && lang === 'en') {
+                // Only 'en' — NOT '' — to avoid releasing during the intermediate
+                // empty-string phase of English restoration.
+                setIsPt(false);
+                releaseTranslating();
+            }
         });
-        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['lang', 'class'] });
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['lang'],
+        });
 
         return () => observer.disconnect();
     }, []);
 
     const handleToggle = () => {
+        // Sync guard: isTranslatingRef takes effect immediately (before React
+        // re-renders the disabled prop), blocking any click in the same frame.
+        if (isTranslatingRef.current) return;
+
         const combo = document.querySelector('.goog-te-combo');
         if (!combo) return;
 
-        const isCurrentlyPt = checkIsPt();
-        
-        combo.value = isCurrentlyPt ? 'en' : 'pt';
-        combo.dispatchEvent(new Event('change'));
-        
-        setIsPt(!isCurrentlyPt);
-        
-        // Google translation is async, ensure state stays synced after it processes
-        setTimeout(() => setIsPt(checkIsPt()), 600);
-        setTimeout(() => setIsPt(checkIsPt()), 1500);
+        const targetIsPt = !checkIsPt();
+        const targetLang  = targetIsPt ? 'pt' : 'en';
+
+        // Lock synchronously via ref, then via state for visual feedback
+        isTranslatingRef.current = true;
+        targetLangRef.current = targetLang;
+        setIsTranslating(true);
+
+        // Safety: release lock after 5s if observer never fires
+        safetyTimerRef.current = setTimeout(releaseTranslating, 5000);
+
+        combo.value = targetLang;
+
+        // Native browser change events on <select> always bubble.
+        // Google Translate uses event delegation (listener above the combo),
+        // so { bubbles: true } is required — otherwise it never receives the event.
+        combo.dispatchEvent(new Event('change', { bubbles: true }));
+
+        // Immediate visual feedback — observer confirms once Google sets html[lang]
+        setIsPt(targetIsPt);
     };
 
     // Define colors so text is always readable over the white switch thumb
@@ -91,6 +149,7 @@ export const GTranslate = ({ className = 'button', style = {} }) => {
         <div style={{ display: 'flex', alignItems: 'center', marginLeft: '12px' }}>
             <button 
                 onClick={handleToggle} 
+                disabled={isTranslating}
                 className={className}
                 aria-label="Toggle language"
                 style={{
@@ -102,10 +161,12 @@ export const GTranslate = ({ className = 'button', style = {} }) => {
                     padding: '0',
                     margin: '0',
                     border: 'none',
-                    cursor: 'pointer',
+                    cursor: isTranslating ? 'wait' : 'pointer',
                     display: 'block',
                     borderRadius: '50px',
                     overflow: 'hidden',
+                    opacity: isTranslating ? 0.7 : 1,
+                    transition: 'opacity 0.2s',
                     color: className === 'button' ? '#124559' : 'currentColor',
                     ...style
                 }}
