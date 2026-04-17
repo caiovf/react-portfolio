@@ -35,7 +35,7 @@ export const Navigation = (props) => {
                         <a title="Contact" href="https://www.linkedin.com/in/caio-ferreiradev/" target="_blank" rel="nofollow noopener noreferrer">Contact</a>
                     </li>
                     <li>
-                        <GTranslate />
+                        <GTranslate style={{ marginLeft: '12px' }} />
                     </li>
                 </ul>
             </nav>
@@ -70,7 +70,7 @@ export const Navigation = (props) => {
                             <a title="Contact" href="https://www.linkedin.com/in/caio-ferreiradev/" target="_blank" rel="nofollow noopener noreferrer">Contact</a>
                         </li>
                         <li>
-                            <GTranslate />
+                            <GTranslate style={{ justifyContent: 'center', margin: '20px 0' }} />
                         </li>
                     </ul>
                     <SocialMedia />

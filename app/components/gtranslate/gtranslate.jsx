@@ -146,7 +146,7 @@ export const GTranslate = ({ className = 'button', style = {} }) => {
     const textColor2 = isPt ? activeColor : inactiveColor; // "PT" is active when isPt is true
 
     return (
-        <div style={{ display: 'flex', alignItems: 'center', marginLeft: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', ...style }}>
             <button 
                 onClick={handleToggle} 
                 disabled={isTranslating}
@@ -167,8 +167,7 @@ export const GTranslate = ({ className = 'button', style = {} }) => {
                     overflow: 'hidden',
                     opacity: isTranslating ? 0.7 : 1,
                     transition: 'opacity 0.2s',
-                    color: className === 'button' ? '#124559' : 'currentColor',
-                    ...style
+                    color: className === 'button' ? '#124559' : 'currentColor'
                 }}
             >
                 {/* White Thumb */}
