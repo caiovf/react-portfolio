@@ -91,7 +91,22 @@ export default function PluginLayout() {
           {!isSubPage ? (
             <div className="vox-header__links">
               {subPages.map((link) => (
-                <a key={link.name} href={link.href} className="vox-header__link">
+                <a 
+                  key={link.name} 
+                  href={link.href} 
+                  className="vox-header__link"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const targetId = link.href.replace('#', '');
+                    const element = document.getElementById(targetId);
+                    if (element) {
+                      const y = element.getBoundingClientRect().top + window.scrollY - 90; // offset do header sticky
+                      window.scrollTo({ top: y, behavior: 'smooth' });
+                      // Atualiza a URL para manter histórico sem re-renderizar a página
+                      window.history.pushState(null, '', link.href);
+                    }
+                  }}
+                >
                   {link.name}
                 </a>
               ))}
