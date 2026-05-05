@@ -18,77 +18,65 @@ import {
 // ─────────────────────────────────────────────
 
 const configRows = [
-  { field: "API Key",            desc: "Chave de API da OpenAI (obrigatória)",                                               default: "—" },
-  { field: "Modelo de Resumo",   desc: "Modelo GPT para geração de resumos",                                                 default: "gpt-4o-mini" },
-  { field: "Tamanho do Resumo",  desc: "Limite de caracteres do resumo gerado",                                              default: "350" },
-  { field: "Voz Padrão (TTS)",   desc: "Voz de narração: Alloy, Echo, Fable, Onyx, Nova, Shimmer",                          default: "alloy" },
-  { field: "Modelo TTS",         desc: "Qualidade do áudio: tts-1 (rápido) ou tts-1-hd (alta qualidade)",                   default: "tts-1" },
-  { field: "Posição do Widget",  desc: "before_content, after_content ou disabled (shortcode manual)",                       default: "before_content" },
-  { field: "Ler Título",         desc: "Inclui o título do post na introdução narrada",                                      default: "Ativado" },
-  { field: "Ler Autor",          desc: "Inclui o autor do post na introdução narrada",                                       default: "Desativado" },
-  { field: "Ler Data",           desc: "Inclui a data de publicação na introdução narrada",                                  default: "Desativado" },
-  { field: "Post Types",         desc: "Tipos de post em que o widget será exibido",                                         default: "post" },
+  { field: "API Key",            desc: "OpenAI API Key (required)",                                                          default: "—" },
+  { field: "Summary Model",      desc: "GPT model for generating summaries",                                                 default: "gpt-4o-mini" },
+  { field: "Summary Length",     desc: "Character limit for the generated summary",                                          default: "350" },
+  { field: "Default Voice (TTS)",desc: "Narration voice: Alloy, Echo, Fable, Onyx, Nova, Shimmer",                           default: "alloy" },
+  { field: "TTS Model",          desc: "Audio quality: tts-1 (fast) or tts-1-hd (high quality)",                             default: "tts-1" },
+  { field: "Widget Position",    desc: "before_content, after_content or disabled (manual shortcode)",                       default: "before_content" },
+  { field: "Read Title",         desc: "Include the post title in the narrated introduction",                                default: "Enabled" },
+  { field: "Read Author",        desc: "Include the post author in the narrated introduction",                               default: "Disabled" },
+  { field: "Read Date",          desc: "Include the publish date in the narrated introduction",                              default: "Disabled" },
+  { field: "Post Types",         desc: "Post types where the widget will be displayed",                                      default: "post" },
 ];
 
 const faqItems = [
   {
-    q: "Preciso de uma conta OpenAI?",
-    a: "Sim. O plugin usa a API da OpenAI para gerar resumos e áudio. É necessário uma conta com créditos disponíveis.",
+    q: "Why do I need an API key?",
+    a: "VoxAI is a plugin, not a middleman service. By using your own API key, you bypass the expensive monthly markups charged by other SaaS tools. You pay the raw, wholesale price directly for the processing.",
   },
   {
-    q: "O conteúdo é enviado à OpenAI automaticamente?",
-    a: 'Não. O conteúdo só é enviado quando você clica explicitamente em "Gerar Resumo" ou "Gerar Áudio" no editor.',
+    q: "How much does audio cost?",
+    a: "Because you pay directly via your API, the costs are incredibly low—often just a few pennies per full-length article. You are never charged per minute or per word by VoxAI.",
   },
   {
-    q: "Quanto custa usar?",
-    a: "O plugin é gratuito. Você paga diretamente à OpenAI pelo uso da API. Resumo típico (GPT-4o Mini, ~1000 palavras): menos de $0,001 USD. Áudio narrado (TTS-1, ~1000 palavras): aproximadamente $0,02–$0,04 USD.",
+    q: "Does it slow down my site?",
+    a: "No. The audio files are generated once and served efficiently. The player itself is lightweight and designed to have zero negative impact on your Core Web Vitals.",
   },
   {
-    q: "O arquivo de áudio fica no meu servidor?",
-    a: "Sim. O MP3 é salvo em wp-content/uploads/voxai/YYYY/MM/ e a reprodução nunca volta a chamar a OpenAI.",
+    q: "Does it work with any theme?",
+    a: "Yes. VoxAI is designed to be theme-agnostic. The audio player inherits a clean, modern styling that looks great out of the box on any WordPress theme or page builder.",
   },
   {
-    q: "Funciona com Gutenberg e Classic Editor?",
-    a: "Sim. O VoxAI tem suporte completo para ambos os editores.",
-  },
-  {
-    q: "O resumo é atualizado quando edito o post?",
-    a: 'Não. O resumo é preservado mesmo após edições no conteúdo. Para gerar um novo resumo, delete o existente via botão no editor e clique em "Gerar Resumo" novamente.',
-  },
-  {
-    q: "Posso usar em tipos de post customizados (CPTs)?",
-    a: "Sim. Configure os tipos de post desejados em Configurações → AI Audio & Summary → Post Types.",
-  },
-  {
-    q: "Funciona com posts muito longos?",
-    a: "Sim. Para posts grandes, o plugin usa chunking inteligente do conteúdo para o resumo. Para o áudio, o texto é segmentado em blocos e concatenados automaticamente.",
+    q: "Can I automate audio generation?",
+    a: "Absolutely. You can configure VoxAI to automatically generate and embed audio the moment you hit 'Publish' on a new post, making it entirely hands-off.",
   },
 ];
 
 const changelogItems = [
-  "🎉 Lançamento público inicial.",
-  "Geração de resumo via OpenAI GPT-4o Mini.",
-  "Player de áudio TTS via OpenAI (6 vozes).",
-  "Estimador de tempo de leitura com suporte a i18n.",
-  "Suporte completo ao painel lateral do Gutenberg.",
-  "Suporte ao metabox do Classic Editor.",
-  "Posição configurável do widget (antes/depois do conteúdo / shortcode).",
+  "🎉 Initial public release.",
+  "Summary generation via OpenAI GPT-4o Mini.",
+  "TTS audio player via OpenAI (6 voices).",
+  "Reading time estimator with i18n support.",
+  "Full support for Gutenberg sidebar panel.",
+  "Support for Classic Editor metabox.",
+  "Configurable widget position (before/after content / shortcode).",
   "Shortcodes: [voxaiau_tts], [voxaiau_summary].",
-  "Geração AJAX com polling de status em tempo real.",
-  "Exibição de custo estimado de API por post.",
-  "Tradução completa para PT-BR.",
-  "Compatibilidade: PHP 7.4+ e WordPress 6.0+.",
+  "AJAX generation with real-time status polling.",
+  "Display of estimated API cost per post.",
+  "Full EN/PT-BR translation.",
+  "Compatibility: PHP 7.4+ and WordPress 6.0+.",
 ];
 
 // ─────────────────────────────────────────────
 // Navegação lateral
 // ─────────────────────────────────────────────
 const navLinks = [
-  { id: "installation",   label: "Instalação" },
-  { id: "configuration",  label: "Configuração" },
-  { id: "usage",          label: "Uso no Editor" },
+  { id: "installation",   label: "Installation" },
+  { id: "configuration",  label: "Configuration" },
+  { id: "usage",          label: "Editor Usage" },
   { id: "shortcodes",     label: "Shortcodes" },
-  { id: "privacy",        label: "Privacidade" },
+  { id: "privacy",        label: "Privacy" },
   { id: "faq",            label: "FAQ" },
   { id: "changelog",      label: "Changelog" },
 ];
@@ -118,8 +106,8 @@ export default function Documentation() {
             </div>
             <h1 className="vox-subpage__title">Documentation</h1>
             <p className="vox-subpage__desc">
-              Tudo o que você precisa para instalar, configurar e usar o{" "}
-              <strong>{project.title}</strong> no seu WordPress.
+              Everything you need to install, configure, and use{" "}
+              <strong>{project.title}</strong> on your WordPress site.
             </p>
           </motion.div>
         </div>
@@ -129,7 +117,7 @@ export default function Documentation() {
       <div className="vox-container vox-subpage__body">
         <aside className="vox-subpage__sidebar">
           <nav className="vox-doc-nav">
-            <p className="vox-doc-nav__title">Nesta página</p>
+            <p className="vox-doc-nav__title">On this page</p>
             {navLinks.map((l) => (
               <a 
                 key={l.id} 
@@ -164,19 +152,19 @@ export default function Documentation() {
           >
             <div className="vox-doc-section__header">
               <span className="vox-doc-section__icon"><Package /></span>
-              <h2 className="vox-doc-section__title">Instalação</h2>
+              <h2 className="vox-doc-section__title">Installation</h2>
             </div>
             <p className="vox-doc-section__desc">
-              Como instalar e ativar o VoxAI no seu WordPress.
+              How to install and activate VoxAI on your WordPress site.
             </p>
 
-            <p className="vox-doc-section__subtitle">Instalação Automática (Recomendada)</p>
+            <p className="vox-doc-section__subtitle">Automatic Installation (Recommended)</p>
             <ol className="vox-doc-steps">
               {[
-                "Acesse o painel do WordPress → Plugins → Adicionar novo.",
-                'Pesquise por "VoxAI - AI Audio & Summary".',
-                'Clique em "Instalar agora" e depois em "Ativar".',
-                "Acesse Configurações → AI Audio & Summary e insira sua chave de API da OpenAI.",
+                "Go to your WordPress dashboard → Plugins → Add New.",
+                'Search for "VoxAI - AI Audio & Summary".',
+                'Click "Install Now" and then "Activate".',
+                "Go to Settings → AI Audio & Summary and enter your OpenAI API key.",
               ].map((step, i) => (
                 <li key={i} className="vox-doc-steps__item">
                   <span className="vox-doc-steps__num">{i + 1}</span>
@@ -185,13 +173,13 @@ export default function Documentation() {
               ))}
             </ol>
 
-            <p className="vox-doc-section__subtitle">Instalação Manual</p>
+            <p className="vox-doc-section__subtitle">Manual Installation</p>
             <ol className="vox-doc-steps">
               {[
-                "Faça o download do arquivo .zip do plugin.",
-                "Acesse o painel do WordPress → Plugins → Adicionar novo → Carregar plugin.",
-                'Selecione o arquivo .zip e clique em "Instalar agora", depois em "Ativar".',
-                "Acesse Configurações → AI Audio & Summary e insira sua chave de API.",
+                "Download the plugin .zip file.",
+                "Go to your WordPress dashboard → Plugins → Add New → Upload Plugin.",
+                'Select the .zip file, click "Install Now", and then "Activate".',
+                "Go to Settings → AI Audio & Summary and enter your API key.",
               ].map((step, i) => (
                 <li key={i} className="vox-doc-steps__item">
                   <span className="vox-doc-steps__num">{i + 1}</span>
@@ -200,12 +188,12 @@ export default function Documentation() {
               ))}
             </ol>
 
-            <p className="vox-doc-section__subtitle">Obtendo sua chave de API OpenAI</p>
+            <p className="vox-doc-section__subtitle">Getting your OpenAI API Key</p>
             <ol className="vox-doc-steps">
               {[
-                "Crie uma conta em platform.openai.com.",
-                'Navegue até "API Keys" e clique em "Create new secret key".',
-                "Copie a chave e cole em Configurações → AI Audio & Summary → API Key.",
+                "Create an account at platform.openai.com.",
+                'Navigate to "API Keys" and click "Create new secret key".',
+                "Copy the key and paste it into Settings → AI Audio & Summary → API Key.",
               ].map((step, i) => (
                 <li key={i} className="vox-doc-steps__item">
                   <span className="vox-doc-steps__num">{i + 1}</span>
@@ -226,19 +214,19 @@ export default function Documentation() {
           >
             <div className="vox-doc-section__header">
               <span className="vox-doc-section__icon"><Settings /></span>
-              <h2 className="vox-doc-section__title">Configuração</h2>
+              <h2 className="vox-doc-section__title">Configuration</h2>
             </div>
             <p className="vox-doc-section__desc">
-              Acesse <strong>WordPress → Configurações → "VoxAI Settings"</strong> para personalizar o comportamento do plugin.
+              Go to <strong>WordPress → Settings → "VoxAI Settings"</strong> to customize the plugin's behavior.
             </p>
 
             <div className="vox-api-params">
               <table className="vox-api-table">
                 <thead>
                   <tr>
-                    <th>Campo</th>
-                    <th>Descrição</th>
-                    <th>Padrão</th>
+                    <th>Field</th>
+                    <th>Description</th>
+                    <th>Default</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -252,11 +240,7 @@ export default function Documentation() {
                 </tbody>
               </table>
             </div>
-
-            <div className="vox-doc-tip">
-              <strong>Modo Sandbox:</strong> Para testar a interface sem gastar créditos da OpenAI, use a chave{" "}
-              <code className="vox-api-code">MOCK_TEST_KEY_123</code>. O plugin retornará dados simulados de resumo e áudio.
-            </div>
+            
           </motion.section>
 
           {/* ── 3. Uso no Editor */}
@@ -270,20 +254,20 @@ export default function Documentation() {
           >
             <div className="vox-doc-section__header">
               <span className="vox-doc-section__icon"><Zap /></span>
-              <h2 className="vox-doc-section__title">Uso no Editor</h2>
+              <h2 className="vox-doc-section__title">Editor Usage</h2>
             </div>
             <p className="vox-doc-section__desc">
-              Gere áudio e resumos diretamente no editor de posts.
+              Generate audio and summaries directly in the post editor.
             </p>
 
             <p className="vox-doc-section__subtitle">Gutenberg (Block Editor)</p>
             <ol className="vox-doc-steps">
               {[
-                "Abra ou crie um post no WordPress.",
-                'Na barra lateral (painel direito), localize o painel "VoxAI".',
-                'Clique em "Gerar Áudio" para criar a narração do post.',
-                'Clique em "Gerar Resumo" para criar o resumo TL;DR inteligente.',
-                "Salve o post — o player e o resumo aparecerão automaticamente no frontend.",
+                "Open or create a post in WordPress.",
+                'In the sidebar (right panel), locate the "VoxAI" panel.',
+                'Click "Generate Audio" to create the post narration.',
+                'Click "Generate Summary" to create the smart TL;DR summary.',
+                "Save the post — the player and summary will automatically appear on the frontend.",
               ].map((step, i) => (
                 <li key={i} className="vox-doc-steps__item">
                   <span className="vox-doc-steps__num">{i + 1}</span>
@@ -295,11 +279,11 @@ export default function Documentation() {
             <p className="vox-doc-section__subtitle">Classic Editor</p>
             <ol className="vox-doc-steps">
               {[
-                "Abra ou crie um post no WordPress.",
-                "Role a página do editor até encontrar o metabox VoxAI.",
-                "Selecione a voz desejada no seletor de vozes.",
-                'Clique em "Gerar Áudio" ou "Gerar Resumo" conforme necessário.',
-                "Salve o post.",
+                "Open or create a post in WordPress.",
+                "Scroll down the editor page to find the VoxAI metabox.",
+                "Select the desired voice from the voice dropdown.",
+                'Click "Generate Audio" or "Generate Summary" as needed.',
+                "Save the post.",
               ].map((step, i) => (
                 <li key={i} className="vox-doc-steps__item">
                   <span className="vox-doc-steps__num">{i + 1}</span>
@@ -309,7 +293,7 @@ export default function Documentation() {
             </ol>
 
             <div className="vox-doc-tip">
-              <strong>Nota:</strong> O resumo e o áudio são preservados mesmo se o post for editado. Ambos só são deletados manualmente pelo botão correspondente no editor.
+              <strong>Note:</strong> The summary and audio are preserved even if the post is edited. Both can only be deleted manually via their respective buttons in the editor.
             </div>
           </motion.section>
 
@@ -327,23 +311,23 @@ export default function Documentation() {
               <h2 className="vox-doc-section__title">Shortcodes</h2>
             </div>
             <p className="vox-doc-section__desc">
-              Insira o player e o resumo em qualquer lugar do seu tema, sem depender da posição automática.
+              Insert the player and summary anywhere in your theme, without relying on automatic positioning.
             </p>
 
             <div className="vox-doc-codes">
               <div className="vox-doc-code-row">
                 <span className="shortcode">[voxaiau_tts]</span>
-                <span className="vox-doc-code-row__desc">Renderiza o player de áudio completo.</span>
+                <span className="vox-doc-code-row__desc">Renders the complete audio player.</span>
               </div>
               <div className="vox-doc-code-row">
                 <span className="shortcode">[voxaiau_summary]</span>
-                <span className="vox-doc-code-row__desc">Exibe apenas o resumo inteligente gerado.</span>
+                <span className="vox-doc-code-row__desc">Renders only the generated smart summary.</span>
               </div>
             </div>
 
             <div className="vox-doc-tip">
-              <strong>Dica:</strong> Para usar os shortcodes manualmente, defina <strong>Posição do Widget</strong> como{" "}
-              <code className="vox-api-code">disabled</code> nas configurações, evitando duplicação.
+              <strong>Tip:</strong> To use shortcodes manually, set <strong>Widget Position</strong> to{" "}
+              <code className="vox-api-code">disabled</code> in the settings, avoiding duplication.
             </div>
           </motion.section>
 
@@ -358,19 +342,19 @@ export default function Documentation() {
           >
             <div className="vox-doc-section__header">
               <span className="vox-doc-section__icon"><ShieldCheck /></span>
-              <h2 className="vox-doc-section__title">Privacidade & Serviços Externos</h2>
+              <h2 className="vox-doc-section__title">Privacy & External Services</h2>
             </div>
             <p className="vox-doc-section__desc">
-              O VoxAI envia conteúdo de posts para a <strong>API da OpenAI</strong> apenas quando solicitado
-              explicitamente pelo editor (botão "Gerar Áudio" ou "Gerar Resumo") —{" "}
-              <strong>nunca automaticamente</strong>.
+              VoxAI sends post content to the <strong>OpenAI API</strong> only when explicitly requested
+              by the editor ("Generate Audio" or "Generate Summary" button) —{" "}
+              <strong>never automatically</strong>.
             </p>
 
             <ol className="vox-doc-steps">
               {[
-                "Nenhum dado é armazenado nos servidores do plugin.",
-                "O arquivo MP3 gerado é salvo localmente no seu WordPress (wp-content/uploads/voxai/).",
-                "A reprodução do áudio nunca aciona a API OpenAI novamente.",
+                "No data is stored on the plugin's servers.",
+                "The generated MP3 file is saved locally in your WordPress (wp-content/uploads/voxai/).",
+                "Audio playback never triggers the OpenAI API again.",
               ].map((item, i) => (
                 <li key={i} className="vox-doc-steps__item">
                   <span className="vox-doc-steps__num">{i + 1}</span>
@@ -380,17 +364,17 @@ export default function Documentation() {
             </ol>
 
             <p className="vox-doc-section__desc" style={{ marginTop: "1rem" }}>
-              <strong>Serviços de terceiros utilizados:</strong>{" "}
+              <strong>Third-party services used:</strong>{" "}
               <a href="https://openai.com" target="_blank" rel="noreferrer" className="vox-doc-link">
                 OpenAI API
               </a>{" "}
               —{" "}
               <a href="https://openai.com/policies/terms-of-use" target="_blank" rel="noreferrer" className="vox-doc-link">
-                Termos de Uso
+                Terms of Use
               </a>{" "}
               ·{" "}
               <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noreferrer" className="vox-doc-link">
-                Política de Privacidade
+                Privacy Policy
               </a>
             </p>
           </motion.section>
@@ -408,7 +392,7 @@ export default function Documentation() {
               <span className="vox-doc-section__icon"><HelpCircle /></span>
               <h2 className="vox-doc-section__title">FAQ</h2>
             </div>
-            <p className="vox-doc-section__desc">Perguntas frequentes sobre o VoxAI.</p>
+            <p className="vox-doc-section__desc">Frequently asked questions about VoxAI.</p>
 
             <div className="vox-doc-faq">
               {faqItems.map((item, i) => (
@@ -431,14 +415,14 @@ export default function Documentation() {
           >
             <div className="vox-doc-section__header">
               <span className="vox-doc-section__icon"><RefreshCw /></span>
-              <h2 className="vox-doc-section__title">Atualizações & Changelog</h2>
+              <h2 className="vox-doc-section__title">Updates & Changelog</h2>
             </div>
             <p className="vox-doc-section__desc">
-              Mantenha o plugin sempre atualizado. Para atualizar: desative o plugin, instale a nova versão e reative.
-              Suas configurações e áudios gerados são preservados entre versões.
+              Keep your plugin up to date. To update: deactivate the plugin, install the new version, and reactivate.
+              Your settings and generated audio files are preserved between versions.
             </p>
 
-            <p className="vox-doc-section__subtitle">v1.0.0 — Abril 2026</p>
+            <p className="vox-doc-section__subtitle">v1.0.0 — April 2026</p>
             <ul className="vox-doc-changelog">
               {changelogItems.map((item, i) => (
                 <li key={i} className="vox-doc-changelog__item">{item}</li>

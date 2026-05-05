@@ -15,6 +15,8 @@ export default [
     index("routes/plugins/slug.index.jsx"),
     route("documentation",  "routes/plugins/slug.documentation.jsx"),
     route("api-reference",  "routes/plugins/slug.api-reference.jsx"),
+    route("privacy",        "routes/plugins/slug.privacy.jsx"),
+    route("terms",          "routes/plugins/slug.terms.jsx"),
   ]),
 
   route(".well-known/*", "routes/silence.jsx"),

@@ -20,3 +20,18 @@ export async function getFreemiusProduct() {
         throw error;
     }
 }
+
+// Retorna os dados completos de precificação do produto (Planos, Preços, etc)
+export async function getFreemiusPlans() {
+    try {
+        if (!process.env.FREEMIUS_PRODUCT_ID || !process.env.FREEMIUS_SECRET_KEY) {
+            console.warn("Chaves do Freemius ausentes no .env. Usando fallback no frontend.");
+            return null; // Fallback
+        }
+        const pricingData = await freemius.api.product.retrievePricingData();
+        return pricingData;
+    } catch (error) {
+        console.error("Erro ao puxar planos do Freemius:", error);
+        return null; // Fallback se der erro (ex: API offline ou chave inválida)
+    }
+}

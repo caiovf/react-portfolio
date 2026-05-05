@@ -204,7 +204,7 @@ $outline-10: rgba(255,255,255,0.10);
   }
   .vox-section-desc {
     color: $muted;
-    max-width: 40rem;
+    max-width: 25rem;
     margin: 0 auto;
   }
 
@@ -456,14 +456,13 @@ $outline-10: rgba(255,255,255,0.10);
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.5rem;
-    auto-rows: auto;
+    grid-auto-rows: auto;
 
     @media (min-width: 768px) {
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: 240px;
+      grid-template-columns: repeat(2, 1fr);
     }
     @media (min-width: 1024px) {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
@@ -491,10 +490,9 @@ $outline-10: rgba(255,255,255,0.10);
     &__bottom {
       position: relative;
       z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
   }
 
@@ -511,7 +509,8 @@ $outline-10: rgba(255,255,255,0.10);
 
   // text-2xl font-headline font-bold mb-2
   .vox-bento-title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    line-height: 1.25em;
     font-family: 'Manrope', sans-serif;
     font-weight: 700;
     margin-bottom: .5rem;
@@ -521,7 +520,7 @@ $outline-10: rgba(255,255,255,0.10);
   .vox-bento-desc {
     font-size: .875rem;
     color: $muted;
-    line-height: 1.75;
+    line-height: 1.5em;
   }
 
   // mt-4 space-y-2 (voice list)
@@ -549,14 +548,12 @@ $outline-10: rgba(255,255,255,0.10);
     display: inline-block;
   }
 
-  // bg-[#ba9eff]/10 text-[#ba9eff] px-3 py-1 rounded-full text-xs font-semibold
-  .vox-bento-badge {
-    background: rgba($primary, .10);
-    color: $primary;
-    padding: .25rem .75rem;
-    border-radius: 9999px;
-    font-size: .75rem;
-    font-weight: 600;
+  // texto de rodapé para descrições longas
+  .vox-bento-footer {
+    color: rgba($primary, 0.8);
+    font-size: .85rem;
+    line-height: 1.5;
+    display: block;
   }
 
   // Watermark — absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10
@@ -647,6 +644,29 @@ $outline-10: rgba(255,255,255,0.10);
 
     // text-[#adaaaa]
     &__desc { color: $muted; }
+  }
+
+  // ============================================================
+  // VALUE SECTION — py-32
+  // ============================================================
+  .vox-value { padding: 6rem 0; background: #0a0a0a; }
+
+  .vox-value-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+
+    @media (min-width: 1024px) {
+      grid-template-columns: 1fr 1.5fr;
+      align-items: start;
+    }
+  }
+
+  .vox-value-sticky {
+    @media (min-width: 1024px) {
+      position: sticky;
+      top: 120px;
+    }
   }
 
   // ============================================================
@@ -932,17 +952,17 @@ $outline-10: rgba(255,255,255,0.10);
     }
   }
 
-  // ── 4-column tier cards grid
+  // ── Centered tier cards grid
   .vox-tier-grid {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1.25rem;
-
-    @media (min-width: 640px)  { grid-template-columns: repeat(2, 1fr); }
-    @media (min-width: 1024px) { grid-template-columns: repeat(4, 1fr); }
   }
 
   .vox-tier-card {
+    flex: 1 1 300px;
+    max-width: 340px;
     background: rgba(255,255,255,.025);
     border: 1px solid rgba(255,255,255,.07);
     border-radius: 1.25rem;

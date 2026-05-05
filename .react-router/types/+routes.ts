@@ -51,6 +51,16 @@ type Pages = {
       "slug": string;
     };
   };
+  "/plugins/:slug/privacy": {
+    params: {
+      "slug": string;
+    };
+  };
+  "/plugins/:slug/terms": {
+    params: {
+      "slug": string;
+    };
+  };
   "/.well-known/*": {
     params: {
       "*": string;
@@ -66,7 +76,7 @@ type Pages = {
 type RouteFiles = {
   "root.jsx": {
     id: "root";
-    page: "/" | "/about" | "/portfolio" | "/portfolio/:slug" | "/portfolio/category/:category" | "/advancing-skills" | "/plugins" | "/plugins/:slug" | "/plugins/:slug/documentation" | "/plugins/:slug/api-reference" | "/.well-known/*" | "/*";
+    page: "/" | "/about" | "/portfolio" | "/portfolio/:slug" | "/portfolio/category/:category" | "/advancing-skills" | "/plugins" | "/plugins/:slug" | "/plugins/:slug/documentation" | "/plugins/:slug/api-reference" | "/plugins/:slug/privacy" | "/plugins/:slug/terms" | "/.well-known/*" | "/*";
   };
   "routes/_index.jsx": {
     id: "routes/_index";
@@ -96,7 +106,7 @@ type RouteFiles = {
   };
   "routes/plugins/slug.layout.jsx": {
     id: "routes/plugins/slug.layout";
-    page: "/plugins/:slug" | "/plugins/:slug/documentation" | "/plugins/:slug/api-reference";
+    page: "/plugins/:slug" | "/plugins/:slug/documentation" | "/plugins/:slug/api-reference" | "/plugins/:slug/privacy" | "/plugins/:slug/terms";
   };
   "routes/plugins/slug.index.jsx": {
     id: "routes/plugins/slug.index";
@@ -109,6 +119,14 @@ type RouteFiles = {
   "routes/plugins/slug.api-reference.jsx": {
     id: "routes/plugins/slug.api-reference";
     page: "/plugins/:slug/api-reference";
+  };
+  "routes/plugins/slug.privacy.jsx": {
+    id: "routes/plugins/slug.privacy";
+    page: "/plugins/:slug/privacy";
+  };
+  "routes/plugins/slug.terms.jsx": {
+    id: "routes/plugins/slug.terms";
+    page: "/plugins/:slug/terms";
   };
   "routes/silence.jsx": {
     id: "routes/silence";
@@ -133,6 +151,8 @@ type RouteModules = {
   "routes/plugins/slug.index": typeof import("./app/routes/plugins/slug.index.jsx");
   "routes/plugins/slug.documentation": typeof import("./app/routes/plugins/slug.documentation.jsx");
   "routes/plugins/slug.api-reference": typeof import("./app/routes/plugins/slug.api-reference.jsx");
+  "routes/plugins/slug.privacy": typeof import("./app/routes/plugins/slug.privacy.jsx");
+  "routes/plugins/slug.terms": typeof import("./app/routes/plugins/slug.terms.jsx");
   "routes/silence": typeof import("./app/routes/silence.jsx");
   "routes/$": typeof import("./app/routes/$.jsx");
 };

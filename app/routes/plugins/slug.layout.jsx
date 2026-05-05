@@ -186,8 +186,8 @@ export default function PluginLayout() {
           <div className="vox-footer__col">
             <h5 className="vox-footer__col-title">Legal</h5>
             <ul className="vox-footer__links">
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms of Service</a></li>
+              <li><Link to={`/plugins/${slug}/privacy`}>Privacy Policy</Link></li>
+              <li><Link to={`/plugins/${slug}/terms`}>Terms of Service</Link></li>
             </ul>
           </div>
 
