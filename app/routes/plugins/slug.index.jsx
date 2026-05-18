@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useOutletContext, useLoaderData } from "react-router";
 // Server Loader removido temporariamente pois é incompatível com ssr: false
 
@@ -7,6 +7,7 @@ import { motion } from "motion/react";
 import {
   AudioLines,
   Play,
+  Pause,
   SkipBack,
   SkipForward,
   Volume2,
@@ -28,50 +29,44 @@ import {
 // ─────────────────────────────────────────────
 const features = [
   {
-    title: "Reduce bounce from long content",
-    description: "Long articles push visitors away. Audio gives them an easier way to stay without committing to reading everything.",    
-    footer: "Even a small increase in engagement can reduce early exits.",
-    icon: <TrendingDown className="vox-icon-primary" />,
-    colSpan: 1,
-    rowSpan: 1,
-  },
-  {
-    title: "Increase time on page",
-    description: "When visitors can listen while doing something else, they stay longer. More time on page = stronger engagement signals.",
-    footer: "Sites that add audio often see longer sessions because users keep listening while multitasking.",
+    title: "Let users listen while multitasking",
+    description: "Give visitors the freedom to consume your content while commuting, working, or doing chores.",
     icon: <Clock className="vox-icon-primary" />,
     colSpan: 1,
     rowSpan: 1,
   },
   {
-    title: "Make your content accessible",
-    description: "Audio opens your content to:",    
-    list: ["visually impaired users", "auditory learners", "anyone dealing with screen fatigue"],
-    footer: "You instantly make your content usable for audiences who wouldn’t fully engage with text alone.",
+    title: "Better experience on mobile devices",
+    description: "Reading long texts on small screens is tiring. Audio makes mobile consumption effortless.",
+    icon: <TrendingDown className="vox-icon-primary" />,
     colSpan: 1,
     rowSpan: 1,
   },
   {
-    title: "Get more value from every post",
-    description: "You already created the content. Now you’re extracting more from it — without extra work.",
-    footer: "One article becomes two formats, increasing its reach without additional production time.",
+    title: "Improve accessibility",
+    description: "Make your site instantly usable for visually impaired users and auditory learners.",
+    icon: <Blocks className="vox-icon-primary" />,
+    colSpan: 1,
+    rowSpan: 1,
+  },
+  {
+    title: "Increase time spent on page",
+    description: "Users who listen stay longer. Stronger engagement signals and lower early exit rates.",
     icon: <Database className="vox-icon-secondary" />,
     colSpan: 1,
     rowSpan: 1,
   },
   {
-    title: "Improve user experience instantly",
-    description: "A built-in audio player makes your site feel more modern, polished, and easier to use.",
-    footer: "Small UX improvements like this can increase perceived quality and trust in your content.",
+    title: "Extract more value from content you already created",
+    description: "Turn every existing article into a new format without rewriting or recording anything manually.",
     icon: <Sparkles className="vox-icon-secondary" />,
     colSpan: 1,
     rowSpan: 1,
   },
   {
-    title: "Automate everything",
-    description: "Generate audio automatically for every post you publish. No manual work. No extra steps.",
-    footer: "Once configured, your entire content pipeline can include audio without extra effort.",
-    icon: <Blocks className="vox-icon-secondary" />,
+    title: "Setup in minutes",
+    description: "Configure your provider once and let VoxAI handle the rest automatically for every future post.",
+    icon: <CheckCircle2 className="vox-icon-secondary" />,
     colSpan: 1,
     rowSpan: 1,
   },
@@ -80,18 +75,18 @@ const features = [
 const steps = [
   {
     number: "1",
-    title: "Add your API key",
-    description: "Connect VoxAI to your own account. You stay in control of the costs, paying only fractions of a cent per generation directly to the provider.",
+    title: "Connect your OpenAI API",
+    description: "Get you key from OpenAi to generate audio directly, without paying middleman markups.",
   },
   {
     number: "2",
-    title: "Select your post",
-    description: "Choose which articles you want to convert. You can process them individually as you write or bulk-generate audio for your entire back catalog.",
+    title: "Select your post type",
+    description: "Choose which types of content should have audio. You can enable it for posts, pages, or custom post types.",
   },
   {
     number: "3",
-    title: "Generate audio",
-    description: "VoxAI creates the audio and embeds a sleek, responsive player directly into your post. Your visitors can now listen immediately.",
+    title: "Audio appears automatically",
+    description: "VoxAI creates the audio and embeds a responsive player in your content automatically.",
   },
 ];
 
@@ -120,29 +115,24 @@ const faqs = [
 
 const valuePoints = [
   {
-    title: "Keep more visitors on your site",
-    desc: "Most people don’t read full articles — they skim and leave. Audio gives them a reason to stay and engage with your content instead of bouncing early.",
-    footer: "Even a small increase in time on page can make a real difference over time."
+    title: "Keep readers engaged",
+    desc: "When faced with a long article, many visitors leave. Audio gives them an effortless alternative to stay and consume your content.",
   },
   {
-    title: "Get more value from content you already created",
-    desc: "You’ve already invested time in writing your posts. VoxAI turns every article into a second format — without rewriting, recording, or editing.",
-    footer: "More output. Same effort."
+    title: "Transform existing content into audio",
+    desc: "Breathe new life into your archives. You already did the hard work of writing; now let VoxAI turn it into a listenable format.",
   },
   {
-    title: "Avoid expensive audio platforms",
-    desc: "Most tools charge recurring fees based on usage. VoxAI doesn’t. You use your own API and pay the real cost — often just a few cents per article.",
-    footer: ""
+    title: "Improve accessibility",
+    desc: "Instantly upgrade your site's accessibility for users who rely on screen readers or simply prefer listening.",
   },
   {
-    title: "Scale without increasing complexity",
-    desc: "Whether you manage one site or many, VoxAI works the same way.",
-    footer: "No per-article pricing. No hidden limits. No extra tools."
+    title: "Create better mobile experiences",
+    desc: "Reading 2,000 words on a smartphone is difficult. A native audio player makes your content perfectly suited for mobile multitasking.",
   },
   {
-    title: "No new workflow to learn",
-    desc: "Everything happens inside WordPress. No dashboards. No integrations. No extra steps.",
-    footer: "You keep publishing the same way — just with more impact."
+    title: "No new workflow required",
+    desc: "VoxAI works behind the scenes. Just publish your posts like you normally do, and the audio is generated and embedded automatically.",
   }
 ];
 
@@ -161,7 +151,7 @@ function ValueSection() {
           
           <div className="vox-value-sticky">
             <h2 className="vox-section-title" style={{ textAlign: "left", fontSize: "2.5rem", marginBottom: "1.5rem", maxWidth: "410px" }}>
-              Why VoxAI is worth it
+              Why publishers and content sites use VoxAI
             </h2>
             <p className="vox-section-desc" style={{ textAlign: "left", fontSize: "1.1rem", maxWidth: "400px", margin: "0" }}>
               You’re not paying for audio.<br/><br/>
@@ -218,17 +208,27 @@ function SocialProof() {
     <section className="vox-comparison" style={{ padding: "6rem 0" }}>
       <div className="vox-container">
         <div className="vox-section-header">
-          <h2 className="vox-section-title">See what other site owners are saying</h2>
-          <p className="vox-section-desc">Real impact from VoxAI across different projects.</p>
+          <h2 className="vox-section-title">Early users testing VoxAI</h2>
+          <p className="vox-section-desc">Real sites using audio to improve engagement.</p>
         </div>
         <div className="vox-compare-layout">
           <div className="vox-compare-section vox-compare-section--pro" style={{ padding: "2rem" }}>
-            <p style={{ fontStyle: "italic", marginBottom: "1rem", color: "#fff" }}>"We added audio to our long-form guides and saw a clear increase in session duration within weeks. People actually stay and listen while browsing."</p>
-            <p style={{ fontWeight: 700, color: "#ba9eff" }}>— Content Manager, SEO blog with 50+ articles</p>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "1rem", borderBottom: "1px solid rgba(255,255,255,0.1)", paddingBottom: "1rem" }}>
+              <span style={{ color: "#ba9eff", fontWeight: 600 }}>SEO Blog</span>
+              <span style={{ color: "#adaaaa", fontSize: "0.9rem" }}>~15k monthly visitors</span>
+            </div>
+            <p style={{ color: "#fff", lineHeight: 1.6 }}>
+              Reason for using VoxAI: "Testing if audio versions reduce bounce rate on 2,000+ word guides."
+            </p>
           </div>
           <div className="vox-compare-section vox-compare-section--pro" style={{ padding: "2rem" }}>
-            <p style={{ fontStyle: "italic", marginBottom: "1rem", color: "#fff" }}>"Managing multiple niche sites, this saved me from paying for multiple SaaS tools. I control the cost and scale it easily"</p>
-            <p style={{ fontWeight: 700, color: "#ba9eff" }}>— Affiliate site owner managing 12+ sitesU</p>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "1rem", borderBottom: "1px solid rgba(255,255,255,0.1)", paddingBottom: "1rem" }}>
+              <span style={{ color: "#ba9eff", fontWeight: 600 }}>Niche News Portal</span>
+              <span style={{ color: "#adaaaa", fontSize: "0.9rem" }}>~40k monthly visitors</span>
+            </div>
+            <p style={{ color: "#fff", lineHeight: 1.6 }}>
+              Reason for using VoxAI: "Giving mobile users a way to listen to daily updates while commuting."
+            </p>
           </div>
         </div>
       </div>
@@ -245,10 +245,10 @@ function ProblemSection() {
       <div className="vox-container">
         <div className="vox-section-header" style={{ marginBottom: "4rem" }}>
           <h2 className="vox-section-title" style={{ fontSize: "2.5rem", maxWidth: "800px", margin: "0 auto 1.5rem" }}>
-            Most visitors don’t read your content
+            You worked hard for the click. Don't lose visitors after it.
           </h2>
           <p className="vox-section-desc" style={{ maxWidth: "800px", margin: "0 auto" }}>
-            You spend hours creating content. Most visitors skim and leave before reaching the middle.
+            Readers skim. Mobile users multitask. Long articles compete with distractions everywhere. If people don't want to read right now, that doesn't mean they want to leave.
           </p>
         </div>
 
@@ -274,9 +274,9 @@ function ProblemSection() {
             }}>
               <Clock style={{ color: "#ba9eff", width: 24, height: 24 }} />
             </div>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 700, marginBottom: "1rem", color: "#fff" }}>Screen Fatigue</h3>
+            <h3 style={{ fontSize: "1.3rem", fontWeight: 700, marginBottom: "1rem", color: "#fff" }}>Visitors skim</h3>
             <p style={{ color: "#adaaaa", lineHeight: 1.6 }}>
-              People are busy. They are multitasking, commuting, or simply experiencing screen fatigue. When confronted with a wall of text, their instinct is to leave.
+              Most users scan content instead of reading every paragraph.
             </p>
           </motion.div>
 
@@ -295,9 +295,9 @@ function ProblemSection() {
             }}>
               <TrendingDown style={{ color: "#ff6b6b", width: 24, height: 24 }} />
             </div>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 700, marginBottom: "1rem", color: "#fff" }}>Lost Engagement</h3>
+            <h3 style={{ fontSize: "1.3rem", fontWeight: 700, marginBottom: "1rem", color: "#fff" }}>Engagement drops</h3>
             <p style={{ color: "#adaaaa", lineHeight: 1.6 }}>
-              This means your best content goes unread, your time on page drops, and you lose opportunities to connect with your audience.
+              Long content often loses attention before reaching the end.
             </p>
           </motion.div>
 
@@ -314,11 +314,11 @@ function ProblemSection() {
               background: "rgba(105, 156, 255, 0.1)", display: "flex", 
               alignItems: "center", justifyContent: "center", marginBottom: "1.5rem" 
             }}>
-              <BookOpen style={{ color: "#699cff", width: 24, height: 24 }} />
+              <AudioLines style={{ color: "#699cff", width: 24, height: 24 }} />
             </div>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 700, marginBottom: "1rem", color: "#fff" }}>The Solution</h3>
+            <h3 style={{ fontSize: "1.3rem", fontWeight: 700, marginBottom: "1rem", color: "#fff" }}>Audio changes consumption</h3>
             <p style={{ color: "#adaaaa", lineHeight: 1.6 }}>
-              Turn readers into listeners right from your dashboard. Give them a second way to consume your content without leaving your site.
+              Give readers another way to consume your content.
             </p>
           </motion.div>
 
@@ -330,7 +330,7 @@ function ProblemSection() {
 
 function PricingSection() {
   const freemiusData = null; 
-  const [billing, setBilling] = useState("annual"); 
+  const [billing, setBilling] = useState("free"); 
 
   const pluginId = "26907";
   const publicKey = "pk_e1246c6f65f95bccf2e2af8906d0e";
@@ -338,9 +338,25 @@ function PricingSection() {
 
   const fallbackTiers = [
     { 
-      label: "Personal", sites: "1 site", popular: false, 
+      label: "Free", sites: "1 site", popular: true, badge: "⭐ Start Here",
+      description: "Perfect for trying VoxAI and testing audio on your content.",
+      monthly: "$0", annual: "$0", annualEquivalent: "$0", savings: "",
+      cta: "Install Free",
+      pricingId: "free",
+      features: [
+        "1 website",
+        "Limited audio generations per month",
+        "Basic AI audio generation",
+        "Audio player included",
+        "WordPress integration",
+        "Community support",
+      ]
+    },
+    { 
+      label: "Creator", sites: "1 site", popular: false, 
+      description: "Ideal for content creators and growing blogs.",
       monthly: "$9.99", annual: "$59.99", annualEquivalent: "$4.99", savings: "Save 50%",
-      cta: "Start with Personal",
+      cta: "Start with Creator",
       pricingId: "58285",
       features: [
         "1 website",
@@ -351,20 +367,8 @@ function PricingSection() {
       ]
     },
     { 
-      label: "Freelancer", sites: "10 sites", popular: true, 
-      monthly: "$24.99", annual: "$149.99", annualEquivalent: "$12.50", savings: "Save 50%",
-      cta: "Start with Freelancer",
-      pricingId: "62369",
-      features: [
-        "Up to 10 websites",
-        "All Pro features",
-        "Automation at scale",
-        "Advanced customization",
-        "Priority updates",
-      ]
-    },
-    { 
       label: "Agency", sites: "Unlimited Sites", popular: false, 
+      description: "For publishers and multiple websites.",
       monthly: null, annual: "$299.99", annualEquivalent: "$24.99", savings: "Best scale value",
       cta: "Get Agency License",
       pricingId: "62369",
@@ -374,6 +378,20 @@ function PricingSection() {
         "Built for scalability",
         "Manage multiple client sites",
         "Future updates included",
+      ]
+    },
+    { 
+      label: "Freelancer", sites: "10 sites", popular: false, 
+      description: "For professionals managing client projects.",
+      monthly: "$24.99", annual: "$149.99", annualEquivalent: "$12.50", savings: "Save 50%",
+      cta: "Start with Freelancer",
+      pricingId: "62369",
+      features: [
+        "Up to 10 websites",
+        "All Pro features",
+        "Automation at scale",
+        "Advanced customization",
+        "Priority updates",
       ]
     }
   ];
@@ -385,6 +403,11 @@ function PricingSection() {
   }
 
   const handleCheckout = async (tier) => {
+    if (tier.pricingId === "free") {
+      window.open("https://wordpress.org/plugins/voxai-ai-audio-summary-for-posts/", "_blank", "noopener,noreferrer");
+      return;
+    }
+
     try {
       const { Checkout: FreemiusCheckout } = await import('@freemius/checkout');
       
@@ -418,6 +441,12 @@ function PricingSection() {
         {/* Toggle */}
         <div className="vox-billing-toggle" style={{ marginBottom: "1rem" }}>
           <button
+            className={`vox-billing-toggle__btn${billing === "free" ? " vox-billing-toggle__btn--active" : ""}`}
+            onClick={() => setBilling("free")}
+          >
+            Free
+          </button>
+          <button
             className={`vox-billing-toggle__btn${billing === "monthly" ? " vox-billing-toggle__btn--active" : ""}`}
             onClick={() => setBilling("monthly")}
           >
@@ -431,13 +460,16 @@ function PricingSection() {
           </button>
         </div>
 
-        <p style={{ textAlign: "center", color: "#adaaaa", marginBottom: "3rem", fontSize: "0.9rem" }}>
-          Start monthly. Upgrade to yearly anytime.
+        <p style={{ textAlign: "center", color: "#fff", marginBottom: "3rem", fontSize: "1.1rem", fontWeight: 500 }}>
+          Start free, validate engagement, upgrade when your audience grows.
         </p>
 
         {/* Cards grid */}
-        <div className="vox-tier-grid">
-          {activeTiers.filter(tier => billing === "monthly" ? tier.monthly !== null : true).map((tier, idx) => (
+        <div className="vox-tier-grid" style={billing === "free" ? { display: "flex", justifyContent: "center" } : {}}>
+          {activeTiers.filter(tier => {
+            if (billing === "free") return tier.pricingId === "free";
+            return tier.pricingId !== "free" && (billing === "monthly" ? tier.monthly !== null : true);
+          }).map((tier, idx) => (
             <motion.div
               key={tier.label}
               className={`vox-tier-card${tier.popular ? " vox-tier-card--popular" : ""}`}
@@ -446,14 +478,17 @@ function PricingSection() {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.08 }}
             >
-              {tier.popular && (
-                <div className="vox-tier-card__badge">⭐ Most Popular</div>
+              {(tier.popular || tier.badge) && (
+                <div className="vox-tier-card__badge">{tier.badge || "⭐ Most Popular"}</div>
               )}
 
               {/* Header */}
-              <div className="vox-tier-card__header">
+              <div className="vox-tier-card__header" style={{ marginBottom: "1.5rem" }}>
                 <h3 className="vox-tier-card__title">{tier.label}</h3>
-                <p className="vox-tier-card__sites">License for {tier.sites}</p>
+                <p className="vox-tier-card__sites" style={{ marginBottom: "0.5rem" }}>License for {tier.sites}</p>
+                {tier.description && (
+                  <p className="vox-tier-card__desc" style={{ color: "#adaaaa", fontSize: "0.9rem", lineHeight: 1.4 }}>{tier.description}</p>
+                )}
               </div>
 
               {/* Price */}
@@ -466,19 +501,21 @@ function PricingSection() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.25 }}
                   >
-                    {(billing === "monthly" ? tier.monthly : tier.annual) || "—"}
+                    {billing === "free" ? tier.monthly : (billing === "monthly" ? tier.monthly : tier.annual) || "—"}
                   </motion.span>
-                  <span className="vox-tier-card__cycle">
-                    {billing === "monthly" ? "/mo" : "/yr"}
-                  </span>
+                  {billing !== "free" && (
+                    <span className="vox-tier-card__cycle">
+                      {billing === "monthly" ? "/mo" : "/yr"}
+                    </span>
+                  )}
                 </div>
                 
-                {billing === "annual" && (
+                {billing === "annual" && tier.annualEquivalent && tier.annualEquivalent !== "$0" && (
                   <div style={{ fontSize: "0.75rem", color: "#adaaaa" }}>
                     ≈ {tier.annualEquivalent}/mo <span style={{ color: "#ba9eff", fontWeight: "600", marginLeft: "4px" }}>{tier.savings}</span>
                   </div>
                 )}
-                {billing === "monthly" && (
+                {billing === "monthly" && tier.pricingId !== "free" && (
                   <div style={{ fontSize: "0.75rem", color: "#8a8a8a", fontStyle: "italic" }}>
                     Higher cost over time
                   </div>
@@ -489,10 +526,10 @@ function PricingSection() {
               <button 
                 className={`vox-tier-card__cta${tier.popular ? " vox-tier-card__cta--popular" : ""}`}
                 onClick={() => handleCheckout(tier)}
-                disabled={!(billing === "monthly" ? tier.monthly : tier.annual)}
-                style={!(billing === "monthly" ? tier.monthly : tier.annual) ? { opacity: 0.5, cursor: "not-allowed" } : {}}
+                disabled={!(billing === "monthly" || billing === "free" ? tier.monthly : tier.annual)}
+                style={!(billing === "monthly" || billing === "free" ? tier.monthly : tier.annual) ? { opacity: 0.5, cursor: "not-allowed" } : {}}
               >
-                {!(billing === "monthly" ? tier.monthly : tier.annual) 
+                {!(billing === "monthly" || billing === "free" ? tier.monthly : tier.annual) 
                   ? "Unavailable" 
                   : tier.cta}
               </button>
@@ -523,6 +560,43 @@ export default function PluginIndex() {
   // Dados passados pelo layout pai via Outlet context
   useOutletContext(); // garante contexto, dados disponíveis se necessário
 
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
+
+  const toggleAudio = () => {
+    const isPt = document.documentElement.lang === 'pt' || 
+                 (document.querySelector('.goog-te-combo') && document.querySelector('.goog-te-combo').value === 'pt');
+    
+    const audioSrc = isPt 
+      ? "/assets/img/audio/alloy_gpt-4o-mini-tts_1x_2026-05-18T22_17_30-607Z-pt-br.wav"
+      : "/assets/img/audio/alloy_gpt-4o-mini-tts_1x_2026-05-18T22_16_51-968Z.wav";
+
+    if (!audioRef.current) {
+      audioRef.current = new Audio(audioSrc);
+      audioRef.current.onended = () => setIsPlaying(false);
+    } else if (audioRef.current.src && !audioRef.current.src.includes(audioSrc.split('/').pop())) {
+      audioRef.current.pause();
+      audioRef.current.src = audioSrc;
+      audioRef.current.load();
+    }
+
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current.play();
+      setIsPlaying(true);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
+  }, []);
+
   return (
     <>
       {/* ── Hero Section */}
@@ -543,16 +617,18 @@ export default function PluginIndex() {
             </div>
 
             <h1 className="vox-hero__title" style={{ fontSize: "3rem", lineHeight: 1.1 }}>
-              Keep your visitors on the page longer by giving them a reason to listen
+              Turn any WordPress post into audio automatically
             </h1>
 
             <p className="vox-hero__desc">
-              Turn every post into audio and keep visitors engaged without changing how you publish.
+              Most visitors won't read every word. Let them listen instead. Convert articles into audio and create a better experience for readers, mobile users and long form content.
             </p>
 
             <div className="vox-hero__actions">
-              <button className="vox-btn-primary" onClick={() => document.getElementById('pricing').scrollIntoView()}>Turn your first post into audio</button>
-              <button className="vox-btn-ghost" onClick={() => document.getElementById('how-it-works').scrollIntoView()}>See How It Works</button>
+              <a href="https://wordpress.org/plugins/voxai-ai-audio-summary-for-posts/" target="_blank" rel="noopener noreferrer" className="vox-btn-primary" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }}>Install Free Plugin</a>
+              <button className="vox-btn-ghost" onClick={toggleAudio}>
+                {isPlaying ? "Pause Demo" : "Listen to Demo"}
+              </button>
             </div>
           </motion.div>
 
@@ -570,8 +646,8 @@ export default function PluginIndex() {
                   <AudioLines style={{ color: "#000", width: 24, height: 24 }} />
                 </div>
                 <div>
-                  <h3 className="vox-player__title">Listen instead of reading.</h3>
-                  <p className="vox-player__subtitle">Narrated by VoxAI • 2:45 min</p>
+                  <h3 className="vox-player__title">Article: How to Improve SEO in WordPress</h3>
+                  <p className="vox-player__subtitle">Audio generated automatically</p>
                 </div>
               </div>
 
@@ -584,8 +660,12 @@ export default function PluginIndex() {
                   <Shuffle className="vox-ctrl-icon" />
                   <div className="vox-player__center-controls">
                     <SkipBack className="vox-ctrl-icon vox-ctrl-icon--lg" />
-                    <button className="vox-play-btn">
-                      <Play style={{ fill: "currentColor", width: 24, height: 24, marginLeft: 3 }} />
+                    <button className="vox-play-btn" onClick={toggleAudio}>
+                      {isPlaying ? (
+                        <Pause style={{ fill: "currentColor", width: 24, height: 24, marginLeft: 0 }} />
+                      ) : (
+                        <Play style={{ fill: "currentColor", width: 24, height: 24, marginLeft: 3 }} />
+                      )}
                     </button>
                     <SkipForward className="vox-ctrl-icon vox-ctrl-icon--lg" />
                   </div>
@@ -601,6 +681,84 @@ export default function PluginIndex() {
         </div>
       </section>
 
+      {/* ── Comparison Section */}
+      <section className="vox-comparison" style={{ padding: "6rem 0", background: "linear-gradient(180deg, #0a0a0a 0%, #131313 100%)" }}>
+        <div className="vox-container">
+          <div className="vox-section-header" style={{ marginBottom: "4rem" }}>
+            <h2 className="vox-section-title" style={{ fontSize: "2.5rem" }}>Without VoxAI vs With VoxAI</h2>
+            <p className="vox-section-desc">What happens when visitors see a long article?</p>
+          </div>
+          <div className="vox-compare-layout" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "2rem", alignItems: "stretch" }}>
+            
+            <motion.div 
+              className="glass-surface" 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              style={{ padding: "3rem", borderRadius: "2rem", borderTop: "4px solid #ff6b6b", position: "relative", overflow: "hidden" }}
+            >
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "150px", background: "radial-gradient(circle at top, rgba(255, 107, 107, 0.1) 0%, transparent 70%)", pointerEvents: "none" }} />
+              
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "2.5rem" }}>
+                <div style={{ width: "64px", height: "64px", borderRadius: "16px", background: "rgba(255, 107, 107, 0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.5rem" }}>
+                  <X style={{ color: "#ff6b6b", width: 32, height: 32 }} />
+                </div>
+                <h3 style={{ fontSize: "1.5rem", color: "#fff", fontWeight: 700, margin: 0 }}>Relying only on text</h3>
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
+                  <X style={{ color: "#ff6b6b", width: 20, height: 20, flexShrink: 0, marginTop: "2px" }} />
+                  <p style={{ color: "#adaaaa", margin: 0, lineHeight: 1.5 }}>Visitors see an 8-minute read and leave immediately</p>
+                </div>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
+                  <X style={{ color: "#ff6b6b", width: 20, height: 20, flexShrink: 0, marginTop: "2px" }} />
+                  <p style={{ color: "#adaaaa", margin: 0, lineHeight: 1.5 }}>Mobile users struggle to scroll through long content</p>
+                </div>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
+                  <X style={{ color: "#ff6b6b", width: 20, height: 20, flexShrink: 0, marginTop: "2px" }} />
+                  <p style={{ color: "#adaaaa", margin: 0, lineHeight: 1.5 }}>You lose potential engagement and time on page drops</p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className="glass-surface" 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              style={{ padding: "3rem", borderRadius: "2rem", borderTop: "4px solid #ba9eff", position: "relative", overflow: "hidden" }}
+            >
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "150px", background: "radial-gradient(circle at top, rgba(186, 158, 255, 0.15) 0%, transparent 70%)", pointerEvents: "none" }} />
+              
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "2.5rem" }}>
+                <div style={{ width: "64px", height: "64px", borderRadius: "16px", background: "rgba(186, 158, 255, 0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.5rem" }}>
+                  <AudioLines style={{ color: "#ba9eff", width: 32, height: 32 }} />
+                </div>
+                <h3 style={{ fontSize: "1.5rem", color: "#fff", fontWeight: 700, margin: 0 }}>Offering an audio alternative</h3>
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
+                  <Check style={{ color: "#ba9eff", width: 20, height: 20, flexShrink: 0, marginTop: "2px" }} />
+                  <p style={{ color: "#fff", margin: 0, lineHeight: 1.5 }}>Visitors hit play and listen while doing something else</p>
+                </div>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
+                  <Check style={{ color: "#ba9eff", width: 20, height: 20, flexShrink: 0, marginTop: "2px" }} />
+                  <p style={{ color: "#fff", margin: 0, lineHeight: 1.5 }}>Perfect mobile experience without forcing them to scroll</p>
+                </div>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
+                  <Check style={{ color: "#ba9eff", width: 20, height: 20, flexShrink: 0, marginTop: "2px" }} />
+                  <p style={{ color: "#fff", margin: 0, lineHeight: 1.5 }}>Time on page increases, boosting your retention metrics</p>
+                </div>
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
       {/* ── Problem Section */}
       <ProblemSection />
 
@@ -608,8 +766,8 @@ export default function PluginIndex() {
       <section className="vox-features" id="features">
         <div className="vox-container">
           <div className="vox-section-header">
-            <h2 className="vox-section-title">Give every post a second format</h2>
-            <p className="vox-section-desc">VoxAI turns your content into audio automatically</p>
+            <h2 className="vox-section-title">Turn articles into content people consume differently</h2>
+            <p className="vox-section-desc">Give visitors another way to consume your content without changing your workflow.</p>
           </div>
 
           <div className="vox-bento">
@@ -688,9 +846,9 @@ export default function PluginIndex() {
       <section className="vox-shortcodes vox-section--dark" id="shortcodes">
         <div className="vox-container vox-shortcodes__grid">
           <div className="vox-shortcodes__text">
-            <h2 className="vox-shortcodes__title">A native WordPress experience.</h2>
+            <h2 className="vox-shortcodes__title">Built for WordPress, not bolted onto it.</h2>
             <p className="vox-shortcodes__desc">
-              VoxAI was built specifically for WordPress. There are no messy embeds to copy-paste, no external dashboards to log into, and no bloated scripts slowing down your site. It integrates seamlessly into your existing publishing workflow.
+              VoxAI feels like a native part of your workflow. Configure once and let every future article automatically become available in audio.
             </p>
             <div className="vox-checklist">
               {[
@@ -770,9 +928,9 @@ export default function PluginIndex() {
       {/* ── Final CTA */}
       <section style={{ padding: "6rem 0", textAlign: "center" }}>
         <div className="vox-container" style={{ maxWidth: "600px" }}>
-          <h2 className="vox-section-title" style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>Most people won’t read your content.</h2>
-          <p className="vox-section-desc" style={{ marginBottom: "2rem" }}>Give them a reason to listen</p>
-          <button className="vox-btn-primary" onClick={() => document.getElementById('pricing').scrollIntoView()}>Get Started Now</button>
+          <h2 className="vox-section-title" style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>Some people read. Others listen.</h2>
+          <p className="vox-section-desc" style={{ marginBottom: "2rem" }}>Give visitors a way to consume content on their terms.</p>
+          <a href="https://wordpress.org/plugins/voxai-ai-audio-summary-for-posts/" target="_blank" rel="noopener noreferrer" className="vox-btn-primary" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }}>Install VoxAI Free</a>
         </div>
       </section>
     </>
