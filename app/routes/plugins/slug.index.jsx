@@ -22,6 +22,7 @@ import {
   Clock,
   TrendingDown,
   BookOpen,
+  BarChart2,
 } from "lucide-react";
 
 // ─────────────────────────────────────────────
@@ -62,13 +63,17 @@ const features = [
     icon: <Sparkles className="vox-icon-secondary" />,
     colSpan: 1,
     rowSpan: 1,
-  },
+  },  
   {
-    title: "Setup in minutes",
-    description: "Configure your provider once and let VoxAI handle the rest automatically for every future post.",
-    icon: <CheckCircle2 className="vox-icon-secondary" />,
+    title: "Track audio performance post by post",    
+    icon: <BarChart2 className="vox-icon-primary" />,
     colSpan: 1,
     rowSpan: 1,
+    list: [
+      "Total plays per post",      
+      "Top-performing posts by audio engagement",
+      "Aggregate plays across all content",
+    ],    
   },
 ];
 
@@ -321,8 +326,66 @@ function ProblemSection() {
               Give readers another way to consume your content.
             </p>
           </motion.div>
-
         </div>
+
+        {/* Analytics Showcase */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+          gap: "2rem",
+          marginTop: "4rem",
+          position: "relative"
+        }}>
+          {/* Subtle glow behind the images */}
+          <div className="vox-glow vox-glow--bottom-left" style={{ opacity: 0.15, left: "20%", bottom: "-10%" }} />
+
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="glass-surface"
+            style={{ 
+              borderRadius: "24px", 
+              overflow: "hidden", 
+              padding: "1rem", 
+              boxShadow: "0 24px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05)",
+              display: "flex",
+              alignItems: "center"
+            }}
+          >
+            <img 
+              src="/assets/voxai/img/voxai-4.png" 
+              alt="VoxAI Analytics Highlights" 
+              style={{ width: "100%", height: "auto", display: "block", borderRadius: "12px" }} 
+              loading="lazy"
+            />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="glass-surface"
+            style={{ 
+              borderRadius: "24px", 
+              overflow: "hidden", 
+              padding: "1rem", 
+              boxShadow: "0 24px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05)",
+              display: "flex",
+              alignItems: "center"
+            }}
+          >
+            <img 
+              src="/assets/voxai/img/voxai-5.png" 
+              alt="VoxAI Detailed Statistics" 
+              style={{ width: "100%", height: "auto", display: "block", borderRadius: "12px" }} 
+              loading="lazy" 
+            />
+          </motion.div>
+        </div>
+
       </div>
     </section>
   );
@@ -339,16 +402,22 @@ function PricingSection() {
   const fallbackTiers = [
     { 
       label: "Free", sites: "1 site", popular: true, badge: "⭐ Start Here",
-      description: "Perfect for trying VoxAI and testing audio on your content.",
+      description: "Install from WordPress.org and start generating audio immediately. No credit card required.",
       monthly: "$0", annual: "$0", annualEquivalent: "$0", savings: "",
       cta: "Install Free",
       pricingId: "free",
       features: [
-        "1 website",
-        "Limited audio generations per month",
-        "Basic AI audio generation",
-        "Audio player included",
-        "WordPress integration",
+        "📊 Analytics dashboard included",
+        "Plays per post + unique listeners",
+        "Daily plays chart (Chart.js)",
+        "Top 5 posts by audio engagement",
+        "AI summary (OpenAI / Claude / Gemini)",
+        "Text-to-speech — 6 voices, MP3 local",
+        "Responsive audio player",
+        "Gutenberg & Classic Editor support",
+        "Cost estimator per post",
+        "Shortcodes [voxaiau_summary] [voxaiau_tts]",
+        "WP AI Client compatible (WP 7.0)",
         "Community support",
       ]
     },
@@ -359,11 +428,16 @@ function PricingSection() {
       cta: "Start with Creator",
       pricingId: "58285",
       features: [
-        "1 website",
-        "All Pro features",
-        "Audio player included",
-        "Manual & automatic generation",
-        "Full WordPress integration",
+        "Everything in Free, plus:",
+        "Auto-generate audio on publish",
+        "Bulk generator with cost estimate",
+        "Sticky player (fixed bottom bar)",
+        "Karaoke mode (paragraph sync)",
+        "Avg. listen time + completion rate",
+        "Seek count analytics",
+        "Custom prompt & audio intro template",
+        "AI Status column in post list",
+        "Priority support",
       ]
     },
     { 
@@ -552,6 +626,311 @@ function PricingSection() {
   );
 }
 
+
+// ─────────────────────────────────────────────
+// Plan Comparison — Free vs Pro
+// ─────────────────────────────────────────────
+const planCategories = [
+  {
+    name: "Analytics & Tracking",
+    accent: true,
+    rows: [
+      { label: "Analytics dashboard",            free: true,  pro: true,  freeNote: "included",       proNote: "included" },
+      { label: "Plays per post + unique listeners", free: true, pro: true },
+      { label: "Daily plays chart + top 5 posts", free: true, pro: true },
+      { label: "Avg. listen time",               free: false, pro: true,  proNote: "Pro only" },
+      { label: "Completion rate",                free: false, pro: true,  proNote: "Pro only" },
+      { label: "Seek count per session",         free: false, pro: true,  proNote: "Pro only" },
+    ],
+  },
+  {
+    name: "Audio & AI Generation",
+    rows: [
+      { label: "AI summary (OpenAI / Claude / Gemini)", free: true, pro: true },
+      { label: "Text-to-speech — 6 voices, MP3 local",  free: true, pro: true },
+      { label: "Cost estimator per post",         free: true, pro: true },
+      { label: "Custom audio intro template",     free: false, pro: true, proNote: "Pro only" },
+      { label: "Custom system prompt",            free: false, pro: true, proNote: "Pro only" },
+    ],
+  },
+  {
+    name: "Automation",
+    rows: [
+      { label: "Manual generation (editor metabox)", free: true, pro: true },
+      { label: "Auto-generate on publish / schedule", free: false, pro: true, proNote: "Pro only" },
+      { label: "Bulk generator with cost preview",    free: false, pro: true, proNote: "Pro only" },
+    ],
+  },
+  {
+    name: "Player & Frontend",
+    rows: [
+      { label: "Responsive audio player",         free: true, pro: true },
+      { label: "Shortcodes [summary] [tts]",      free: true, pro: true },
+      { label: "Sticky player (persistent bar)",  free: false, pro: true, proNote: "Pro only" },
+      { label: "Karaoke mode — paragraph sync",   free: false, pro: true, proNote: "Pro only" },
+    ],
+  },
+  {
+    name: "Admin & Workflow",
+    rows: [
+      { label: "Gutenberg & Classic Editor metabox", free: true, pro: true },
+      { label: "WP AI Client compatible (WP 7.0)",   free: true, pro: true },
+      { label: "AI Status column in post list",       free: false, pro: true, proNote: "Pro only" },
+      { label: "Real-time editor monitoring",         free: false, pro: true, proNote: "Pro only" },
+      { label: "Priority support + Freemius billing", free: false, pro: true, proNote: "Pro only" },
+    ],
+  },
+];
+
+function PlanCompare() {
+  const [activePlan, setActivePlan] = useState("free");
+
+  return (
+    <section id="compare" style={{ padding: "6rem 0", background: "linear-gradient(180deg, #0a0a0a 0%, #111 100%)" }}>
+      <div className="vox-container">
+
+        {/* Header */}
+        <div className="vox-section-header" style={{ marginBottom: "3rem" }}>
+          <h2 className="vox-section-title">Everything you get — free and paid.</h2>
+          <p className="vox-section-desc" style={{ maxWidth: "480px" }}>
+            The Free plan is a complete plugin, not a trial. Upgrade only when you need automation or advanced analytics.
+          </p>
+        </div>
+
+        {/* Plan toggle */}
+        <div style={{ display: "flex", justifyContent: "center", marginBottom: "3.5rem" }}>
+          <div style={{
+            display: "inline-flex",
+            background: "rgba(255,255,255,0.04)",
+            border: "1px solid rgba(255,255,255,0.08)",
+            borderRadius: "9999px",
+            padding: "4px",
+            gap: "2px",
+            position: "relative",
+          }}>
+            {["free", "pro"].map((plan) => (
+              <button
+                key={plan}
+                onClick={() => setActivePlan(plan)}
+                style={{
+                  padding: "0.55rem 2rem",
+                  borderRadius: "9999px",
+                  fontWeight: 600,
+                  fontSize: "0.9rem",
+                  transition: "all 0.25s",
+                  background: activePlan === plan
+                    ? plan === "free"
+                      ? "rgba(255,255,255,0.10)"
+                      : "linear-gradient(135deg, #ba9eff, #8455ef)"
+                    : "transparent",
+                  color: activePlan === plan ? "#fff" : "#adaaaa",
+                  boxShadow: activePlan === plan && plan === "pro" ? "0 4px 16px rgba(132,85,239,0.35)" : "none",
+                  border: "none",
+                  cursor: "pointer",
+                  letterSpacing: "0.03em",
+                }}
+              >
+                {plan === "free" ? "Free  $0" : "Pro  from $9.99/mo"}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Feature table */}
+        <div style={{ 
+          display: "grid", 
+          gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))", 
+          gap: "1.25rem", 
+          alignItems: "stretch",
+          maxWidth: "960px",
+          margin: "0 auto"
+        }}>
+          {planCategories.map((cat, idx) => (
+            <motion.div
+              key={cat.name}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.4 }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gridColumn: idx === planCategories.length - 1 ? "1 / -1" : undefined,
+                borderRadius: "1.25rem",
+                overflow: "hidden",
+                border: cat.accent
+                  ? "1px solid rgba(186,158,255,0.22)"
+                  : "1px solid rgba(255,255,255,0.06)",
+                background: cat.accent
+                  ? "rgba(186,158,255,0.03)"
+                  : "rgba(255,255,255,0.02)",
+              }}
+            >
+              {/* Category header */}
+              <div style={{
+                padding: "0.9rem 1.5rem",
+                borderBottom: cat.accent
+                  ? "1px solid rgba(186,158,255,0.12)"
+                  : "1px solid rgba(255,255,255,0.05)",
+                display: "flex",
+                alignItems: "center",
+                gap: "0.6rem",
+                background: cat.accent ? "rgba(186,158,255,0.05)" : "rgba(255,255,255,0.02)",
+              }}>
+                {cat.accent && (
+                  <span style={{
+                    display: "inline-block",
+                    width: "6px", height: "6px",
+                    borderRadius: "50%",
+                    background: "#ba9eff",
+                    boxShadow: "0 0 8px #ba9eff",
+                    flexShrink: 0,
+                  }} />
+                )}
+                <span style={{
+                  fontSize: "0.75rem",
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                  color: cat.accent ? "#ba9eff" : "#adaaaa",
+                }}>{cat.name}</span>
+              </div>
+
+              {/* Rows */}
+              {cat.rows.map((row, i) => {
+                const isAvailable = activePlan === "free" ? row.free : row.pro;
+                const note = activePlan === "free" ? row.freeNote : row.proNote;
+                const isProOnly = !row.free && row.pro;
+                const isHighlight = cat.accent && i === 0;
+
+                return (
+                  <motion.div
+                    key={row.label}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.2, delay: i * 0.03 }}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "0.85rem 1.5rem",
+                      borderBottom: i < cat.rows.length - 1 ? "1px solid rgba(255,255,255,0.04)" : "none",
+                      background: isHighlight ? "rgba(186,158,255,0.04)" : "transparent",
+                      transition: "background 0.2s",
+                    }}
+                  >
+                    {/* Label */}
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", flex: 1 }}>
+                      {isHighlight ? (
+                        <BarChart2 style={{ width: 15, height: 15, color: "#ba9eff", flexShrink: 0 }} />
+                      ) : (
+                        <div style={{ width: 15, height: 15, flexShrink: 0 }} />
+                      )}
+                      <span style={{
+                        fontSize: "0.9rem",
+                        color: isAvailable ? (isHighlight ? "#fff" : "#e0e0e0") : "#4a4a4a",
+                        fontWeight: isHighlight ? 700 : 400,
+                        transition: "color 0.25s",
+                      }}>
+                        {row.label}
+                      </span>
+                      {isHighlight && activePlan === "free" && (
+                        <span style={{
+                          fontSize: "0.65rem",
+                          fontWeight: 700,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.08em",
+                          color: "#0a0a0a",
+                          background: "#ba9eff",
+                          borderRadius: "9999px",
+                          padding: "2px 8px",
+                          marginLeft: "4px",
+                        }}>
+                          Free
+                        </span>
+                      )}
+                      {isProOnly && activePlan === "free" && (
+                        <span style={{
+                          fontSize: "0.65rem",
+                          fontWeight: 600,
+                          color: "#ba9eff",
+                          background: "rgba(186,158,255,0.1)",
+                          borderRadius: "9999px",
+                          padding: "2px 7px",
+                          marginLeft: "4px",
+                          border: "1px solid rgba(186,158,255,0.2)",
+                        }}>
+                          Pro
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Status indicator */}
+                    <div style={{ flexShrink: 0, marginLeft: "1rem" }}>
+                      {isAvailable ? (
+                        <div style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "0.35rem",
+                        }}>
+                          {note && activePlan === "free" && isHighlight && (
+                            <span style={{ fontSize: "0.75rem", color: "#ba9eff", fontStyle: "italic" }}>{note}</span>
+                          )}
+                          <div style={{
+                            width: 22, height: 22,
+                            borderRadius: "50%",
+                            background: isHighlight ? "#ba9eff" : "rgba(186,158,255,0.15)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}>
+                            <Check style={{ fill: "transparent", width: 12, height: 12, color: isHighlight ? "#000" : "#ba9eff" }} />
+                          </div>
+                        </div>
+                      ) : (
+                        <div style={{
+                          width: 22, height: 22,
+                          borderRadius: "50%",
+                          background: "rgba(255,255,255,0.04)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}>
+                          <X style={{ width: 11, height: 11, color: "#3a3a3a" }} />
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div style={{ marginTop: "3rem", display: "flex", justifyContent: "center", gap: "1rem", flexWrap: "wrap" }}>
+          <a
+            href="https://wordpress.org/plugins/voxai-ai-audio-summary-for-posts/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="vox-btn-primary"
+            style={{ display: "inline-flex", alignItems: "center", textDecoration: "none" }}
+          >
+            Install Free — No card needed
+          </a>
+          <button
+            className="vox-btn-ghost"
+            onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}
+          >
+            See Pro pricing ↓
+          </button>
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
 // ─────────────────────────────────────────────
 // Landing page — index da rota /plugins/:slug
 // ─────────────────────────────────────────────
@@ -568,8 +947,8 @@ export default function PluginIndex() {
                  (document.querySelector('.goog-te-combo') && document.querySelector('.goog-te-combo').value === 'pt');
     
     const audioSrc = isPt 
-      ? "/assets/img/audio/alloy_gpt-4o-mini-tts_1x_2026-05-18T22_17_30-607Z-pt-br.wav"
-      : "/assets/img/audio/alloy_gpt-4o-mini-tts_1x_2026-05-18T22_16_51-968Z.wav";
+      ? "/assets/voxai/audio/alloy_gpt-4o-mini-tts_1x_2026-05-18T22_17_30-607Z-pt-br.wav"
+      : "/assets/voxai/audio/alloy_gpt-4o-mini-tts_1x_2026-05-18T22_16_51-968Z.wav";
 
     if (!audioRef.current) {
       audioRef.current = new Audio(audioSrc);
@@ -681,84 +1060,6 @@ export default function PluginIndex() {
         </div>
       </section>
 
-      {/* ── Comparison Section */}
-      <section className="vox-comparison" style={{ padding: "6rem 0", background: "linear-gradient(180deg, #0a0a0a 0%, #131313 100%)" }}>
-        <div className="vox-container">
-          <div className="vox-section-header" style={{ marginBottom: "4rem" }}>
-            <h2 className="vox-section-title" style={{ fontSize: "2.5rem" }}>Without VoxAI vs With VoxAI</h2>
-            <p className="vox-section-desc">What happens when visitors see a long article?</p>
-          </div>
-          <div className="vox-compare-layout" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "2rem", alignItems: "stretch" }}>
-            
-            <motion.div 
-              className="glass-surface" 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              style={{ padding: "3rem", borderRadius: "2rem", borderTop: "4px solid #ff6b6b", position: "relative", overflow: "hidden" }}
-            >
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "150px", background: "radial-gradient(circle at top, rgba(255, 107, 107, 0.1) 0%, transparent 70%)", pointerEvents: "none" }} />
-              
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "2.5rem" }}>
-                <div style={{ width: "64px", height: "64px", borderRadius: "16px", background: "rgba(255, 107, 107, 0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.5rem" }}>
-                  <X style={{ color: "#ff6b6b", width: 32, height: 32 }} />
-                </div>
-                <h3 style={{ fontSize: "1.5rem", color: "#fff", fontWeight: 700, margin: 0 }}>Relying only on text</h3>
-              </div>
-
-              <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-                <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
-                  <X style={{ color: "#ff6b6b", width: 20, height: 20, flexShrink: 0, marginTop: "2px" }} />
-                  <p style={{ color: "#adaaaa", margin: 0, lineHeight: 1.5 }}>Visitors see an 8-minute read and leave immediately</p>
-                </div>
-                <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
-                  <X style={{ color: "#ff6b6b", width: 20, height: 20, flexShrink: 0, marginTop: "2px" }} />
-                  <p style={{ color: "#adaaaa", margin: 0, lineHeight: 1.5 }}>Mobile users struggle to scroll through long content</p>
-                </div>
-                <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
-                  <X style={{ color: "#ff6b6b", width: 20, height: 20, flexShrink: 0, marginTop: "2px" }} />
-                  <p style={{ color: "#adaaaa", margin: 0, lineHeight: 1.5 }}>You lose potential engagement and time on page drops</p>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div 
-              className="glass-surface" 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              style={{ padding: "3rem", borderRadius: "2rem", borderTop: "4px solid #ba9eff", position: "relative", overflow: "hidden" }}
-            >
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "150px", background: "radial-gradient(circle at top, rgba(186, 158, 255, 0.15) 0%, transparent 70%)", pointerEvents: "none" }} />
-              
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "2.5rem" }}>
-                <div style={{ width: "64px", height: "64px", borderRadius: "16px", background: "rgba(186, 158, 255, 0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.5rem" }}>
-                  <AudioLines style={{ color: "#ba9eff", width: 32, height: 32 }} />
-                </div>
-                <h3 style={{ fontSize: "1.5rem", color: "#fff", fontWeight: 700, margin: 0 }}>Offering an audio alternative</h3>
-              </div>
-
-              <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-                <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
-                  <Check style={{ color: "#ba9eff", width: 20, height: 20, flexShrink: 0, marginTop: "2px" }} />
-                  <p style={{ color: "#fff", margin: 0, lineHeight: 1.5 }}>Visitors hit play and listen while doing something else</p>
-                </div>
-                <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
-                  <Check style={{ color: "#ba9eff", width: 20, height: 20, flexShrink: 0, marginTop: "2px" }} />
-                  <p style={{ color: "#fff", margin: 0, lineHeight: 1.5 }}>Perfect mobile experience without forcing them to scroll</p>
-                </div>
-                <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
-                  <Check style={{ color: "#ba9eff", width: 20, height: 20, flexShrink: 0, marginTop: "2px" }} />
-                  <p style={{ color: "#fff", margin: 0, lineHeight: 1.5 }}>Time on page increases, boosting your retention metrics</p>
-                </div>
-              </div>
-            </motion.div>
-
-          </div>
-        </div>
-      </section>
-
       {/* ── Problem Section */}
       <ProblemSection />
 
@@ -814,33 +1115,126 @@ export default function PluginIndex() {
         </div>
       </section>
 
-      {/* ── How it Works */}
-      <section className="vox-how" id="how-it-works">
+      {/* ── Easy Setup Section */}
+      <section id="setup" style={{ padding: "6rem 0", background: "linear-gradient(180deg, #0a0a0a 0%, #131313 100%)" }}>
         <div className="vox-container">
-          <div className="vox-section-header">
-            <h2 className="vox-section-title">From text to audio in three simple steps.</h2>
-            <p className="vox-section-desc">Bring your content to life effortlessly.</p>
+          <div className="vox-section-header" style={{ marginBottom: "4rem" }}>
+            <h2 className="vox-section-title" style={{ fontSize: "2.5rem" }}>Configure once. Works on every post.</h2>
+            <p className="vox-section-desc" style={{ maxWidth: "440px" }}>Three tabs. A few dropdowns. That's all it takes to go from zero to automatic audio on every article you publish.</p>
           </div>
 
-          <div className="vox-steps">
-            {steps.map((step, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.2 }}
-                className="vox-step"
-              >
-                <div className="vox-step__number">{step.number}</div>
-                <h3 className="vox-step__title">{step.title}</h3>
-                <p className="vox-step__desc">{step.description}</p>
-              </motion.div>
-            ))}
-            <div className="vox-steps__line" />
+          <div style={{ display: "flex", flexDirection: "column", gap: "5rem" }}>
+
+            {/* Step 1 – General */}
+            <div className="vox-setup-row vox-setup-row--text-left">
+              <div>
+                <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: "48px", height: "48px", borderRadius: "50%", background: "rgba(186,158,255,0.15)", border: "1px solid rgba(186,158,255,0.3)", marginBottom: "1.5rem" }}>
+                  <span style={{ color: "#ba9eff", fontWeight: 700, fontSize: "1.1rem" }}>1</span>
+                </div>
+                <h3 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", lineHeight: "1.1em" }}>Connect your OpenAI key</h3>
+                <a
+                  href="https://platform.openai.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ display: "inline-block", fontSize: "0.85rem", color: "#ba9eff", opacity: 0.8, marginBottom: "1rem", textDecoration: "underline", textUnderlineOffset: "3px" }}
+                >
+                  platform.openai.com ↗
+                </a>
+                <p style={{ color: "#adaaaa", lineHeight: 1.7, marginBottom: "1.25rem" }}>
+                  Paste your OpenAI API key in the General tab. VoxAI uses it to generate both text summaries and audio — no middleman, no markup.
+                </p>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+                  {["Choose UI theme (light / dark / neutral)", "Set player position (before or after content)", "Enable on posts, pages or custom types"].map(item => (
+                    <li key={item} style={{ display: "flex", gap: "0.6rem", alignItems: "flex-start", color: "#adaaaa", fontSize: "0.95rem" }}>
+                      <Check style={{ width: 16, height: 16, color: "#ba9eff", flexShrink: 0, marginTop: "3px" }} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div style={{ borderRadius: "12px", overflow: "hidden", boxShadow: "0 0 0 1px rgba(255,255,255,0.06), 0 24px 48px rgba(0,0,0,0.5)" }}>
+                <img
+                  src="/assets/voxai/img/voxai-setup-general.webp"
+                  alt="VoxAI General Settings tab showing API key field, UI theme and post type configuration"
+                  width={1918}
+                  height={910}
+                  style={{ display: "block", width: "100%", height: "auto" }}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+
+            {/* Step 2 – Summary */}
+            <div className="vox-setup-row vox-setup-row--text-right">
+              <div style={{ borderRadius: "12px", overflow: "hidden", boxShadow: "0 0 0 1px rgba(255,255,255,0.06), 0 24px 48px rgba(0,0,0,0.5)" }}>
+                <img
+                  src="/assets/voxai/img/voxai-setup-summary.webp"
+                  alt="VoxAI Summary (Text) tab showing GPT-4o Mini model selection, summary length limit and format options"
+                  width={1917}
+                  height={913}
+                  style={{ display: "block", width: "100%", height: "auto" }}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div>
+                <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: "48px", height: "48px", borderRadius: "50%", background: "rgba(186,158,255,0.15)", border: "1px solid rgba(186,158,255,0.3)", marginBottom: "1.5rem" }}>
+                  <span style={{ color: "#ba9eff", fontWeight: 700, fontSize: "1.1rem" }}>2</span>
+                </div>
+                <h3 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "1rem" }}>Pick your AI model for summaries</h3>
+                <p style={{ color: "#adaaaa", lineHeight: 1.7, marginBottom: "1.25rem" }}>
+                  The Summary tab lets you choose the model that reads and condenses your articles. By default it uses <strong style={{ color: "#fff" }}>GPT-4o Mini</strong> — fast, accurate and among the most cost-effective options OpenAI offers.
+                </p>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+                  {["AI model: GPT-4o Mini (Fast & Cheap)", "Summary length: up to 350 characters", "Format: paragraph or bulleted list"].map(item => (
+                    <li key={item} style={{ display: "flex", gap: "0.6rem", alignItems: "flex-start", color: "#adaaaa", fontSize: "0.95rem" }}>
+                      <Check style={{ width: 16, height: 16, color: "#ba9eff", flexShrink: 0, marginTop: "3px", fill: "transparent" }} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Step 3 – Audio */}
+            <div className="vox-setup-row vox-setup-row--text-left">
+              <div>
+                <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: "48px", height: "48px", borderRadius: "50%", background: "rgba(186,158,255,0.15)", border: "1px solid rgba(186,158,255,0.3)", marginBottom: "1.5rem" }}>
+                  <span style={{ color: "#ba9eff", fontWeight: 700, fontSize: "1.1rem" }}>3</span>
+                </div>
+                <h3 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "1rem" }}>Set voice, model and permissions</h3>
+                <p style={{ color: "#adaaaa", lineHeight: 1.7, marginBottom: "1.25rem" }}>
+                  The Audio tab controls the text-to-speech output. Choose a voice, pick between standard and HD quality, and define which WordPress roles can generate or delete audio on posts.
+                </p>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+                  {["Voice: Alloy, Echo, Fable, Onyx, Nova, Shimmer", "Model: tts-1 ($0.015/1k) or tts-1-hd", "Permissions per role: Admin, Editor, Author, Contributor"].map(item => (
+                    <li key={item} style={{ display: "flex", gap: "0.6rem", alignItems: "flex-start", color: "#adaaaa", fontSize: "0.95rem" }}>
+                      <Check style={{ width: 16, height: 16, color: "#ba9eff", flexShrink: 0, marginTop: "3px", fill: "transparent" }} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div style={{ borderRadius: "12px", overflow: "hidden", boxShadow: "0 0 0 1px rgba(255,255,255,0.06), 0 24px 48px rgba(0,0,0,0.5)" }}>
+                <img
+                  src="/assets/voxai/img/voxai-setup-audio.webp"
+                  alt="VoxAI Audio (TTS) tab showing voice, model, intro elements and role-based permission controls"
+                  width={1917}
+                  height={911}
+                  style={{ display: "block", width: "100%", height: "auto" }}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
+
+      {/* ── Free vs Pro comparison */}
+      <PlanCompare />
 
       {/* ── Shortcodes */}
       <section className="vox-shortcodes vox-section--dark" id="shortcodes">

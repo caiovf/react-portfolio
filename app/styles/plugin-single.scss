@@ -793,6 +793,27 @@ $outline-10: rgba(255,255,255,0.10);
   }
 
   // ============================================================
+  // EASY SETUP — three-step section with static screenshots
+  // ============================================================
+  .vox-setup-row {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+
+    // Text left (1fr) + image right (2fr)
+    &--text-left  { grid-template-columns: 1fr 2fr; }
+    // Image left (2fr) + text right (1fr)
+    &--text-right { grid-template-columns: 2fr 1fr; }
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr !important;
+
+      // On mobile push the text block before the image regardless of visual order
+      &--text-right > *:last-child  { order: -1; }
+    }
+  }
+
+  // ============================================================
   // COMPARISON — py-24 px-8
   // ============================================================
   .vox-comparison { padding: 6rem 0; }
