@@ -329,62 +329,102 @@ function ProblemSection() {
         </div>
 
         {/* Analytics Showcase */}
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-          gap: "2rem",
-          marginTop: "4rem",
-          position: "relative"
-        }}>
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6 }}
+          style={{
+            marginTop: "6rem",
+            padding: "4rem 2rem",
+            background: "linear-gradient(180deg, rgba(186,158,255,0.03) 0%, rgba(0,0,0,0) 100%)",
+            borderRadius: "32px",
+            border: "1px solid rgba(186,158,255,0.08)",
+            position: "relative"
+          }}
+        >
           {/* Subtle glow behind the images */}
           <div className="vox-glow vox-glow--bottom-left" style={{ opacity: 0.15, left: "20%", bottom: "-10%" }} />
+          
+          <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
+            <div style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              background: "rgba(186, 158, 255, 0.1)",
+              border: "1px solid rgba(186, 158, 255, 0.2)",
+              padding: "0.4rem 1rem",
+              borderRadius: "9999px",
+              marginBottom: "1.5rem"
+            }}>
+              <BarChart2 style={{ width: 14, height: 14, color: "#ba9eff" }} />
+              <span style={{ fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.08em", color: "#ba9eff", textTransform: "uppercase" }}>
+                Built-in Analytics
+              </span>
+            </div>
+            
+            <h3 style={{ fontSize: "2.2rem", fontWeight: 700, color: "#fff", marginBottom: "1rem", lineHeight: 1.2 }}>
+              See what’s actually working
+            </h3>
+            <p style={{ color: "#adaaaa", fontSize: "1.1rem", maxWidth: "600px", margin: "0 auto", lineHeight: 1.6 }}>
+              Don't guess if visitors are listening. Track total plays, unique listeners, and monitor performance post by post right from your WordPress dashboard.
+            </p>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="glass-surface"
-            style={{ 
-              borderRadius: "24px", 
-              overflow: "hidden", 
-              padding: "1rem", 
-              boxShadow: "0 24px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05)",
-              display: "flex",
-              alignItems: "center"
-            }}
-          >
-            <img 
-              src="/assets/voxai/img/voxai-4.png" 
-              alt="VoxAI Analytics Highlights" 
-              style={{ width: "100%", height: "auto", display: "block", borderRadius: "12px" }} 
-              loading="lazy"
-            />
-          </motion.div>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gap: "2rem",
+          }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="glass-surface"
+              style={{ 
+                borderRadius: "24px", 
+                overflow: "hidden", 
+                padding: "1rem", 
+                boxShadow: "0 24px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05)",
+                display: "flex",
+                alignItems: "center",
+                background: "rgba(255,255,255,0.02)"
+              }}
+            >
+              <img 
+                src="/assets/voxai/img/voxai-4.png" 
+                alt="VoxAI Analytics Highlights" 
+                style={{ width: "100%", height: "auto", display: "block", borderRadius: "12px" }} 
+                loading="lazy"
+              />
+            </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="glass-surface"
-            style={{ 
-              borderRadius: "24px", 
-              overflow: "hidden", 
-              padding: "1rem", 
-              boxShadow: "0 24px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05)",
-              display: "flex",
-              alignItems: "center"
-            }}
-          >
-            <img 
-              src="/assets/voxai/img/voxai-5.png" 
-              alt="VoxAI Detailed Statistics" 
-              style={{ width: "100%", height: "auto", display: "block", borderRadius: "12px" }} 
-              loading="lazy" 
-            />
-          </motion.div>
-        </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="glass-surface"
+              style={{ 
+                borderRadius: "24px", 
+                overflow: "hidden", 
+                padding: "1rem", 
+                boxShadow: "0 24px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05)",
+                display: "flex",
+                alignItems: "center",
+                background: "rgba(255,255,255,0.02)"
+              }}
+            >
+              <img 
+                src="/assets/voxai/img/voxai-5.png" 
+                alt="VoxAI Detailed Statistics" 
+                style={{ width: "100%", height: "auto", display: "block", borderRadius: "12px" }} 
+                loading="lazy" 
+              />
+            </motion.div>
+          </div>
+        </motion.div>
 
       </div>
     </section>
@@ -1234,7 +1274,9 @@ export default function PluginIndex() {
       </section>
 
       {/* ── Free vs Pro comparison */}
-      <PlanCompare />
+      <div className="vox-compare-table-wrapper">
+        <PlanCompare />
+      </div>
 
       {/* ── Shortcodes */}
       <section className="vox-shortcodes vox-section--dark" id="shortcodes">

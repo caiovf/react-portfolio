@@ -194,6 +194,7 @@ $outline-10: rgba(255,255,255,0.10);
   .vox-section-header {
     text-align: center;
     margin-bottom: 4rem;
+    @media (max-width: 768px) { margin-bottom: 2.5rem; }
   }
   .vox-section-title {
     // text-4xl font-headline font-bold mb-4
@@ -201,6 +202,7 @@ $outline-10: rgba(255,255,255,0.10);
     font-family: 'Manrope', sans-serif;
     font-weight: 700;
     margin-bottom: 1rem;
+    @media (max-width: 768px) { font-size: 1.8rem; }
   }
   .vox-section-desc {
     color: $muted;
@@ -218,6 +220,10 @@ $outline-10: rgba(255,255,255,0.10);
     padding-left: 2rem;
     padding-right: 2rem;
 
+    @media (max-width: 768px) {
+      padding: 3rem 1rem 4rem;
+    }
+
     &__grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -227,6 +233,9 @@ $outline-10: rgba(255,255,255,0.10);
       @media (max-width: 1024px) {
         grid-template-columns: 1fr;
         gap: 3rem;
+      }
+      @media (max-width: 768px) {
+        gap: 2.5rem;
       }
     }
 
@@ -262,6 +271,7 @@ $outline-10: rgba(255,255,255,0.10);
       margin-bottom: 1.5rem;
 
       @media (min-width: 1024px) { font-size: 4.5rem; }
+      @media (max-width: 768px) { font-size: 2.25rem; margin-bottom: 1rem; }
     }
 
     // p — text-xl text-[#adaaaa] leading-relaxed mb-10 max-w-xl
@@ -271,6 +281,8 @@ $outline-10: rgba(255,255,255,0.10);
       line-height: 1.75;
       margin-bottom: 2.5rem;
       max-width: 36rem;
+
+      @media (max-width: 768px) { font-size: 1.1rem; margin-bottom: 1.5rem; }
     }
 
     // Actions
@@ -1390,5 +1402,56 @@ $outline-10: rgba(255,255,255,0.10);
   .vox-footer__author {
     color: #fff;
     font-weight: 600;
+  }
+
+  // ============================================================
+  // SPECIFIC MOBILE UX FIXES
+  // ============================================================
+  .vox-setup-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+
+    @media (max-width: 1024px) {
+      gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+
+      // On mobile, always put the text above the image.
+      // If the row was meant to have image first on desktop, 
+      // we need to override the order.
+      &--text-right {
+        & > div:first-child { order: 2; }
+        & > div:last-child { order: 1; }
+      }
+    }
+  }
+
+  .vox-compare-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 1rem;
+    
+    // Custom scrollbar for webkit
+    &::-webkit-scrollbar {
+      height: 6px;
+    }
+    &::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.05);
+      border-radius: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+    }
+
+    .vox-compare-grid {
+      min-width: 640px; // ensure it doesn't shrink infinitely on mobile
+    }
   }
 }
