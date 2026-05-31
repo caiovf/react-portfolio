@@ -67,7 +67,7 @@ const features = [
   {
     title: "Track audio performance post by post",    
     icon: <BarChart2 className="vox-icon-primary" />,
-    colSpan: 1,
+    colSpan: 2,
     rowSpan: 1,
     list: [
       "Total plays per post",      
@@ -155,16 +155,16 @@ function ValueSection() {
         <div className="vox-value-grid">
           
           <div className="vox-value-sticky">
-            <h2 className="vox-section-title" style={{ textAlign: "left", fontSize: "2.5rem", marginBottom: "1.5rem", maxWidth: "410px" }}>
+            <h2 className="vox-value-sticky__title">
               Why publishers and content sites use VoxAI
             </h2>
-            <p className="vox-section-desc" style={{ textAlign: "left", fontSize: "1.1rem", maxWidth: "400px", margin: "0" }}>
+            <p className="vox-value-sticky__desc">
               You’re not paying for audio.<br/><br/>
               You’re paying for better content performance.
             </p>
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>
+          <div className="vox-value-list">
             {valuePoints.map((point, idx) => (
               <motion.div 
                 key={idx}
@@ -172,17 +172,16 @@ function ValueSection() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ delay: 0.1 }}
-                className="glass-surface"
-                style={{ padding: "3rem", borderRadius: "1.5rem", borderLeft: "4px solid #ba9eff" }}
+                className="glass-surface vox-value-card"
               >
-                <h3 style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: "1rem", color: "#fff" }}>
+                <h3 className="vox-value-card__title">
                   {point.title}
                 </h3>
-                <p style={{ color: "#adaaaa", lineHeight: 1.6, fontSize: "1.1rem", marginBottom: point.footer ? "1.5rem" : "0" }}>
+                <p className="vox-value-card__desc" style={{ marginBottom: point.footer ? "1.5rem" : "0" }}>
                   {point.desc}
                 </p>
                 {point.footer && (
-                  <p style={{ color: "#ba9eff", fontSize: "1rem", fontWeight: 600 }}>
+                  <p className="vox-value-card__footer">
                     {point.footer}
                   </p>
                 )}
@@ -193,11 +192,11 @@ function ValueSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              style={{ marginTop: "2rem", padding: "2rem", background: "rgba(186, 158, 255, 0.05)", borderRadius: "1rem", textAlign: "center" }}
+              className="vox-value-highlight"
             >
-              <p style={{ color: "#fff", fontSize: "1.2rem", lineHeight: 1.6, fontWeight: 500 }}>
+              <p>
                 If VoxAI helps retain even a small percentage of visitors who would otherwise leave, it already pays for itself. <br/>
-                <span style={{ color: "#ba9eff" }}>And it keeps doing that every time you publish.</span>
+                <span>And it keeps doing that every time you publish.</span>
               </p>
             </motion.div>
           </div>
@@ -210,28 +209,28 @@ function ValueSection() {
 
 function SocialProof() {
   return (
-    <section className="vox-comparison" style={{ padding: "6rem 0" }}>
+    <section className="vox-social-proof">
       <div className="vox-container">
         <div className="vox-section-header">
           <h2 className="vox-section-title">Early users testing VoxAI</h2>
           <p className="vox-section-desc">Real sites using audio to improve engagement.</p>
         </div>
         <div className="vox-compare-layout">
-          <div className="vox-compare-section vox-compare-section--pro" style={{ padding: "2rem" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "1rem", borderBottom: "1px solid rgba(255,255,255,0.1)", paddingBottom: "1rem" }}>
-              <span style={{ color: "#ba9eff", fontWeight: 600 }}>SEO Blog</span>
-              <span style={{ color: "#adaaaa", fontSize: "0.9rem" }}>~15k monthly visitors</span>
+          <div className="vox-compare-section vox-compare-section--pro vox-social-card">
+            <div className="vox-social-card__header">
+              <span className="vox-social-card__name">SEO Blog</span>
+              <span className="vox-social-card__stats">~15k monthly visitors</span>
             </div>
-            <p style={{ color: "#fff", lineHeight: 1.6 }}>
+            <p className="vox-social-card__text">
               Reason for using VoxAI: "Testing if audio versions reduce bounce rate on 2,000+ word guides."
             </p>
           </div>
-          <div className="vox-compare-section vox-compare-section--pro" style={{ padding: "2rem" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "1rem", borderBottom: "1px solid rgba(255,255,255,0.1)", paddingBottom: "1rem" }}>
-              <span style={{ color: "#ba9eff", fontWeight: 600 }}>Niche News Portal</span>
-              <span style={{ color: "#adaaaa", fontSize: "0.9rem" }}>~40k monthly visitors</span>
+          <div className="vox-compare-section vox-compare-section--pro vox-social-card">
+            <div className="vox-social-card__header">
+              <span className="vox-social-card__name">Niche News Portal</span>
+              <span className="vox-social-card__stats">~40k monthly visitors</span>
             </div>
-            <p style={{ color: "#fff", lineHeight: 1.6 }}>
+            <p className="vox-social-card__text">
               Reason for using VoxAI: "Giving mobile users a way to listen to daily updates while commuting."
             </p>
           </div>
@@ -243,13 +242,13 @@ function SocialProof() {
 
 function ProblemSection() {
   return (
-    <section className="vox-problem" style={{ padding: "6rem 0", background: "#131313", position: "relative", overflow: "hidden" }}>
+    <section className="vox-problem vox-section-pad" style={{ background: "#131313", position: "relative", overflow: "hidden" }}>
       {/* Decorative background elements */}
       <div className="vox-glow vox-glow--top-left" style={{ opacity: 0.3 }} />
       
       <div className="vox-container">
-        <div className="vox-section-header" style={{ marginBottom: "4rem" }}>
-          <h2 className="vox-section-title" style={{ fontSize: "2.5rem", maxWidth: "800px", margin: "0 auto 1.5rem" }}>
+        <div className="vox-section-header">
+          <h2 className="vox-section-title" style={{ maxWidth: "800px", margin: "0 auto 1.5rem" }}>
             You worked hard for the click. Don't lose visitors after it.
           </h2>
           <p className="vox-section-desc" style={{ maxWidth: "800px", margin: "0 auto" }}>
@@ -259,8 +258,8 @@ function ProblemSection() {
 
         <div className="vox-problem__grid" style={{ 
           display: "grid", 
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", 
-          gap: "2rem",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))", 
+          gap: "1.5rem",
           marginBottom: "3rem"
         }}>
           
@@ -270,17 +269,12 @@ function ProblemSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0 }}
-            style={{ padding: "2.5rem 2rem", textAlign: "left", borderRadius: "24px" }}
           >
-            <div style={{ 
-              width: "48px", height: "48px", borderRadius: "12px", 
-              background: "rgba(186, 158, 255, 0.1)", display: "flex", 
-              alignItems: "center", justifyContent: "center", marginBottom: "1.5rem" 
-            }}>
-              <Clock style={{ color: "#ba9eff", width: 24, height: 24 }} />
+            <div className="vox-problem-card__icon vox-problem-card__icon--purple">
+              <Clock className="vox-problem-card__icon-svg" />
             </div>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 700, marginBottom: "1rem", color: "#fff" }}>Visitors skim</h3>
-            <p style={{ color: "#adaaaa", lineHeight: 1.6 }}>
+            <h3 className="vox-problem-card__title">Visitors skim</h3>
+            <p className="vox-problem-card__desc">
               Most users scan content instead of reading every paragraph.
             </p>
           </motion.div>
@@ -291,17 +285,12 @@ function ProblemSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            style={{ padding: "2.5rem 2rem", textAlign: "left", borderRadius: "24px" }}
           >
-            <div style={{ 
-              width: "48px", height: "48px", borderRadius: "12px", 
-              background: "rgba(255, 107, 107, 0.1)", display: "flex", 
-              alignItems: "center", justifyContent: "center", marginBottom: "1.5rem" 
-            }}>
-              <TrendingDown style={{ color: "#ff6b6b", width: 24, height: 24 }} />
+            <div className="vox-problem-card__icon vox-problem-card__icon--red">
+              <TrendingDown className="vox-problem-card__icon-svg" />
             </div>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 700, marginBottom: "1rem", color: "#fff" }}>Engagement drops</h3>
-            <p style={{ color: "#adaaaa", lineHeight: 1.6 }}>
+            <h3 className="vox-problem-card__title">Engagement drops</h3>
+            <p className="vox-problem-card__desc">
               Long content often loses attention before reaching the end.
             </p>
           </motion.div>
@@ -312,17 +301,12 @@ function ProblemSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            style={{ padding: "2.5rem 2rem", textAlign: "left", borderRadius: "24px" }}
           >
-            <div style={{ 
-              width: "48px", height: "48px", borderRadius: "12px", 
-              background: "rgba(105, 156, 255, 0.1)", display: "flex", 
-              alignItems: "center", justifyContent: "center", marginBottom: "1.5rem" 
-            }}>
-              <AudioLines style={{ color: "#699cff", width: 24, height: 24 }} />
+            <div className="vox-problem-card__icon vox-problem-card__icon--blue">
+              <AudioLines className="vox-problem-card__icon-svg" />
             </div>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 700, marginBottom: "1rem", color: "#fff" }}>Audio changes consumption</h3>
-            <p style={{ color: "#adaaaa", lineHeight: 1.6 }}>
+            <h3 className="vox-problem-card__title">Audio changes consumption</h3>
+            <p className="vox-problem-card__desc">
               Give readers another way to consume your content.
             </p>
           </motion.div>
@@ -334,48 +318,24 @@ function ProblemSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6 }}
-          style={{
-            marginTop: "6rem",
-            padding: "4rem 2rem",
-            background: "linear-gradient(180deg, rgba(186,158,255,0.03) 0%, rgba(0,0,0,0) 100%)",
-            borderRadius: "32px",
-            border: "1px solid rgba(186,158,255,0.08)",
-            position: "relative"
-          }}
+          className="vox-analytics-showcase"
         >
           {/* Subtle glow behind the images */}
           <div className="vox-glow vox-glow--bottom-left" style={{ opacity: 0.15, left: "20%", bottom: "-10%" }} />
-          
-          <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
-            <div style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              background: "rgba(186, 158, 255, 0.1)",
-              border: "1px solid rgba(186, 158, 255, 0.2)",
-              padding: "0.4rem 1rem",
-              borderRadius: "9999px",
-              marginBottom: "1.5rem"
-            }}>
+
+          <div className="vox-analytics-header">
+            <div className="vox-analytics-pill">
               <BarChart2 style={{ width: 14, height: 14, color: "#ba9eff" }} />
-              <span style={{ fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.08em", color: "#ba9eff", textTransform: "uppercase" }}>
-                Built-in Analytics
-              </span>
+              <span className="vox-analytics-pill__text">Built-in Analytics</span>
             </div>
             
-            <h3 style={{ fontSize: "2.2rem", fontWeight: 700, color: "#fff", marginBottom: "1rem", lineHeight: 1.2 }}>
-              See what’s actually working
-            </h3>
-            <p style={{ color: "#adaaaa", fontSize: "1.1rem", maxWidth: "600px", margin: "0 auto", lineHeight: 1.6 }}>
+            <h3 className="vox-analytics-title">See what's actually working</h3>
+            <p className="vox-analytics-desc">
               Don't guess if visitors are listening. Track total plays, unique listeners, and monitor performance post by post right from your WordPress dashboard.
             </p>
           </div>
 
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-            gap: "2rem",
-          }}>
+          <div className="vox-analytics-images">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -553,7 +513,7 @@ function PricingSection() {
         </div>
 
         {/* Toggle */}
-        <div className="vox-billing-toggle" style={{ marginBottom: "1rem" }}>
+        <div className="vox-billing-toggle">
           <button
             className={`vox-billing-toggle__btn${billing === "free" ? " vox-billing-toggle__btn--active" : ""}`}
             onClick={() => setBilling("free")}
@@ -570,16 +530,16 @@ function PricingSection() {
             className={`vox-billing-toggle__btn${billing === "annual" ? " vox-billing-toggle__btn--active" : ""}`}
             onClick={() => setBilling("annual")}
           >
-            Annual <span style={{ fontSize: "0.75rem", background: "rgba(186, 158, 255, 0.2)", padding: "2px 6px", borderRadius: "4px", marginLeft: "6px", color: "#ba9eff" }}>Best Value</span>
+            Annual <span className="vox-billing-toggle__tag">Best Value</span>
           </button>
         </div>
 
-        <p style={{ textAlign: "center", color: "#fff", marginBottom: "3rem", fontSize: "1.1rem", fontWeight: 500 }}>
+        <p className="vox-pricing__subtitle">
           Start free, validate engagement, upgrade when your audience grows.
         </p>
 
         {/* Cards grid */}
-        <div className="vox-tier-grid" style={billing === "free" ? { display: "flex", justifyContent: "center" } : {}}>
+        <div className={`vox-tier-grid${billing === "free" ? " vox-tier-grid--centered" : ""}`}>
           {activeTiers.filter(tier => {
             if (billing === "free") return tier.pricingId === "free";
             return tier.pricingId !== "free" && (billing === "monthly" ? tier.monthly !== null : true);
@@ -597,17 +557,17 @@ function PricingSection() {
               )}
 
               {/* Header */}
-              <div className="vox-tier-card__header" style={{ marginBottom: "1.5rem" }}>
+              <div className="vox-tier-card__header">
                 <h3 className="vox-tier-card__title">{tier.label}</h3>
-                <p className="vox-tier-card__sites" style={{ marginBottom: "0.5rem" }}>License for {tier.sites}</p>
+                <p className="vox-tier-card__sites">License for {tier.sites}</p>
                 {tier.description && (
-                  <p className="vox-tier-card__desc" style={{ color: "#adaaaa", fontSize: "0.9rem", lineHeight: 1.4 }}>{tier.description}</p>
+                  <p className="vox-tier-card__desc">{tier.description}</p>
                 )}
               </div>
 
               {/* Price */}
-              <div className="vox-tier-card__price-wrap" style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 0, marginBottom: "1.5rem" }}>
-                <div style={{ display: "flex", alignItems: "baseline", gap: "4px" }}>
+              <div className="vox-tier-card__price-wrap">
+                <div className="vox-tier-card__price-row">
                   <motion.span
                     key={billing + tier.label}
                     className="vox-tier-card__price"
@@ -625,12 +585,12 @@ function PricingSection() {
                 </div>
                 
                 {billing === "annual" && tier.annualEquivalent && tier.annualEquivalent !== "$0" && (
-                  <div style={{ fontSize: "0.75rem", color: "#adaaaa" }}>
-                    ≈ {tier.annualEquivalent}/mo <span style={{ color: "#ba9eff", fontWeight: "600", marginLeft: "4px" }}>{tier.savings}</span>
+                  <div className="vox-tier-card__savings">
+                    ≈ {tier.annualEquivalent}/mo <span className="vox-tier-card__savings-highlight">{tier.savings}</span>
                   </div>
                 )}
                 {billing === "monthly" && tier.pricingId !== "free" && (
-                  <div style={{ fontSize: "0.75rem", color: "#8a8a8a", fontStyle: "italic" }}>
+                  <div className="vox-tier-card__higher-cost">
                     Higher cost over time
                   </div>
                 )}
@@ -652,8 +612,8 @@ function PricingSection() {
               <ul className="vox-tier-card__features">
                 {tier.features.map((f, i) => (
                   <li key={f}>
-                    <Check style={{ width: 15, height: 15, color: i === 0 ? "#fff" : "#ba9eff", flexShrink: 0 }} />
-                    <span style={i === 0 ? { fontWeight: 700, color: "#fff" } : {}}>{f}</span>
+                    <Check />
+                    <span>{f}</span>
                   </li>
                 ))}
               </ul>
@@ -726,7 +686,7 @@ function PlanCompare() {
   const [activePlan, setActivePlan] = useState("free");
 
   return (
-    <section id="compare" style={{ padding: "6rem 0", background: "linear-gradient(180deg, #0a0a0a 0%, #111 100%)" }}>
+    <section id="compare" className="vox-compare-section-wrap">
       <div className="vox-container">
 
         {/* Header */}
@@ -738,37 +698,13 @@ function PlanCompare() {
         </div>
 
         {/* Plan toggle */}
-        <div style={{ display: "flex", justifyContent: "center", marginBottom: "3.5rem" }}>
-          <div style={{
-            display: "inline-flex",
-            background: "rgba(255,255,255,0.04)",
-            border: "1px solid rgba(255,255,255,0.08)",
-            borderRadius: "9999px",
-            padding: "4px",
-            gap: "2px",
-            position: "relative",
-          }}>
+        <div className="vox-compare-toggle-wrap">
+          <div className="vox-compare-toggle">
             {["free", "pro"].map((plan) => (
               <button
                 key={plan}
                 onClick={() => setActivePlan(plan)}
-                style={{
-                  padding: "0.55rem 2rem",
-                  borderRadius: "9999px",
-                  fontWeight: 600,
-                  fontSize: "0.9rem",
-                  transition: "all 0.25s",
-                  background: activePlan === plan
-                    ? plan === "free"
-                      ? "rgba(255,255,255,0.10)"
-                      : "linear-gradient(135deg, #ba9eff, #8455ef)"
-                    : "transparent",
-                  color: activePlan === plan ? "#fff" : "#adaaaa",
-                  boxShadow: activePlan === plan && plan === "pro" ? "0 4px 16px rgba(132,85,239,0.35)" : "none",
-                  border: "none",
-                  cursor: "pointer",
-                  letterSpacing: "0.03em",
-                }}
+                className={`vox-compare-toggle__btn${activePlan === plan ? ` vox-compare-toggle__btn--active vox-compare-toggle__btn--${plan}` : ""}`}
               >
                 {plan === "free" ? "Free  $0" : "Pro  from $9.99/mo"}
               </button>
@@ -776,64 +712,25 @@ function PlanCompare() {
           </div>
         </div>
 
-        {/* Feature table */}
-        <div style={{ 
-          display: "grid", 
-          gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))", 
-          gap: "1.25rem", 
-          alignItems: "stretch",
-          maxWidth: "960px",
-          margin: "0 auto"
-        }}>
+        {/* Feature table — stack on mobile, grid on desktop */}
+        <div className="vox-compare-grid">
           {planCategories.map((cat, idx) => (
             <motion.div
               key={cat.name}
+              className={[
+                "vox-compare-cat",
+                cat.accent && "vox-compare-cat--accent",
+                idx === planCategories.length - 1 && "vox-compare-cat--full",
+              ].filter(Boolean).join(" ")}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.4 }}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gridColumn: idx === planCategories.length - 1 ? "1 / -1" : undefined,
-                borderRadius: "1.25rem",
-                overflow: "hidden",
-                border: cat.accent
-                  ? "1px solid rgba(186,158,255,0.22)"
-                  : "1px solid rgba(255,255,255,0.06)",
-                background: cat.accent
-                  ? "rgba(186,158,255,0.03)"
-                  : "rgba(255,255,255,0.02)",
-              }}
             >
               {/* Category header */}
-              <div style={{
-                padding: "0.9rem 1.5rem",
-                borderBottom: cat.accent
-                  ? "1px solid rgba(186,158,255,0.12)"
-                  : "1px solid rgba(255,255,255,0.05)",
-                display: "flex",
-                alignItems: "center",
-                gap: "0.6rem",
-                background: cat.accent ? "rgba(186,158,255,0.05)" : "rgba(255,255,255,0.02)",
-              }}>
-                {cat.accent && (
-                  <span style={{
-                    display: "inline-block",
-                    width: "6px", height: "6px",
-                    borderRadius: "50%",
-                    background: "#ba9eff",
-                    boxShadow: "0 0 8px #ba9eff",
-                    flexShrink: 0,
-                  }} />
-                )}
-                <span style={{
-                  fontSize: "0.75rem",
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                  color: cat.accent ? "#ba9eff" : "#adaaaa",
-                }}>{cat.name}</span>
+              <div className="vox-compare-cat__header">
+                {cat.accent && <span className="vox-compare-cat__dot" />}
+                <span className="vox-compare-cat__name">{cat.name}</span>
               </div>
 
               {/* Rows */}
@@ -846,96 +743,49 @@ function PlanCompare() {
                 return (
                   <motion.div
                     key={row.label}
+                    className={[
+                      "vox-compare-row",
+                      isHighlight && "vox-compare-row--highlight",
+                      i < cat.rows.length - 1 && "vox-compare-row--border",
+                    ].filter(Boolean).join(" ")}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.2, delay: i * 0.03 }}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      padding: "0.85rem 1.5rem",
-                      borderBottom: i < cat.rows.length - 1 ? "1px solid rgba(255,255,255,0.04)" : "none",
-                      background: isHighlight ? "rgba(186,158,255,0.04)" : "transparent",
-                      transition: "background 0.2s",
-                    }}
                   >
                     {/* Label */}
-                    <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", flex: 1 }}>
-                      {isHighlight ? (
-                        <BarChart2 style={{ width: 15, height: 15, color: "#ba9eff", flexShrink: 0 }} />
-                      ) : (
-                        <div style={{ width: 15, height: 15, flexShrink: 0 }} />
-                      )}
-                      <span style={{
-                        fontSize: "0.9rem",
-                        color: isAvailable ? (isHighlight ? "#fff" : "#e0e0e0") : "#4a4a4a",
-                        fontWeight: isHighlight ? 700 : 400,
-                        transition: "color 0.25s",
-                      }}>
+                    <div className="vox-compare-row__label">
+                      {isHighlight
+                        ? <BarChart2 className="vox-compare-row__icon" />
+                        : <div className="vox-compare-row__icon-spacer" />
+                      }
+                      <span className={[
+                        "vox-compare-row__text",
+                        !isAvailable && "vox-compare-row__text--off",
+                        isHighlight && "vox-compare-row__text--highlight",
+                      ].filter(Boolean).join(" ")}>
                         {row.label}
                       </span>
                       {isHighlight && activePlan === "free" && (
-                        <span style={{
-                          fontSize: "0.65rem",
-                          fontWeight: 700,
-                          textTransform: "uppercase",
-                          letterSpacing: "0.08em",
-                          color: "#0a0a0a",
-                          background: "#ba9eff",
-                          borderRadius: "9999px",
-                          padding: "2px 8px",
-                          marginLeft: "4px",
-                        }}>
-                          Free
-                        </span>
+                        <span className="vox-compare-badge vox-compare-badge--free">Free</span>
                       )}
                       {isProOnly && activePlan === "free" && (
-                        <span style={{
-                          fontSize: "0.65rem",
-                          fontWeight: 600,
-                          color: "#ba9eff",
-                          background: "rgba(186,158,255,0.1)",
-                          borderRadius: "9999px",
-                          padding: "2px 7px",
-                          marginLeft: "4px",
-                          border: "1px solid rgba(186,158,255,0.2)",
-                        }}>
-                          Pro
-                        </span>
+                        <span className="vox-compare-badge vox-compare-badge--pro">Pro</span>
                       )}
                     </div>
 
                     {/* Status indicator */}
-                    <div style={{ flexShrink: 0, marginLeft: "1rem" }}>
+                    <div className="vox-compare-row__status">
                       {isAvailable ? (
-                        <div style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "0.35rem",
-                        }}>
+                        <div className="vox-compare-check-wrap">
                           {note && activePlan === "free" && isHighlight && (
-                            <span style={{ fontSize: "0.75rem", color: "#ba9eff", fontStyle: "italic" }}>{note}</span>
+                            <span className="vox-compare-note">{note}</span>
                           )}
-                          <div style={{
-                            width: 22, height: 22,
-                            borderRadius: "50%",
-                            background: isHighlight ? "#ba9eff" : "rgba(186,158,255,0.15)",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                          }}>
-                            <Check style={{ fill: "transparent", width: 12, height: 12, color: isHighlight ? "#000" : "#ba9eff" }} />
+                          <div className={`vox-compare-check${isHighlight ? " vox-compare-check--accent" : ""}`}>
+                            <Check style={{ width: 12, height: 12, color: isHighlight ? "#000" : "#ba9eff" }} />
                           </div>
                         </div>
                       ) : (
-                        <div style={{
-                          width: 22, height: 22,
-                          borderRadius: "50%",
-                          background: "rgba(255,255,255,0.04)",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}>
+                        <div className="vox-compare-x">
                           <X style={{ width: 11, height: 11, color: "#3a3a3a" }} />
                         </div>
                       )}
@@ -948,7 +798,7 @@ function PlanCompare() {
         </div>
 
         {/* Bottom CTA */}
-        <div style={{ marginTop: "3rem", display: "flex", justifyContent: "center", gap: "1rem", flexWrap: "wrap" }}>
+        <div className="vox-compare-cta">
           <a
             href="https://wordpress.org/plugins/voxai-ai-audio-summary-for-posts/"
             target="_blank"
@@ -1031,11 +881,11 @@ export default function PluginIndex() {
             <div className="vox-hero__badge">
               <span className="vox-pulse-dot" />
               <span className="vox-hero__badge-text">
-                No usage fees — you pay OpenAI directly
+                No usage fees — Pay OpenAI directly
               </span>
             </div>
 
-            <h1 className="vox-hero__title" style={{ fontSize: "3rem", lineHeight: 1.1 }}>
+            <h1 className="vox-hero__title">
               Turn any WordPress post into audio automatically
             </h1>
 
@@ -1052,10 +902,10 @@ export default function PluginIndex() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 2 }}
+            initial={{ opacity: 0, scale: 0.92 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 0.8 }}
             className="vox-hero__right"
           >
             {/* Player Mockup */}
@@ -1156,49 +1006,49 @@ export default function PluginIndex() {
       </section>
 
       {/* ── Easy Setup Section */}
-      <section id="setup" style={{ padding: "6rem 0", background: "linear-gradient(180deg, #0a0a0a 0%, #131313 100%)" }}>
+      <section id="setup" className="vox-setup-section">
         <div className="vox-container">
-          <div className="vox-section-header" style={{ marginBottom: "4rem" }}>
-            <h2 className="vox-section-title" style={{ fontSize: "2.5rem" }}>Configure once. Works on every post.</h2>
+          <div className="vox-section-header">
+            <h2 className="vox-section-title">Configure once. Works on every post.</h2>
             <p className="vox-section-desc" style={{ maxWidth: "440px" }}>Three tabs. A few dropdowns. That's all it takes to go from zero to automatic audio on every article you publish.</p>
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "5rem" }}>
+          <div className="vox-setup-steps">
 
             {/* Step 1 – General */}
-            <div className="vox-setup-row vox-setup-row--text-left">
+            <div className="vox-setup-row vox-setup-row--text-left vox-setup-step">
               <div>
-                <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: "48px", height: "48px", borderRadius: "50%", background: "rgba(186,158,255,0.15)", border: "1px solid rgba(186,158,255,0.3)", marginBottom: "1.5rem" }}>
-                  <span style={{ color: "#ba9eff", fontWeight: 700, fontSize: "1.1rem" }}>1</span>
+                <div className="vox-setup-step__number">
+                  <span>1</span>
                 </div>
-                <h3 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", lineHeight: "1.1em" }}>Connect your OpenAI key</h3>
+                <h3 className="vox-setup-step__title">Connect your OpenAI key</h3>
                 <a
                   href="https://platform.openai.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ display: "inline-block", fontSize: "0.85rem", color: "#ba9eff", opacity: 0.8, marginBottom: "1rem", textDecoration: "underline", textUnderlineOffset: "3px" }}
+                  className="vox-setup-step__link"
                 >
                   platform.openai.com ↗
                 </a>
-                <p style={{ color: "#adaaaa", lineHeight: 1.7, marginBottom: "1.25rem" }}>
+                <p className="vox-setup-step__desc">
                   Paste your OpenAI API key in the General tab. VoxAI uses it to generate both text summaries and audio — no middleman, no markup.
                 </p>
-                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+                <ul className="vox-setup-step__list">
                   {["Choose UI theme (light / dark / neutral)", "Set player position (before or after content)", "Enable on posts, pages or custom types"].map(item => (
-                    <li key={item} style={{ display: "flex", gap: "0.6rem", alignItems: "flex-start", color: "#adaaaa", fontSize: "0.95rem" }}>
-                      <Check style={{ width: 16, height: 16, color: "#ba9eff", flexShrink: 0, marginTop: "3px" }} />
+                    <li key={item} className="vox-setup-step__item">
+                      <Check />
                       {item}
                     </li>
                   ))}
                 </ul>
               </div>
-              <div style={{ borderRadius: "12px", overflow: "hidden", boxShadow: "0 0 0 1px rgba(255,255,255,0.06), 0 24px 48px rgba(0,0,0,0.5)" }}>
+              <div className="vox-setup-step__image-wrap">
                 <img
                   src="/assets/voxai/img/voxai-setup-general.webp"
                   alt="VoxAI General Settings tab showing API key field, UI theme and post type configuration"
                   width={1918}
                   height={910}
-                  style={{ display: "block", width: "100%", height: "auto" }}
+                  className="vox-setup-step__image"
                   loading="lazy"
                   decoding="async"
                 />
@@ -1206,30 +1056,30 @@ export default function PluginIndex() {
             </div>
 
             {/* Step 2 – Summary */}
-            <div className="vox-setup-row vox-setup-row--text-right">
-              <div style={{ borderRadius: "12px", overflow: "hidden", boxShadow: "0 0 0 1px rgba(255,255,255,0.06), 0 24px 48px rgba(0,0,0,0.5)" }}>
+            <div className="vox-setup-row vox-setup-row--text-right vox-setup-step">
+              <div className="vox-setup-step__image-wrap">
                 <img
                   src="/assets/voxai/img/voxai-setup-summary.webp"
                   alt="VoxAI Summary (Text) tab showing GPT-4o Mini model selection, summary length limit and format options"
                   width={1917}
                   height={913}
-                  style={{ display: "block", width: "100%", height: "auto" }}
+                  className="vox-setup-step__image"
                   loading="lazy"
                   decoding="async"
                 />
               </div>
               <div>
-                <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: "48px", height: "48px", borderRadius: "50%", background: "rgba(186,158,255,0.15)", border: "1px solid rgba(186,158,255,0.3)", marginBottom: "1.5rem" }}>
-                  <span style={{ color: "#ba9eff", fontWeight: 700, fontSize: "1.1rem" }}>2</span>
+                <div className="vox-setup-step__number">
+                  <span>2</span>
                 </div>
-                <h3 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "1rem" }}>Pick your AI model for summaries</h3>
-                <p style={{ color: "#adaaaa", lineHeight: 1.7, marginBottom: "1.25rem" }}>
+                <h3 className="vox-setup-step__title">Pick your AI model for summaries</h3>
+                <p className="vox-setup-step__desc">
                   The Summary tab lets you choose the model that reads and condenses your articles. By default it uses <strong style={{ color: "#fff" }}>GPT-4o Mini</strong> — fast, accurate and among the most cost-effective options OpenAI offers.
                 </p>
-                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+                <ul className="vox-setup-step__list">
                   {["AI model: GPT-4o Mini (Fast & Cheap)", "Summary length: up to 350 characters", "Format: paragraph or bulleted list"].map(item => (
-                    <li key={item} style={{ display: "flex", gap: "0.6rem", alignItems: "flex-start", color: "#adaaaa", fontSize: "0.95rem" }}>
-                      <Check style={{ width: 16, height: 16, color: "#ba9eff", flexShrink: 0, marginTop: "3px", fill: "transparent" }} />
+                    <li key={item} className="vox-setup-step__item">
+                      <Check />
                       {item}
                     </li>
                   ))}
@@ -1238,31 +1088,31 @@ export default function PluginIndex() {
             </div>
 
             {/* Step 3 – Audio */}
-            <div className="vox-setup-row vox-setup-row--text-left">
+            <div className="vox-setup-row vox-setup-row--text-left vox-setup-step">
               <div>
-                <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: "48px", height: "48px", borderRadius: "50%", background: "rgba(186,158,255,0.15)", border: "1px solid rgba(186,158,255,0.3)", marginBottom: "1.5rem" }}>
-                  <span style={{ color: "#ba9eff", fontWeight: 700, fontSize: "1.1rem" }}>3</span>
+                <div className="vox-setup-step__number">
+                  <span>3</span>
                 </div>
-                <h3 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff", marginBottom: "1rem" }}>Set voice, model and permissions</h3>
-                <p style={{ color: "#adaaaa", lineHeight: 1.7, marginBottom: "1.25rem" }}>
+                <h3 className="vox-setup-step__title">Set voice, model and permissions</h3>
+                <p className="vox-setup-step__desc">
                   The Audio tab controls the text-to-speech output. Choose a voice, pick between standard and HD quality, and define which WordPress roles can generate or delete audio on posts.
                 </p>
-                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+                <ul className="vox-setup-step__list">
                   {["Voice: Alloy, Echo, Fable, Onyx, Nova, Shimmer", "Model: tts-1 ($0.015/1k) or tts-1-hd", "Permissions per role: Admin, Editor, Author, Contributor"].map(item => (
-                    <li key={item} style={{ display: "flex", gap: "0.6rem", alignItems: "flex-start", color: "#adaaaa", fontSize: "0.95rem" }}>
-                      <Check style={{ width: 16, height: 16, color: "#ba9eff", flexShrink: 0, marginTop: "3px", fill: "transparent" }} />
+                    <li key={item} className="vox-setup-step__item">
+                      <Check />
                       {item}
                     </li>
                   ))}
                 </ul>
               </div>
-              <div style={{ borderRadius: "12px", overflow: "hidden", boxShadow: "0 0 0 1px rgba(255,255,255,0.06), 0 24px 48px rgba(0,0,0,0.5)" }}>
+              <div className="vox-setup-step__image-wrap">
                 <img
                   src="/assets/voxai/img/voxai-setup-audio.webp"
                   alt="VoxAI Audio (TTS) tab showing voice, model, intro elements and role-based permission controls"
                   width={1917}
                   height={911}
-                  style={{ display: "block", width: "100%", height: "auto" }}
+                  className="vox-setup-step__image"
                   loading="lazy"
                   decoding="async"
                 />
@@ -1274,9 +1124,7 @@ export default function PluginIndex() {
       </section>
 
       {/* ── Free vs Pro comparison */}
-      <div className="vox-compare-table-wrapper">
-        <PlanCompare />
-      </div>
+      <PlanCompare />
 
       {/* ── Shortcodes */}
       <section className="vox-shortcodes vox-section--dark" id="shortcodes">
@@ -1362,11 +1210,11 @@ export default function PluginIndex() {
       </section>
 
       {/* ── Final CTA */}
-      <section style={{ padding: "6rem 0", textAlign: "center" }}>
-        <div className="vox-container" style={{ maxWidth: "600px" }}>
-          <h2 className="vox-section-title" style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>Some people read. Others listen.</h2>
-          <p className="vox-section-desc" style={{ marginBottom: "2rem" }}>Give visitors a way to consume content on their terms.</p>
-          <a href="https://wordpress.org/plugins/voxai-ai-audio-summary-for-posts/" target="_blank" rel="noopener noreferrer" className="vox-btn-primary" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }}>Install VoxAI Free</a>
+      <section className="vox-final-cta">
+        <div className="vox-container vox-final-cta__inner">
+          <h2 className="vox-section-title vox-final-cta__title">Some people read. Others listen.</h2>
+          <p className="vox-section-desc vox-final-cta__desc">Give visitors a way to consume content on their terms.</p>
+          <a href="https://wordpress.org/plugins/voxai-ai-audio-summary-for-posts/" target="_blank" rel="noopener noreferrer" className="vox-btn-primary vox-final-cta__btn">Install VoxAI Free</a>
         </div>
       </section>
     </>
